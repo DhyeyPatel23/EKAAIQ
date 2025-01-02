@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://w9am50djcmb9.share.zrok.io' , 'https://quizbot-x6j8.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://w9am50djcmb9.share.zrok.io' , 'https://quizbot-x6j8.onrender.com','https://quizbot-m7r0.onrender.com']
 
 # Application definition
 
