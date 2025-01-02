@@ -19,3 +19,4 @@ uritemplate==4.1.1
 =======
 pandas
 >>>>>>> 71b993d94abf1665c5c45a770b66245f4a450095
+openpyxl
