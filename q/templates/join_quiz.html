@@ -274,6 +274,25 @@
 
             window.addEventListener('resize', checkFullScreen);
             checkFullScreen();
+
+            // Mobile-specific checks
+            window.addEventListener('focus', function() {
+                if (!isSubmitting && !quizOver) {
+                    if (window.innerHeight !== screen.height || window.innerWidth !== screen.width) {
+                        quizOver = true;
+                        alert("You are using split screen or floating window! Your quiz will be terminated.");
+                        window.location.href = "{% url 'join_room' %}";
+                    }
+                }
+            });
+
+            window.addEventListener('orientationchange', function() {
+                if (!isSubmitting && !quizOver) {
+                    quizOver = true;
+                    alert("You changed the orientation of your device! Your quiz will be terminated.");
+                    window.location.href = "{% url 'join_room' %}";
+                }
+            });
         });
     </script>
 </body>
