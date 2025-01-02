@@ -1,0 +1,377 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #3b82f6;  /* Bright Blue */
+  --secondary-color: #1e293b;  /* Dark Navy */
+  --accent-color: #f97316;  /* Vivid Orange */
+  --light-gray: #f1f5f9;  /* Light Gray */
+  --white: #ffffff;  /* White */
+  --text-color: #374151;  /* Charcoal */
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--light-gray);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* =============== Navigation ================ */
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: var(--secondary-color);
+  border-left: 10px solid var(--secondary-color);
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: var(--primary-color);
+}
+
+.navigation ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: var(--white);
+  align-items: center;
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--white);
+}
+
+.navigation ul li a .icon {
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+.navigation ul li a .icon ion-icon {
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.navigation ul li a .title-main {
+  padding: 10px 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+.navigation ul li a .icon-main {
+  padding: 20px 6px 0;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--primary-color);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--primary-color);
+  pointer-events: none;
+}
+
+/* ===================== Main ===================== */
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--light-gray);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.toggle {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.user {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.welcome-message h1 {
+  font-size: 28px;
+  color: var(--primary-color);
+}
+
+.welcome-message p {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background-color: var(--accent-color);
+}
+
+.stat-item i {
+  font-size: 30px;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.stat-info h3 {
+  font-size: 22px;
+  margin: 0;
+  color: var(--secondary-color);
+}
+
+.stat-info p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.quiz-history {
+  margin-bottom: 20px;
+}
+
+.quiz-history h2 {
+  font-size: 24px;
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+}
+
+.quiz-history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-history ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.quiz-history ul li button {
+  padding: 5px 10px;
+  background-color: var(--accent-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quiz-history ul li button:hover {
+  background-color: var(--secondary-color);
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cta-buttons button {
+  padding: 15px 30px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+}
+
+.cta-buttons button:hover {
+  background-color: var(--secondary-color);
+}
+
+.user-results {
+  max-width: 100%;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.user-results thead {
+  background-color: var(--primary-color);
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.user-results th, .user-results td {
+  padding: 14px 24px;
+  text-align: left;
+  border-bottom: 1px solid #dddddd;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.user-results th {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.user-results td {
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.user-results tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+.user-results tbody tr:hover {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+.view-button {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: var(--accent-color);
+  color: var(--white);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+  background-color: var(--primary-color);
+}
+

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      :root {
+        --foreground: #1a5319;
+        --background: #80af81;
+        --main-bg: #d6efd8;
+      }
+
+      body {
+        margin: 0;
+        background: var(--main-bg);
+        font-family: "Poppins";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .login-container {
+        padding: 20px;
+        background: transparent;
+        box-shadow: 0 0 10px var(--foreground);
+        border-radius: 10px;
+        max-width: 350px;
+        width: 80%;
+      }
+
+      .login-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--foreground);
+      }
+
+      .login-form input[type="text"],
+      .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        color: var(--foreground);
+        border-radius: 5px;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid var(--foreground);
+        background: transparent;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="text"]:hover,
+      .login-form input[type="password"]:hover {
+        transform: scale(1);
+      }
+
+      .login-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--foreground);
+        border-radius: 5px;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="submit"]:hover {
+        transform: scale(1);
+        font-size: 15px;
+      }
+
+      .login-form span {
+        font-size: 13px;
+      }
+
+      .login-form span a {
+        color: var(--foreground);
+        text-decoration: none;
+      }
+
+      .login-form span a:hover {
+        text-decoration: underline;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .login-container {
+          width: 90%;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Login to QuizBOT</h2>
+      <form class="login-form" method="post">
+        {% csrf_token %}
+        <input type="text" name="{{ form.username.name }}" placeholder="Username" required />
+        <input type="password" name="{{ form.password.name }}" placeholder="Password" required />
+
+        {% if form.non_field_errors %}
+          <div class="error">
+            <h5 class="error">Username or Password Incorrect .</h5>
+          </div>
+        {% endif %}
+
+        <input type="submit" value="Login" />
+        <span>Don't have an Account? <a href="/signup/">Register</a></span>
+      </form>
+    </div>
+  </body>
+</html>

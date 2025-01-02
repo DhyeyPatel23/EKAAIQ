@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7fa7fb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 95%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #4d64e6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #4d64e6;
+        }
+
+        .form-group input[type="file"] {
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add New Question to "{{ quiz.title }}"</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="question_text">Question</label>
+                <textarea id="question_text" name="question_text" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Question Image (Optional)</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <label for="option1">Option 1</label>
+                <input type="text" id="option1" name="option1" required>
+            </div>
+            <div class="form-group">
+                <label for="option2">Option 2</label>
+                <input type="text" id="option2" name="option2" required>
+            </div>
+            <div class="form-group">
+                <label for="option3">Option 3</label>
+                <input type="text" id="option3" name="option3" required>
+            </div>
+            <div class="form-group">
+                <label for="option4">Option 4</label>
+                <input type="text" id="option4" name="option4" required>
+            </div>
+            <div class="form-group">
+                <label for="correct_option">Correct Option</label>
+                <select id="correct_option" name="correct_option" required>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option4">Option 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Add Question</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

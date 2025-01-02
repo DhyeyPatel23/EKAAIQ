@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      :root {
+        --foreground: #4d64e6;
+        --background: #80af81;
+        --main-bg: #d6efd8;
+        --alert-bg: #ffdb4d;
+        --alert-text: #333;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+        font-family: "Poppins";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .profile-container {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.59);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 1px solid rgba(1, 4, 9, 1);
+        max-width: 700px;
+        width: 90%;
+      }
+
+      .profile-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--foreground);
+      }
+
+      .profile-details,
+      .profile-img-section {
+        margin-bottom: 20px;
+      }
+
+      .profile-details {
+        text-align: left;
+        color: var(--foreground);
+      }
+
+      .profile-details p {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .profile-details p strong {
+        color: #000;
+      }
+
+      .profile-img-section {
+        text-align: center;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--foreground);
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .profile-btn {
+        padding: 10px 20px;
+        background-color: var(--foreground);
+        border-radius: 5px;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .profile-btn:hover {
+        transform: scale(1);
+        font-size: 15px;
+      }
+
+      .profile-btn a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Modal Styling */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(15px);
+        border-radius: 15px;
+        padding: 40px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .close {
+        color: var(--foreground);
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: #ddd;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid var(--foreground);
+        border-radius: 5px;
+        background: transparent;
+        color: var(--foreground);
+        outline: none;
+      }
+
+      .form-input:focus {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Custom Alert Box Styling */
+      .custom-alert {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -30%);
+        background-color: rgb(92, 151, 255);
+        border: 2px solid #ffdb4d;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        color: white;
+        z-index: 999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .custom-alert button {
+        background-color: var(--foreground);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .profile-container {
+          width: 90%;
+          max-width: 400px;
+        }
+      }
+  </style>
+  
+</head>
+
+<body>
+    <div class="profile-container">
+        <h2>Teacher Profile</h2>
+
+        <!-- Profile Image Section -->
+        <div class="profile-img-section">
+            {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Image" class="profile-img" id="profile-img">
+            {% else %}
+            <img src="{% static 'images/profile.jpg' %}" alt="Default Profile Image" class="profile-img" id="profile-img">
+            {% endif %}
+        </div>
+
+        <!-- Profile Details Section -->
+        <div class="profile-details">
+            <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Gender:</strong> {{ user.gender }}</p>
+            <p><strong>Location:</strong> {{ user.location }}</p>
+            <p><strong>Date Joined:</strong> {{ user.date_joined }}</p>
+        </div>
+
+        <!-- Button Section -->
+        <div class="btn-container">
+            <button class="profile-btn" id="editProfileBtn">Edit Profile</button>
+            <button class="profile-btn"><a href="{% url 'request_password_change' %}">Change Password</a></button>
+            <button class="profile-btn"><a href="{% url 'teacher_home' %}">Home</a></button>
+        </div>
+    </div>
+
+    <!-- Modal for Editing Profile -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" value="{{ user.location }}" class="form-input"><br>
+                <span id="locationError"></span>
+
+                <br>
+
+                <label for="profile_picture">Profile Picture:</label>
+                <input type="file" id="profile_picture" name="profile_picture" class="form-input" onchange="previewImage(event)"><br>
+
+                <button type="submit" class="profile-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div id="customAlert" class="custom-alert">
+        <p id="alertMessage">Profile updated successfully!</p>
+        <button onclick="closeAlert()">OK</button>
+    </div>
+
+    <!-- JavaScript to Handle Modal Display and AJAX Submission -->
+    <!-- <script>
+        const modal = document.getElementById('editProfileModal');
+        const editBtn = document.getElementById('editProfileBtn');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        document.addEventListener('DOMContentLoaded', function() {
+          // location validation
+          const locationInput = document.getElementById('location');
+          const locationError = document.getElementById('locationError');
+      
+          locationInput.addEventListener('input', function() {
+              const locationValue = location.value.trim();
+      
+              if (locationValue === '') {
+                  locationError.textContent = 'location is required.';
+                  locationError.style.color = 'red';
+                  locationInput.style.borderColor = 'red';
+                  locationInput.style.color = 'red';
+              } else if (!/^[a-zA-Z]+$/.test(locationValue)) {
+                  locationError.textContent = 'location should only contain letters.';
+                  locationError.style.color = 'red';
+                  locationInput.style.borderColor = 'red';
+                  locationInput.style.color = 'red';
+              } else {
+                  locationError.textContent = '';
+                  locationInput.style.borderColor = 'green';
+                  locationInput.style.color = 'green';
+              }
+        });
+
+        editBtn.onclick = function() {
+            modal.style.display = 'flex';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Preview profile image
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('profile-img');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Custom alert box handling
+        function showAlert(message) {
+            const alertBox = document.getElementById('customAlert');
+            document.getElementById('alertMessage').innerText = message;
+            alertBox.style.display = 'block';
+        }
+
+        function closeAlert() {
+            const alertBox = document.getElementById('customAlert');
+            alertBox.style.display = 'none';
+        }
+
+        // AJAX for profile update
+        document.getElementById('editProfileForm').onsubmit = function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            fetch("{% url 'edit_profile' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showAlert('Profile updated successfully!');
+                        modal.style.display = 'none';
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000); // reload after a delay
+                    } else {
+                        showAlert('Error: ' + JSON.stringify(data.errors));
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script> -->
+
+    <script>
+      const modal = document.getElementById('editProfileModal');
+      const editBtn = document.getElementById('editProfileBtn');
+      const closeBtn = document.getElementsByClassName('close')[0];
+  
+      document.addEventListener('DOMContentLoaded', function() {
+          // Location validation
+          const locationInput = document.getElementById('location');
+          const locationError = document.getElementById('locationError');
+  
+          if (locationInput) {
+              locationInput.addEventListener('input', function() {
+                  const locationValue = locationInput.value.trim();
+  
+                  if (locationValue === '') {
+                      locationError.textContent = 'Location is required.';
+                      locationError.style.color = 'red';
+                      locationInput.style.borderColor = 'red';
+                      locationInput.style.color = 'red';
+                  } else if (!/^[a-zA-Z\s]+$/.test(locationValue)) {
+                      locationError.textContent = 'Location should only contain letters and spaces.';
+                      locationError.style.color = 'red';
+                      locationInput.style.borderColor = 'red';
+                      locationInput.style.color = 'red';
+                  } else {
+                      locationError.textContent = '';
+                      locationInput.style.borderColor = 'green';
+                      locationInput.style.color = 'green';
+                  }
+              });
+          }
+  
+          // Show modal on edit button click
+          editBtn.onclick = function() {
+              modal.style.display = 'flex';
+          }
+  
+          // Close modal on close button click
+          closeBtn.onclick = function() {
+              modal.style.display = 'none';
+          }
+  
+          // Close modal if clicking outside the modal content
+          window.onclick = function(event) {
+              if (event.target === modal) {
+                  modal.style.display = 'none';
+              }
+          }
+  
+          // Preview profile image
+          function previewImage(event) {
+              var reader = new FileReader();
+              reader.onload = function() {
+                  var output = document.getElementById('profile-img');
+                  output.src = reader.result;
+              }
+              reader.readAsDataURL(event.target.files[0]);
+          }
+  
+          // Custom alert box handling
+          function showAlert(message) {
+              const alertBox = document.getElementById('customAlert');
+              document.getElementById('alertMessage').innerText = message;
+              alertBox.style.display = 'block';
+          }
+  
+          function closeAlert() {
+              const alertBox = document.getElementById('customAlert');
+              alertBox.style.display = 'none';
+          }
+  
+          // AJAX for profile update
+          document.getElementById('editProfileForm').onsubmit = function(e) {
+              e.preventDefault();
+              var formData = new FormData(this);
+  
+              fetch("{% url 'edit_profile' %}", {
+                      method: "POST",
+                      body: formData,
+                      headers: {
+                          "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                      },
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.status === 'success') {
+                          showAlert('Profile updated successfully!');
+                          modal.style.display = 'none';
+                          setTimeout(() => {
+                              location.reload();
+                          }, 2000); // reload after a delay
+                      } else {
+                          showAlert('Error: ' + JSON.stringify(data.errors));
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      showAlert('An error occurred while updating your profile.');
+                  });
+          }
+      });
+  </script>
+  
+</body>
+
+</html>

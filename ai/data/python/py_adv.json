@@ -1,0 +1,320 @@
+[
+    {
+      "question": "Which of the following is not a valid way to import the 'math' module in Python?",
+      "options": ["import math", "from math import *", "import math as m", "import math()"],
+      "answer": "option4"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["10 + 10 = 20", "10 + 10 = 10", "{x} + {x} = {2 * x}", "10 + x = 20"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img1.png"
+    },
+    {
+      "question": "Which of the following statements is true about Python decorators?",
+      "options": [
+        "They are used to modify the behavior of a function or class",
+        "They are used to create private variables",
+        "They are used to handle exceptions",
+        "They are used for input and output operations"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "What does the built-in function 'enumerate()' return?",
+      "options": [
+        "A tuple containing an index and the corresponding element from the input",
+        "A list of indices of the input sequence",
+        "The length of the input sequence",
+        "A reversed iterator of the input sequence"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following is an immutable data type in Python?",
+      "options": ["List", "Dictionary", "Set", "Tuple"],
+      "answer": "option4"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["[1] and [1]", "[1] and [1, 1]", "[1, 1] and [1]", "[1, 1] and [1, 1]"],
+      "answer": "option2" ,
+      "image_loc" : "images/py_adv/img2.png"
+    },
+    {
+      "question": "Which of the following methods can be used to add an element to a list in Python?",
+      "options": ["append()", "add()", "push()", "insert()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the result of '3 ** 2 ** 3' in Python?",
+      "options": ["512", "729", "6561", "19683"],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following is used to handle exceptions in Python?",
+      "options": ["try-except", "if-else", "for-while", "do-while"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["{1, 2, 3, 4, 5, 6}", "{1, 2, 3}", "{4, 5, 6}", "{(1, 2, 3), (4, 5, 6)}"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img3.png"
+    },
+    {
+      "question": "In Python, which of the following statements is used to inherit from another class?",
+      "options": ["class NewClass(ParentClass):", "class NewClass inherits ParentClass:", "inherit ParentClass in NewClass:", "class NewClass -> ParentClass:"],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following Python standard libraries is used for data serialization?",
+      "options": ["json", "math", "os", "sys"],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the result of the following code?",
+      "options": ["Pto", "Pthon", "Pytohn", "Python"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_adv/img4.png"
+    },
+    {
+      "question": "Which of the following statements is true for Python's garbage collection?",
+      "options": [
+        "Python automatically manages memory using a reference counting algorithm",
+        "Python requires manual memory management",
+        "Python uses malloc() and free() for memory management",
+        "Python does not have garbage collection"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["[4, 8]", "[2, 4, 6, 8, 10]", "[2, 6, 10]", "[4, 10]"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_adv/img5.png"
+    },
+    {
+      "question": "Which Python keyword is used to check if an object is an instance of a class or subclass?",
+      "options": ["instanceof", "isinstance", "issubclass", "isclass"],
+      "answer": "option2"
+    },
+    {
+      "question": "What does the 'zip()' function do in Python?",
+      "options": [
+        "Combines multiple iterables into a single iterable of tuples",
+        "Concatenates multiple strings",
+        "Sorts multiple iterables",
+        "Converts an iterable into a list"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following is not a valid Python built-in data type?",
+      "options": ["array", "list", "dict", "set"],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following is a mutable sequence type in Python?",
+      "options": ["tuple", "list", "str", "int"],
+      "answer": "option2"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["default", "None", "4", "KeyError"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img6.png"
+    },
+    {
+      "question": "Which Python keyword is used to create a generator?",
+      "options": ["yield", "generate", "return", "gen"],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["[0, 2, 4, 6, 8]", "[2, 4, 6, 8, 10]", "[1, 2, 3, 4, 5]", "[0, 1, 2, 3, 4]"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img7.png"
+    },
+    {
+      "question": "Which of the following methods is used to create a shallow copy of a list?",
+      "options": ["copy()", "deepcopy()", "shallowcopy()", "clone()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What does the following code output?",
+      "options": ["[1, 2, 3]", "[1, 2, 3, 4]", "[4]", "[1, 2, 3, 4, 4]"],
+      "answer": "option2" ,
+      "image_loc" : "images/py_adv/img8.png"
+    },
+    {
+      "question": "Which of the following is not a valid set operation in Python?",
+      "options": ["union", "intersection", "difference", "concatenate"],
+      "answer": "option4"
+    },
+    {
+      "question": "What does the 'global' keyword do in Python?",
+      "options": [
+        "Declares a global variable",
+        "Imports a global module",
+        "Restricts a variable to a local scope",
+        "Deletes a global variable"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which method can be used to remove whitespace from both ends of a string in Python?",
+      "options": ["strip()", "trim()", "remove()", "delete()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["KeyError", "None", "0", "d"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img9.png"
+    },
+    {
+      "question": "Which of the following is true about Python's 'None' type?",
+      "options": [
+        "It is a singleton object",
+        "It is the same as an empty string",
+        "It is equivalent to zero",
+        "It is a reserved keyword that can be used as a variable name"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["[1] and [2]", "[1] and [1, 2]", "[2] and [2, 1]", "[1] and [1, 2]"],
+      "answer": "option2" , 
+      "image_loc" : "images/py_adv/img10.png"
+    },
+    {
+      "question": "Which of the following is not a valid Python string method?",
+      "options": ["split()", "join()", "append()", "replace()"],
+      "answer": "option3"
+    },
+    {
+      "question": "What is the purpose of the 'assert' statement in Python?",
+      "options": [
+        "To check if a condition is True, and if not, raise an AssertionError",
+        "To raise an exception",
+        "To create a breakpoint in the code",
+        "To print a message to the console"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which method is used to convert an object into its string representation in Python?",
+      "options": ["__str__()", "__repr__()", "toString()", "__format__()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What does the 'with' statement do in Python?",
+      "options": [
+        "Ensures that resources are properly cleaned up after use",
+        "Creates a loop",
+        "Defines a function",
+        "Imports a module"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["[1, 4, 9]", "[2, 3, 4]", "[1, 2, 3]", "[4, 9, 16]"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img11.png"
+    },
+    {
+      "question": "Which of the following statements is true about Python dictionaries?",
+      "options": [
+        "They are unordered collections of items",
+        "They allow duplicate keys",
+        "They are indexed by sequence numbers",
+        "They store values in a sorted order"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["Hello World", "HELLO WORLD", "hello World", "Hello world"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_adv/img12.png"
+    },
+    {
+      "question": "Which of the following is used to check for equality between two objects in Python?",
+      "options": ["==", "=", "is", "equals"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["{'a', 'b'}", "{'c'}", "{'a', 'b', 'd', 'e'}", "{'d', 'e'}"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_adv/img13.png"
+    },
+    {
+      "question": "What does the built-in function 'dir()' do in Python?",
+      "options": [
+        "Lists the attributes and methods of an object",
+        "Deletes a directory",
+        "Creates a new directory",
+        "Changes the current working directory"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following is true about Python's 'else' clause in loops?",
+      "options": [
+        "It is executed only if the loop completes normally without a break",
+        "It is executed only if the loop encounters a break",
+        "It is executed for each iteration of the loop",
+        "It can only be used with a 'while' loop"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which of the following is not a valid keyword in Python?",
+      "options": ["finally", "lambda", "nonlocal", "undefined"],
+      "answer": "option4"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["[3, 4]", "[2, 3]", "[4, 3]", "[2, 3, 4]"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_adv/img14.png"
+    },
+    {
+      "question": "What does the following code output?",
+      "options": ["6", "(2, 3)", "(6,)", "TypeError"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_adv/img15.png"
+    },
+    {
+      "question": "Which of the following is not a valid file mode in Python?",
+      "options": ["'r'", "'w'", "'rb'", "'a+'"],
+      "answer": "option4"
+    },
+    {
+      "question": "Which method is used to get a list of all keys in a dictionary?",
+      "options": ["keys()", "values()", "items()", "get()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["[1, 2, 3]", "[1, 2]", "ValueError", "[2, 3]"],
+      "answer": "option3" , 
+      "image_loc" : "images/py_adv/img16.png"
+    },
+    {
+      "question": "Which Python function is used to parse a string to a float?",
+      "options": ["float()", "str()", "int()", "parse()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["1 and [2, 3]", "[1] and [2, 3]", "3 and [1, 2]", "[2, 3] and [1]"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_adv/img17.png"
+    }
+  ]
+  

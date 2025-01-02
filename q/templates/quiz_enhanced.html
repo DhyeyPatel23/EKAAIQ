@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Enhanced Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-settings, .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .options-group input {
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1 1 auto;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 10px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Create Enhanced Quiz</h1>
+        <form id="quizForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Quiz Settings -->
+            <div class="quiz-settings">
+                <div class="form-group">
+                    <label for="title">Quiz Title:</label>
+                    <input type="text" name="title" id="title" value="My Quiz " required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="duration">Duration (minutes):</label>
+                    <input type="number" name="duration" id="duration" value="5" min="1" max="30" required>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" name="show_results_to_student" id="show_results" checked>
+                    <label for="show_results">Show results to students</label>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" name="is_active" id="is_active" checked>
+                    <label for="is_active">Quiz is active</label>
+                </div>
+            </div>
+
+            <!-- Questions Container -->
+            <div id="questionsContainer"></div>
+
+            <div class="button-group">
+                <button type="button" class="btn" style="background-color: #4CAF50; color: white;" onclick="addQuestion('MCQ')">Add Single Choice Question</button>
+                <button type="button" class="btn" style="background-color: #2196F3; color: white;" onclick="addQuestion('MCA')">Add Multiple Choice Question</button>
+                <button type="button" class="btn" style="background-color: #ff9800; color: white;" onclick="addQuestion('TF')">Add True/False</button>
+                <button type="submit" class="btn btn-primary">Create Quiz</button>
+                <button type="button" class="btn" style="background-color: #6c757d; color: white;" onclick="backToDashboard()">Back to Dashboard</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Templates -->
+    <template id="mcq-template">
+        <div class="question-block" data-type="MCQ">
+            <input type="hidden" name="question_types[]" value="MCQ">
+            <div class="form-group">
+                <label>Question Text:</label>
+                <textarea name="questions[]" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Points:</label>
+                <input type="number" name="points_${index}" value="1" min="1" max="5">
+            </div>
+            
+            <div class="form-group">
+                <label>Image (optional):</label>
+                <input type="file" name="images_${index}" accept="image/*">
+            </div>
+            
+            <div class="options-group">
+                <label>Options:</label>
+                <input type="text" name="option1_${index}" placeholder="Option A" required>
+                <input type="text" name="option2_${index}" placeholder="Option B" required>
+                <input type="text" name="option3_${index}" placeholder="Option C" required>
+                <input type="text" name="option4_${index}" placeholder="Option D" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Correct Answer:</label>
+                <select name="correct_option_${index}" required>
+                    <option value="option1">Option A</option>
+                    <option value="option2">Option B</option>
+                    <option value="option3">Option C</option>
+                    <option value="option4">Option D</option>
+                </select>
+            </div>
+            
+            <button type="button" class="btn btn-danger" onclick="removeQuestion(this)">Remove Question</button>
+        </div>
+    </template>
+
+    <template id="mca-template">
+        <div class="question-block" data-type="MCA">
+            <input type="hidden" name="question_types[]" value="MCA">
+            <div class="form-group">
+                <label>Question Text:</label>
+                <textarea name="questions[]" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Points:</label>
+                <input type="number" name="points_${index}" value="1" min="1" max="5">
+            </div>
+            
+            <div class="form-group">
+                <label>Image (optional):</label>
+                <input type="file" name="images_${index}" accept="image/*">
+            </div>
+            
+            <div class="options-group">
+                <label>Options:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="correct_options_${index}[]" value="option1">
+                    <input type="text" name="option1_${index}" placeholder="Option A" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="correct_options_${index}[]" value="option2">
+                    <input type="text" name="option2_${index}" placeholder="Option B" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="correct_options_${index}[]" value="option3">
+                    <input type="text" name="option3_${index}" placeholder="Option C" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="correct_options_${index}[]" value="option4">
+                    <input type="text" name="option4_${index}" placeholder="Option D" required>
+                </div>
+            </div>
+            
+            <button type="button" class="btn btn-danger" onclick="removeQuestion(this)">Remove Question</button>
+        </div>
+    </template>
+
+    <template id="tf-template">
+        <div class="question-block" data-type="TF">
+            <input type="hidden" name="question_types[]" value="TF">
+            <div class="form-group">
+                <label>Question Text:</label>
+                <textarea name="questions[]" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Points:</label>
+                <input type="number" name="points_${index}" value="1" min="1" max="5">
+            </div>
+            
+            <div class="form-group">
+                <label>Image (optional):</label>
+                <input type="file" name="images_${index}" accept="image/*">
+            </div>
+            
+            <div class="form-group">
+                <label>Correct Answer:</label>
+                <select name="correct_tf_${index}" required>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+            
+            <button type="button" class="btn btn-danger" onclick="removeQuestion(this)">Remove Question</button>
+        </div>
+    </template>
+
+    <script>
+        let questionIndex = 0;
+        
+        function addQuestion(type) {
+            const container = document.getElementById('questionsContainer');
+            const template = document.getElementById(`${type.toLowerCase()}-template`);
+            
+            if (!template) {
+                console.error(`Template not found for type: ${type}`);
+                return;
+            }
+
+            // Create a new div to hold the question
+            const questionDiv = document.createElement('div');
+            
+            // Clone the template content
+            const clone = template.content.cloneNode(true);
+            
+            // Get the current number of questions for indexing
+            const currentIndex = container.children.length;
+            
+            // Convert the template content to string and replace index
+            const templateHtml = clone.firstElementChild.outerHTML;
+            const html = templateHtml.replace(/\${index}/g, currentIndex);
+            
+            // Set the HTML content
+            questionDiv.innerHTML = html;
+            
+            // Add the new question to the container
+            container.appendChild(questionDiv);
+            
+            console.log(`Added ${type} question. Total questions: ${container.children.length}`);
+        }
+        
+        function removeQuestion(button) {
+            const questionBlock = button.closest('.question-block');
+            if (questionBlock) {
+                questionBlock.remove();
+                console.log('Question removed');
+            }
+        }
+
+        // Form validation
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate that there's at least one question
+            const questions = document.querySelectorAll('.question-block');
+            if (questions.length === 0) {
+                alert('Please add at least one question to the quiz.');
+                return;
+            }
+
+            // Create FormData object
+            const formData = new FormData(this);
+
+            // Log form data for debugging
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+
+            // Submit the form
+            this.submit();
+        });
+
+        // Image preview functionality
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'file') {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please upload only image files.');
+                        e.target.value = '';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview = document.createElement('img');
+                        preview.src = e.target.result;
+                        preview.style.maxWidth = '200px';
+                        preview.style.marginTop = '10px';
+                        const container = e.target.parentElement;
+                        const oldPreview = container.querySelector('img');
+                        if (oldPreview) {
+                            container.removeChild(oldPreview);
+                        }
+                        container.appendChild(preview);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        function backToDashboard() {
+            window.location.href = "/teacher/home";
+        }
+
+        // Add console log to help debug
+        window.onload = function() {
+            console.log('Quiz form initialized');
+            console.log('Available templates:', {
+                mcq: document.getElementById('mcq-template'),
+                mca: document.getElementById('mca-template'),
+                tf: document.getElementById('tf-template')
+            });
+        };
+    </script>
+</body>
+</html>

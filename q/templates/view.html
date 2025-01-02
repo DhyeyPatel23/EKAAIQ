@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Quiz Results</title>
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables Library -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+            font-family: "Poppins";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #4d64e6; 
+            border-radius: 8px;
+            background-color: #cfd6f4; 
+        }
+
+        .quiz-details {
+            margin-bottom: 20px;
+        }
+
+        .quiz-details h2 {
+            margin-bottom: 10px;
+            color: #4d64e6; 
+        }
+
+        .scores-table {
+            margin-bottom: 30px;
+            overflow-x: auto; /* Ensure table is scrollable on small screens */
+        }
+
+        .scores-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #4d64e6; 
+        }
+
+        .scores-table th, .scores-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #000; 
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .scores-table th {
+            background-color: #4d64e6; 
+            color: white;
+        }
+
+        .scores-table tr:hover {
+            background-color: white; 
+        }
+
+        .export-options button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: 5px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 1vh;
+            font-size: 1.2vw;
+            transition: 0.6s ease-in-out;
+            letter-spacing: 1px;
+            background: #4d64e6;
+        }
+
+        .export-options button:hover {
+            border: 5px solid #4d64e6;
+            background-color: var(--foreground);
+            color: #4d64e6;
+        }
+    
+        #cancelbtn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        #cancelbtn {
+            background-color: #4d64e6;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+        
+            .scores-table th, .scores-table td {
+                padding: 5px;
+            }
+        
+            .export-options button {
+                font-size: 3vw;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .export-options button {
+                font-size: 4vw;
+                padding: 6px 12px;
+            }
+
+            .scores-table th, .scores-table td {
+                padding: 4px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .export-options button {
+                font-size: 5vw;
+                padding: 5px 10px;
+            }
+
+            .scores-table th, .scores-table td {
+                padding: 3px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Quiz Details Section -->
+        <section class="quiz-details">
+            <h2>Quiz Title: {{ quiz.title }}</h2>
+            <p><strong>Date:</strong> {{ quiz.created_at }}</p>
+            <p><strong>Room Code:</strong> {{ quiz.code }}</p>
+            <p><strong>Total Question:</strong> {{ total_questions }}</p>
+        </section>
+
+        <!-- Student Scores Table -->
+        <section class="scores-table">
+            <h3>Student Scores</h3>
+            <table id="resultsTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Scored</th>
+                        <th>Correct Attempts</th>
+                        <th>Submitted At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ result.user.first_name }}</td>
+                            <td>{{ result.score }}</td>
+                            <td>{{ result.correct_attempts }} / {{ total_questions }}</td>
+                            <td>{{ result.submitted_at }}</td>
+                            <td><a href="{% url 'view_student_answers' result.id %}">Answers</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Export Options -->
+        <section class="export-options">
+            <button onclick="exportToCSV()">Export to CSV</button>
+            <button onclick="exportToPDF()">Export to PDF</button>
+            <button onclick="home()">Home</button>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+        const quizDetails = [
+            'Quiz Title: {{ quiz.title }}',
+            'Date: {{ quiz.created_at }}',
+            'Room Code: {{ quiz.code }}',
+            'Total Questions: {{ total_questions }}'
+        ];
+
+        // Initialize DataTable on document ready
+        $(document).ready(function() {
+            $('#resultsTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                lengthChange: true
+            });
+        });
+
+        // Function to export content to PDF without 'Actions' column
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add Quiz Details Section
+            quizDetails.forEach((detail, index) => {
+                doc.setFontSize(index === 0 ? 16 : 12); // Larger font for title
+                doc.text(detail, 10, 10 + (index * 10)); // Adjust Y position dynamically
+            });
+
+            // Add Student Scores Table (excluding the 'Actions' column)
+            const table = document.querySelector("#resultsTable");
+            const tableData = Array.from(table.rows)
+                                   .map(row => Array.from(row.cells)
+                                   .filter((_, i) => i !== 4)  // Exclude the last 'Actions' column
+                                   .map(cell => cell.innerText));
+            
+            doc.autoTable({
+                head: [tableData[0]],
+                body: tableData.slice(1),
+                startY: 55,
+                styles: { fontSize: 10 },
+                headStyles: { fillColor: [22, 160, 133] },
+                theme: 'striped'
+            });
+
+            // Save the PDF document
+            doc.save('quiz_results.pdf');
+        }
+
+        // Function to export content to CSV without 'Actions' column and correct the score format
+        function exportToCSV() {
+            const table = document.getElementById("resultsTable");
+            const rows = Array.from(table.rows);
+
+            // Add Quiz Details to CSV Content
+            let csvContent = quizDetails.map(detail => escapeCSVValue(detail)).join('\n') + '\n\n';
+
+            // Convert Table Data to CSV Format (excluding the 'Actions' column)
+            csvContent += rows.map(row => {
+                const cells = Array.from(row.cells);
+                return cells.filter((_, i) => i !== 4)  
+                            .map((cell, i) => {
+                                if (i === 1) {  
+                                    return escapeCSVValue(cell.textContent); 
+                                }
+                                return escapeCSVValue(cell.textContent);
+                            })
+                            .join(",");
+            }).join('\n');
+
+            // Create a downloadable CSV file
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "quiz_results.csv";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Utility function to escape CSV values
+        function escapeCSVValue(value) {
+            return '"' + value.replace(/"/g, '""') + '"';
+        }
+
+        function home() {
+            window.location.href = "/teacher/home";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      :root {
+        --foreground: #4d64e6;
+        --background: #80af81;
+        --main-bg: #d6efd8;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+        font-family: "Poppins";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .registration-container {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.59);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 1px solid rgba(1, 4, 9, 1);
+        max-width: 350px;
+        width: 80%;
+      }
+
+      .registration-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--foreground);
+      }
+
+      .registration-form input[type="text"],
+      .registration-form input[type="email"],
+      .registration-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        color: var(--foreground);
+        border-radius: 5px;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid var(--foreground);
+        background: transparent;
+        transition: 0.3s ease-in-out;
+        transform: scale(0.98);
+      }
+
+      .registration-form input[type="text"]:hover,
+      .registration-form input[type="email"]:hover,
+      .registration-form input[type="password"]:hover {
+        transform: scale(1);
+      }
+
+      .registration-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--foreground);
+        border-radius: 5px;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .registration-form input[type="submit"]:hover {
+        transform: scale(1);
+        font-size: 15px;
+      }
+
+      .registration-form span {
+        font-size: 13px;
+      }
+
+      .registration-form span a {
+        color: var(--foreground);
+        text-decoration: none;
+      }
+
+      .registration-form span a:hover {
+        text-decoration: underline;
+      }
+
+      .error {
+          color: red;
+          font-size: 0.9em;
+      }
+
+      .form-group {
+          margin-bottom: 15px;
+      }
+
+      label {
+          display: block;
+          margin-bottom: 5px;
+      }
+
+      input, select {
+          width: 100%;
+          padding: 8px;
+          color: var(--foreground);
+          border-radius: 5px;
+          box-sizing: border-box;
+          outline: none;
+          border: 1px solid var(--foreground);
+          background: transparent;
+          transition: 0.3s ease-in-out;
+          transform: scale(0.98);
+          margin-bottom: 12px;
+      }
+
+      select:focus, input:focus {
+          border-color: #3b4cb8; /* Darker shade on focus */
+      }
+
+      input:hover, select:hover {
+          transform: scale(1);
+      }
+
+      @media only screen and (max-width: 600px) {
+        .registration-container {
+          width: 90%;
+          max-width: 300px;
+        }
+      }
+
+    </style>
+</head>
+<body>
+
+  <body>
+    <div class="registration-container">
+        <h2>Signup for {{ user_type }}</h2>
+        <form method="post" class="registration-form">
+            {% csrf_token %}
+
+            <input type="text" id="first_name" name="first_name" placeholder="First Name" required />
+            <span id="firstNameError"></span>
+            <!-- <p id="firstNameError"></p> -->
+
+            <input type="text" id="last_name" name="last_name" placeholder="Last Name" required />
+            <span id="lastNameError"></span>
+            
+            {% if user_type == 'Student' %}
+              <input type="text" id="prn" name="prn" placeholder="PRN" required />
+              <span id="prnError"></span>
+            {% endif %}
+
+            <input type="email" id="email" name="email" placeholder="Email" required />
+            <span id="emailError"></span>
+
+            <select id="gender" name="gender" class="form-input" required>
+                <option value="">Select Gender</option>
+                <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
+                <option value="Other" {% if user.gender == 'Other' %}selected{% endif %}>Other</option>
+            </select>
+            <span id="genderError"></span>
+
+            <input type="password" id="password1" name="password1" placeholder="Password" required />
+            <span id="passwordError"></span>
+        
+            <input type="password" id="password2" name="password2" placeholder="Confirm Password" required />
+            <span id="confirmPasswordError"></span>
+
+
+            {% if user_type == 'Student' %}
+              {% if form.prn.errors %}
+                <h5 class="error">{{ form.prn.errors }}</h5>
+              {% endif %}
+            {% endif %}
+
+            {% if form.username.errors %}
+                <h5 class="error">{{ form.username.errors }}</h5>
+            {% elif form.email.errors %}
+                <h5 class="error">{{ form.email.errors }}</h5>
+            {% elif form.password1.errors %}
+                <h5 class="error">{{ form.password1.errors }}</h5>
+            {% elif form.password2.errors %}
+                <h5 class="error">{{ form.password2.errors }}</h5>
+            {% endif %}
+            
+
+            <input type="submit" value="Register" />
+            <br>
+            <center>
+            <span>Already have an Account? <a href="/login/">Login</a></span>
+            </center>
+        </form>
+    </div>
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const usernameInput = document.getElementById('username');
+        const usernameError = document.getElementById('usernameError');
+    
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+    
+        const passwordInput = document.getElementById('password1');
+        const passwordError = document.getElementById('passwordError');
+    
+        const confirmPasswordInput = document.getElementById('password2');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+    
+        const prnInput = document.getElementById('prn'); // For student signup
+        const prnError = document.getElementById('prnError');
+    
+        // Username validation (no numbers allowed)
+        usernameInput.addEventListener('input', function() {
+            const usernameValue = usernameInput.value;
+            if (/\d/.test(usernameValue)) {
+                usernameError.textContent = 'Numbers are not allowed in the username.';
+                usernameError.style.color = 'red';
+                usernameInput.style.borderColor = 'red';
+            } else if (usernameValue.length > 0) {
+                usernameError.textContent = 'Valid username.';
+                usernameError.style.color = 'green';
+                usernameInput.style.borderColor = 'green';
+            } else {
+                usernameError.textContent = '';
+                usernameInput.style.borderColor = '';
+            }
+        });
+    
+        // Email validation (simple regex for email format)
+        emailInput.addEventListener('input', function() {
+          const emailValue = emailInput.value;
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+          // Check if the email matches the email pattern
+          if (!emailPattern.test(emailValue)) {
+              emailError.textContent = 'Please enter a valid email address.';
+              emailError.style.color = 'red';
+              emailInput.style.borderColor = 'red';
+          } else {
+              // Make AJAX call to check if email exists
+              fetch(`/check_email_exists/?email=${emailValue}`)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.exists) {
+                          emailError.textContent = 'Email already exists, try a different one.';
+                          emailError.style.color = 'red';
+                          emailInput.style.borderColor = 'red';
+                      } else {
+                          emailError.textContent = 'Valid email address.';
+                          emailError.style.color = 'green';
+                          emailInput.style.borderColor = 'green';
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error checking email:', error);
+                  });
+          }
+        });
+      
+    
+        // Password validation (minimum length)
+        passwordInput.addEventListener('input', function() {
+            const passwordValue = passwordInput.value;
+            if (passwordValue.length < 8) {
+                passwordError.textContent = 'Password must be at least 8 characters long.';
+                passwordError.style.color = 'red';
+                passwordInput.style.borderColor = 'red';
+            } else {
+                passwordError.textContent = 'Strong password.';
+                passwordError.style.color = 'green';
+                passwordInput.style.borderColor = 'green';
+            }
+        });
+    
+        // Confirm Password validation (must match the password)
+        confirmPasswordInput.addEventListener('input', function() {
+            const passwordValue = passwordInput.value;
+            const confirmPasswordValue = confirmPasswordInput.value;
+            if (confirmPasswordValue !== passwordValue) {
+                confirmPasswordError.textContent = 'Passwords do not match.';
+                confirmPasswordError.style.color = 'red';
+                confirmPasswordInput.style.borderColor = 'red';
+            } else if (confirmPasswordValue.length > 0) {
+                confirmPasswordError.textContent = 'Passwords match.';
+                confirmPasswordError.style.color = 'green';
+                confirmPasswordInput.style.borderColor = 'green';
+            } else {
+                confirmPasswordError.textContent = '';
+                confirmPasswordInput.style.borderColor = '';
+            }
+        });
+    
+        
+        // PRN validation (for students - example: exactly 12 digits)
+        if (prnInput) {
+          prnInput.addEventListener('input', function() {
+              const prnValue = prnInput.value;
+      
+              // Check if PRN is exactly 12 digits
+              if (!/^\d{10}$/.test(prnValue)) {
+                  prnError.textContent = 'PRN must be exactly 10 digits.';
+                  prnError.style.color = 'red';
+                  prnInput.style.borderColor = 'red';
+              } else {
+                  // Make AJAX call to check if PRN exists
+                  fetch(`/check_prn_exists/?prn=${prnValue}`)
+                      .then(response => response.json())
+                      .then(data => {
+                          if (data.exists) {
+                              prnError.textContent = 'PRN already exists.';
+                              prnError.style.color = 'red';
+                              prnInput.style.borderColor = 'red';
+                          } else {
+                              prnError.textContent = 'Valid PRN.';
+                              prnError.style.color = 'green';
+                              prnInput.style.borderColor = 'green';
+                          }
+                      })
+                      .catch(error => {
+                          console.error('Error checking PRN:', error);
+                      });
+              }
+          });
+        }
+      });
+    
+
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const usernameInput = document.getElementById('username');
+        const usernameError = document.getElementById('usernameError');
+    
+        usernameInput.addEventListener('input', function() {
+            const usernameValue = usernameInput.value;
+    
+            // Check if the username contains any number
+            if (/\d/.test(usernameValue)) {
+                usernameError.textContent = 'Numbers are not allowed in the username.';
+                usernameError.style.color = 'red';
+                usernameInput.style.borderColor = 'red';
+            } else if (usernameValue.length > 0) {
+                usernameError.textContent = 'Valid username.';
+                usernameError.style.color = 'green';
+                usernameInput.style.borderColor = 'green';
+            } else {
+                usernameError.textContent = ''; // Clear error when input is empty
+                usernameInput.style.borderColor = ''; // Reset border color
+            }
+        });
+
+      });      
+    </script> -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // First Name validation
+        const firstNameInput = document.getElementById('first_name');
+        const firstNameError = document.getElementById('firstNameError');
+    
+        firstNameInput.addEventListener('input', function() {
+            const firstNameValue = firstNameInput.value.trim();
+    
+            if (firstNameValue === '') {
+                firstNameError.textContent = 'First name is required.';
+                firstNameError.style.color = 'red';
+                firstNameInput.style.borderColor = 'red';
+                firstNameInput.style.color = 'red';
+            } else if (!/^[a-zA-Z]+$/.test(firstNameValue)) {
+                firstNameError.textContent = 'First name should only contain letters.';
+                firstNameError.style.color = 'red';
+                firstNameInput.style.borderColor = 'red';
+                firstNameInput.style.color = 'red';
+            } else {
+                firstNameError.textContent = '';
+                firstNameInput.style.borderColor = 'green';
+                firstNameInput.style.color = 'green';
+            }
+        });
+    
+        // Last Name validation
+        const lastNameInput = document.getElementById('last_name');
+        const lastNameError = document.getElementById('lastNameError');
+    
+        lastNameInput.addEventListener('input', function() {
+            const lastNameValue = lastNameInput.value.trim();
+    
+            if (lastNameValue === '') {
+                lastNameError.textContent = 'Last name is required.';
+                lastNameError.style.color = 'red';
+                lastNameInput.style.borderColor = 'red';
+                lastNameInput.style.color = 'red';
+            } else if (!/^[a-zA-Z]+$/.test(lastNameValue)) {
+                lastNameError.textContent = 'Last name should only contain letters.';
+                lastNameError.style.color = 'red';
+                lastNameInput.style.borderColor = 'red';
+                lastNameInput.style.color = 'red';
+            } else {
+                lastNameError.textContent = '';
+                lastNameInput.style.borderColor = 'green';
+                lastNameInput.style.color = 'green';
+            }
+        });
+    
+        // Email validation with domain restriction
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        const allowedDomains = ['gmail.com', 'outlook.com', 'yahoo.com']; // Allowed domains
+    
+        emailInput.addEventListener('input', function() {
+            const emailValue = emailInput.value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const domainPattern = /@([a-zA-Z0-9.-]+)$/; // Regex to extract domain
+    
+            if (!emailPattern.test(emailValue)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                emailError.style.color = 'red';
+                emailInput.style.borderColor = 'red';
+                emailInput.style.color = 'red';
+            } else {
+                const domainMatch = emailValue.match(domainPattern);
+                if (domainMatch) {
+                    const domain = domainMatch[1];
+                    if (!allowedDomains.includes(domain)) {
+                        emailError.textContent = `Only ${allowedDomains.join(', ')} emails are allowed.`;
+                        emailError.style.color = 'red';
+                        emailInput.style.borderColor = 'red';
+                        emailInput.style.color = 'red';
+                    } else {
+                        fetch(`/check_email_exists/?email=${emailValue}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.exists) {
+                                    emailError.textContent = 'Email already exists, try a different one.';
+                                    emailError.style.color = 'red';
+                                    emailInput.style.borderColor = 'red';
+                                    emailInput.style.color = 'red';
+                                } else {
+                                    emailError.textContent = '';
+                                    emailInput.style.borderColor = 'green';
+                                    emailInput.style.color = 'green';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error checking email:', error);
+                            });
+                    }
+                } else {
+                    emailError.textContent = 'Please enter a valid email address.';
+                    emailError.style.color = 'red';
+                    emailInput.style.borderColor = 'red';
+                    emailInput.style.color = 'red';
+                }
+            }
+        });
+    
+        // Password validation
+        const passwordInput = document.getElementById('password1');
+        const passwordError = document.getElementById('passwordError');
+    
+        passwordInput.addEventListener('input', function() {
+            const passwordValue = passwordInput.value;
+    
+            if (passwordValue.length < 8) {
+                passwordError.textContent = 'Password must be at least 8 characters long.';
+                passwordError.style.color = 'red';
+                passwordInput.style.borderColor = 'red';
+                passwordInput.style.color = 'red';
+            } else {
+                passwordError.textContent = '';
+                passwordInput.style.borderColor = 'green';
+                passwordInput.style.color = 'green';
+            }
+        });
+    
+        // Confirm Password validation
+        const confirmPasswordInput = document.getElementById('password2');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+    
+        confirmPasswordInput.addEventListener('input', function() {
+            const passwordValue = passwordInput.value;
+            const confirmPasswordValue = confirmPasswordInput.value;
+    
+            if (confirmPasswordValue !== passwordValue) {
+                confirmPasswordError.textContent = 'Passwords do not match.';
+                confirmPasswordError.style.color = 'red';
+                confirmPasswordInput.style.borderColor = 'red';
+                confirmPasswordInput.style.color = 'red';
+            } else if (confirmPasswordValue.length > 0) {
+                confirmPasswordError.textContent = '';
+                confirmPasswordError.style.color = 'green';
+                confirmPasswordInput.style.borderColor = 'green';
+                confirmPasswordInput.style.color = 'green';
+            } else {
+                confirmPasswordError.textContent = '';
+                confirmPasswordInput.style.borderColor = '';
+            }
+        });
+    
+        // PRN validation (for students only)
+        const prnInput = document.getElementById('prn');
+        const prnError = document.getElementById('prnError');
+    
+        if (prnInput) {
+            prnInput.addEventListener('input', function() {
+                const prnValue = prnInput.value;
+    
+                if (!/^\d{10}$/.test(prnValue)) {
+                    prnError.textContent = 'PRN must be exactly 10 digits.';
+                    prnError.style.color = 'red';
+                    prnInput.style.borderColor = 'red';
+                    prnInput.style.color = 'red';
+                }
+                else {
+                    fetch(`/check_prn_exists/?prn=${prnValue}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.exists) {
+                                prnError.textContent = 'PRN already exists.';
+                                prnError.style.color = 'red';
+                                prnInput.style.borderColor = 'red';
+                                prnInput.style.color = 'red';
+                            } else {
+                                prnError.textContent = '';
+                                prnError.style.color = 'green';
+                                prnInput.style.borderColor = 'green';
+                                prnInput.style.color = 'green';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error checking PRN:', error);
+                        });
+                }
+            });
+        }
+    });    
+    </script>
+</body>
+</html>

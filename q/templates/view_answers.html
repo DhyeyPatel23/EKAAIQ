@@ -1,0 +1,293 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Quiz Answers</title>
+    <style>
+        body {
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/hi.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh; 
+            overflow-y: auto;
+            margin: 20px;
+        }
+
+        .result-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .result-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .result-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .result-container h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .result-container h2, h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .details p {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+
+        .question-block {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .question-text {
+            margin-bottom: 20px;
+        }
+
+        .question-type {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            background-color: #e9ecef;
+            color: #495057;
+            margin-left: 10px;
+            font-weight: 500;
+        }
+
+        .option {
+            margin: 12px 0;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .option.user-selected {
+            border-left: 4px solid #2196F3;
+            background-color: #e3f2fd;
+        }
+
+        .option.correct {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+            border-left: 4px solid #4caf50;
+        }
+
+        .option.incorrect {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .answer-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .answer-summary p {
+            margin: 8px 0;
+            color: #495057;
+        }
+
+        .answer-summary strong {
+            color: #2c3e50;
+        }
+
+        .actions {
+            margin-top: 30px;
+        }
+
+        .actions button.share {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .actions button.share:hover {
+            background-color: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .result-container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .option {
+                padding: 12px;
+            }
+        }
+
+        .question-points {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            background-color: #4CAF50;
+            color: white;
+            margin-left: 10px;
+            font-weight: 500;
+        }
+
+        .question-text h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .question-text h2 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .question-points, .question-type {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Student's Quiz Answers</h1>
+        <h3>Quiz Name: {{ quiz.title }}</h3>
+        <h3>Student: {{ student.first_name }} {{ student.last_name }}</h3>
+        <div class="details">
+            <p>Score: {{ result.score }}</p>
+            <p>Percentage: {{ percentage }}%</p>
+        </div>
+        
+        <div class="detailed-results">
+            {% for answer in detailed_results %}
+            <div class="question-block">
+                <div class="question-text">
+                    <h2>
+                        Question {{ forloop.counter }}
+                        <span class="question-type">{{ answer.question_type }}</span>
+                        <span class="question-points">{{ answer.points }} point{% if answer.points != 1 %}s{% endif %}</span>
+                    </h2>
+                    <h3>{{ answer.question }}</h3>
+
+                    {% if answer.img %}
+                        <img src="{{ answer.img.url }}" alt="Question Image">
+                    {% endif %}
+                </div>
+
+                {% if answer.question_type == 'TF' %}
+                    <!-- True/False question display -->
+                    <div class="option {% if 'True' == answer.user_answer %}user-selected{% endif %} 
+                                    {% if 'True' == answer.correct_answer %}correct{% endif %}
+                                    {% if 'True' == answer.user_answer and 'True' != answer.correct_answer %}incorrect{% endif %}">
+                        True
+                    </div>
+                    <div class="option {% if 'False' == answer.user_answer %}user-selected{% endif %} 
+                                    {% if 'False' == answer.correct_answer %}correct{% endif %}
+                                    {% if 'False' == answer.user_answer and 'False' != answer.correct_answer %}incorrect{% endif %}">
+                        False
+                    </div>
+                {% else %}
+                    <!-- MCQ and MCA questions display -->
+                    {% for key, option in answer.options.items %}
+                        {% if option %}
+                            <div class="option 
+                                {% if option in answer.user_answer %}user-selected{% endif %} 
+                                {% if option in answer.correct_answer %}correct{% endif %}
+                                {% if option in answer.user_answer and option not in answer.correct_answer %}incorrect{% endif %}">
+                                {{ option }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <div class="answer-summary">
+                    <p><strong>Student's Answer:</strong> {{ answer.user_answer }}</p>
+                    <p><strong>Correct Answer:</strong> {{ answer.correct_answer }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="actions">
+            <form action="{% url 'teacher_home' %}" method="get">
+                <button class="share">Back to Dashboard</button>
+            </form>
+        </div>
+        <div class="actions">
+            <form action="{% url 'quiz_view' quiz.id %}" method="get">
+                <button class="share">Back to Details</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,336 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      :root {
+        --foreground: #4d64e6;
+        --background: #80af81;
+        --main-bg: #d6efd8;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+        font-family: "Poppins";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .login-container {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.59);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 1px solid rgba(1, 4, 9, 1);
+        max-width: 350px;
+        width: 80%;
+      }
+
+      .login-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--foreground);
+      }
+
+      .login-form input[type="email"],
+      .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        color: var(--foreground);
+        border-radius: 5px;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid var(--foreground);
+        background: transparent;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="email"]:hover,
+      .login-form input[type="password"]:hover {
+        transform: scale(1);
+      }
+
+      .login-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--foreground);
+        border-radius: 5px;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="submit"]:hover {
+        transform: scale(1);
+        font-size: 15px;
+      }
+
+      .login-form span {
+        font-size: 13px;
+        color: #000;
+      }
+
+      .login-form span a {
+        color: var(--foreground);
+        text-decoration: none;
+        align-content: center;
+      }
+
+      .login-form span a:hover {
+        text-decoration: underline;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .login-container {
+          width: 90%;
+          max-width: 300px;
+        }
+      }
+
+      /* Signup Modal Styles */
+      .signup-popup {
+        min-width: 100%;
+        min-height: 45vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 1px solid rgba(1, 4, 9, 1);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        color: var(--foreground);
+        transition: 0.6s ease;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 200;
+      }
+      .signup-popup.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .signup-popup h1 {
+        font-size: 1.8vw;
+        color:#4d64e6;
+        text-transform: uppercase;
+        border-bottom: 1px solid #4d64e6;
+        margin-bottom: 2vh;
+      }
+      .signup-popup .fa-solid {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 13px 8px;
+        margin: 20px;
+        background: #4d64e6;
+        color: var(--main-bg);
+        border-radius: 25%;
+      }
+      .signup-popup .option {
+        width: 100%;
+        text-align: center;
+        margin: 1.5vh 0;
+      }
+      .signup-popup .option a {
+        border: 5px solid #000;
+        color: #fff;
+        padding: 0.5vw 1.5vw;
+        text-decoration: none;
+        border-radius: 1vh;
+        font-size: 1.2vw;
+        transition: 0.6s ease-in-out;
+        letter-spacing: 1px;
+        background: #4d64e6;
+      }
+      .signup-popup .option a:hover {
+        border: 5px solid #4d64e6;
+        background-color: #fff;
+        color: #4d64e6;
+      }
+
+      /* Responsive Design for Signup Modal */
+      @media (max-width: 850px) {
+        .signup-popup {
+          width: 65%;
+        }
+        .signup-popup h1 {
+          font-size: 4vh;
+        }
+        .signup-popup .option a {
+          font-size: 2.5vh;
+          padding: 0.6vh 0.8vh;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .signup-popup {
+          width: 75%;
+        }
+        .signup-popup h1 {
+          font-size: 3vh;
+        }
+        .signup-popup .option a {
+          font-size: 2.4vh;
+          padding: 0.8vh 1vh;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .signup-popup {
+          width: 85%;
+          border-radius: 10px;
+          padding: 18px;
+        }
+        .signup-popup h1 {
+          font-size: 2.6vh;
+        }
+        .signup-popup .option a {
+          font-size: 2vh;
+          padding: 1vh 1.4vh;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Login to QuizBOT</h2>
+      <form class="login-form" method="post">
+        {% csrf_token %}
+        
+        <!-- Email Input Field -->
+        <input type="email" id="email" name="{{ form.email.name }}" placeholder="Email" required />
+        <span id="emailError" class="error"></span> <!-- Error display for email -->
+    
+        <!-- Password Input Field -->
+        <input type="password" id="password" name="{{ form.password.name }}" placeholder="Password" required />
+        <span id="passwordError" class="error"></span> <!-- Error display for password -->
+    
+        <!-- Non-field errors (e.g., invalid credentials) -->
+        {% if form.non_field_errors %}
+            <div class="error">
+                <h5>Email or Password Incorrect.</h5>
+            </div>
+        {% endif %}
+    
+        <!-- Submit Button -->
+        <input type="submit" value="Login" />
+    
+        <!-- Sign up Link -->
+        <center>
+        <span>Don't have an account? <a href="#" id="signupBtn">Sign up</a></span>
+
+        
+        <!-- Forgot Password Link -->
+        <br>
+        <span><a href="{% url 'forgot_password' %}" id="forgotPasswordBtn">Forgot password</a></span>
+        </center>
+    </form>
+
+      <div class="signup-popup" id="signupPopup">
+        <h1>Sign up as</h1>
+        <i class="fa-solid fa-xmark fa-lg" id="closeSignupPopup"></i>
+        <div class="option">
+          <a href="/student/signup/">Sign up as Student</a>
+        </div>
+        <div class="option">
+          <a href="/teacher/signup/">Sign up as Teacher</a>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'JavaScript/login.js' %}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const emailInput = document.getElementById('email');
+          const emailError = document.getElementById('emailError');
+          const passwordInput = document.getElementById('password');
+          const passwordError = document.getElementById('passwordError');
+
+          // Email Validation and Existence Check
+          emailInput.addEventListener('input', function() {
+              const emailValue = emailInput.value;
+              const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format check
+
+              if (!emailPattern.test(emailValue)) {
+                  emailError.textContent = 'Please enter a valid email address.';
+                  emailError.style.color = 'red';
+                  emailInput.style.borderColor = 'red';
+                  emailInput.style.color = 'red' ;
+              } else {
+                  // Email format is correct, now check if email exists in the database
+                  fetch(`/check_email_exists/?email=${emailValue}`, {
+                      method: 'GET',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token for security
+                      }
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.exists) {
+                          emailError.textContent = '';
+                          emailError.style.color = 'green';
+                          emailInput.style.borderColor = 'green';
+                          emailInput.style.color = 'green' ;
+                      } else {
+                          emailError.textContent = 'Email does not exist.';
+                          emailError.style.color = 'red';
+                          emailInput.style.borderColor = 'red';
+                          emailInput.style.color = 'red' ;
+                      }
+                  });
+              }
+          });
+
+          // Password Validation
+          passwordInput.addEventListener('input', function() {
+              const passwordValue = passwordInput.value;
+              if (passwordValue.length < 8) {
+                  passwordError.textContent = 'Password must be at least 8 characters long.';
+                  passwordError.style.color = 'red';
+                  passwordInput.style.borderColor = 'red';
+                  passwordInput.style.color = 'red' ;
+              } else {
+                  passwordError.textContent = '';
+                  passwordInput.style.borderColor = 'green';
+                  passwordInput.style.color = 'green' ;
+              }
+          });
+      });
+
+    </script>
+  </body>
+</html>

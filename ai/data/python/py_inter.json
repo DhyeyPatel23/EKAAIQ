@@ -1,0 +1,293 @@
+[
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["Hello", "olleH", "SyntaxError", "None"],
+      "answer": "option2" ,
+      "image_loc" : "images/py_inter/img1.png"
+    },
+    {
+      "question": "Which method is used to remove whitespace from the beginning and end of a string?",
+      "options": ["strip()", "split()", "trim()", "cut()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["[1, 2, 3]", "[1, 2, 3, 4]", "[4, 2, 3]", "Error"],
+      "answer": "option2",
+      "image_loc" : "images/py_inter/img2.png"
+    },
+    {
+      "question": "Which of the following functions checks if all characters in a string are digits?",
+      "options": ["isdigit()", "isnumeric()", "isdecimal()", "isnumber()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["10", "7", "8", "Error"],
+      "answer": "option1",
+      "image_loc" : "images/py_inter/img3.png"
+    },
+    {
+      "question": "What does the 'yield' keyword do in Python?",
+      "options": ["Returns a value", "Creates a generator", "Ends a function", "Starts a loop"],
+      "answer": "option2"
+    },
+    {
+      "question": "Which of the following will correctly reverse a list 'a' in Python?",
+      "options": ["a[::-1]", "reverse(a)", "a.reverse[]", "a[::1]"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["Error!", "Done", "Error! Done", "None"],
+      "answer": "option3" ,
+      "image_loc" : "images/py_inter/img4.png"
+    },
+    {
+      "question": "Which of the following is used to import the 'math' module in Python?",
+      "options": ["import math()", "import math", "include(math)", "math.import()"],
+      "answer": "option2"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["2", "3", "4", "Error"],
+      "answer": "option2" ,
+      "image_loc" : "images/py_inter/img5.png"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["[1, 2, 3]", "[2, 3, 4]", "[2, 3, 4, 5]", "[1, 2, 3, 4, 5]"],
+      "answer": "option2",
+      "image_loc" : "images/py_inter/img6.png"
+    },
+    {
+      "question": "Which of the following will raise an error in Python?",
+      "options": ["print('Hello')", "x = [1, 2, 3]; x[3]", "y = (1, 2); y[1]", "z = {'a': 1, 'b': 2}"],
+      "answer": "option2"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["1", "2", "3", "Error"],
+      "answer": "option3",
+      "image_loc" : "images/py_inter/img7.png"
+    },
+    {
+      "question": "Which of the following functions will return the largest value in a list?",
+      "options": ["min()", "max()", "sum()", "len()"],
+      "answer": "option2"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["['one', 'two', 'three']", "dict_keys(['one', 'two', 'three'])", "{'one', 'two', 'three'}", "None"],
+      "answer": "option2",
+      "image_loc" : "images/py_inter/img8.png"
+    },
+    {
+      "question": "Which method is used to add an item to a set in Python?",
+      "options": ["add()", "append()", "insert()", "push()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["abc", "a b c", "a, b, c", "Error"],
+      "answer": "option2" , 
+      "image_loc" : "images/py_inter/img9.png"
+    },
+    {
+      "question": "Which of the following is a valid Python lambda function?",
+      "options": ["lambda x, y: x + y", "lambda(x, y): x + y", "lambda x, y { return x + y }", "lambda(x, y) => x + y"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["True", "False", "1", "0"],
+      "answer": "option3" , 
+      "image_loc" : "images/py_inter/img10.png"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["['apple', 'cherry']", "['apple', 'banana']", "['apple', 'banana', 'cherry']", "Error"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_inter/img11.png"
+    },
+    {
+      "question": "Which of the following is used to iterate over a sequence in Python?",
+      "options": ["for", "while", "foreach", "loop"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["True", "False", "Error", "None"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_inter/img12.png"
+    },
+    {
+      "question": "What is the result of the following code?",
+      "options": ["4", "8", "16", "Error"],
+      "answer": "option2" , 
+      "image_loc" : "images/py_inter/img13.png"
+    },
+    {
+      "question": "Which of the following methods will convert a list into a set?",
+      "options": ["set()", "list()", "dict()", "tuple()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["2", "2.5", "2.0", "3"],
+      "answer": "option1",
+      "image_loc" : "images/py_inter/img14.png"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["True", "False", "0", "Error"],
+      "answer": "option2" ,
+      "image_loc" : "images/py_inter/img15.png"
+    },
+    {
+      "question": "Which keyword is used to define a class in Python?",
+      "options": ["class", "def", "struct", "define"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["0", "1", "2", "Error"],
+      "answer": "option2" , 
+      "image_loc" : "images/py_inter/img16.png"
+    },
+    {
+      "question": "Which method returns the number of items in a list?",
+      "options": ["count()", "length()", "len()", "size()"],
+      "answer": "option3"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["4", "5", "-1", "Error"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_inter/img17.png"
+    } ,
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["[1, 2, 3, 1, 2, 3]", "[2, 4, 6]", "[1, 2, 3, 2]", "Error"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_inter/img18.png"
+    },
+    {
+      "question": "Which of the following will correctly copy a dictionary in Python?",
+      "options": ["dict.copy()", "copy(dict)", "dict2 = dict", "dict(dict)"],
+      "answer": "option1"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["['Hello', 'World']", "['Hello World']", "['H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd']", "Error"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_inter/img19.png"
+    },
+    {
+      "question": "Which of the following methods will sort a list in descending order?",
+      "options": ["list.sort(reverse=True)", "list.sort(descending=True)", "sorted(list, desc=True)", "sort(list, reverse=True)"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["2", "2.0", "4", "Error"],
+      "answer": "option2",
+      "image_loc" : "images/py_inter/img20.png"
+    },
+    {
+      "question": "Which of the following is used to read a single line from a file in Python?",
+      "options": ["file.read()", "file.readline()", "file.read_line()", "file.readlines()"],
+      "answer": "option2"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["{}", "{'a': 1, 'b': 2, 'c': 3}", "None", "Error"],
+      "answer": "option1",
+      "image_loc" : "images/py_inter/img21.png"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["['P', 'y', 't', 'h', 'o', 'n']", "['Python']", "['P', 'y', 't', 'h', 'o', 'n', '']", "Error"],
+      "answer": "option1" ,
+      "image_loc" : "images/py_inter/img22.png"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["[1] [2] [3]", "[1] [2] [1, 3]", "[1] [2] [3, 1]", "[1] [2] [1, 3]"],
+      "answer": "option4" ,
+      "image_loc" : "images/py_inter/img23.png"
+    },
+    {
+      "question": "Which of the following is not a valid way to import the 'math' module?",
+      "options": ["import math", "from math import *", "import math as m", "import * from math"],
+      "answer": "option4"
+    },
+    {
+      "question": "What is the purpose of the 'is' keyword in Python?",
+      "options": [
+        "To compare values for equality",
+        "To check object identity",
+        "To check type",
+        "To import a module"
+      ],
+      "answer": "option2"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["True", "False", "None", "Error"],
+      "answer": "option2" , 
+      "image_loc" : "images/py_inter/img24.png"
+    },
+    {
+      "question": "What is the difference between '==' and 'is' in Python?",
+      "options": [
+        "'==' checks for equality, 'is' checks for object identity",
+        "'==' checks for object identity, 'is' checks for equality",
+        "No difference",
+        "'==' is used for strings, 'is' for numbers"
+      ],
+      "answer": "option1"
+    },
+    {
+      "question": "Which method is used to add elements of a list to the end of another list?",
+      "options": ["append()", "extend()", "add()", "insert()"],
+      "answer": "option2"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["Hezlo World", "Hezzo World", "Hezzo Worzd", "Error"],
+      "answer": "option1" , 
+      "image_loc" : "images/py_inter/img25.png"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["1", "2", "3", "4"],
+      "answer": "option4" , 
+      "image_loc" : "images/py_inter/img26.png"
+    },
+    {
+      "question": "Which method can be used to convert a tuple to a list?",
+      "options": ["list()", "tuple()", "convert()", "to_list()"],
+      "answer": "option1"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "options": ["[4, 2, 3]", "[1, 2, 3]", "[4, 4, 3]", "Error"],
+      "answer": "option2" ,
+      "image_loc" : "images/py_inter/img27.png"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["10", "20", "30", "Error"],
+      "answer": "option2" , 
+      "image_loc" :"images/py_inter/img28.png"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "options": ["0", "1", "2", "Error"],
+      "answer": "option2" , 
+      "image_loc" : "images/py_inter/img29.png"
+    }
+  ]
+  
+  

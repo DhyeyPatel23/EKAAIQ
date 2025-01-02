@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .score-summary {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .percentage {
+            font-size: 18px;
+            color: #6c757d;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .correct {
+            border-left: 4px solid #28a745;
+        }
+
+        .incorrect {
+            border-left: 4px solid #dc3545;
+        }
+
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .answer {
+            margin-top: 10px;
+        }
+
+        .correct-answer {
+            color: #28a745;
+        }
+
+        .incorrect-answer {
+            color: #dc3545;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .all-options {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .all-options ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .all-options li {
+            padding: 5px 10px;
+            margin: 5px 0;
+            background-color: white;
+            border-radius: 4px;
+            border-left: 3px solid #007bff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .question {
+                padding: 10px;
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Results: {{ quiz.title }}</h1>
+
+        <div class="score-summary">
+            <div class="score">Score: {{ total_score }} / {{ max_score }}</div>
+            <div class="percentage">Percentage: {{ percentage }}%</div>
+        </div>
+
+        {% if show_results %}
+            {% for question in questions %}
+                <div class="question {% if question.is_correct %}correct{% else %}incorrect{% endif %}">
+                    <h3>Question {{ forloop.counter }}: {{ question.text }}</h3>
+                    
+                    {% if question.image %}
+                        <img src="{{ question.image }}" alt="Question Image" class="question-image">
+                    {% endif %}
+
+                    <div class="answer">
+                        <div class="all-options">
+                            <p><strong>All Options:</strong></p>
+                            <ul>
+                                {% for option in question.options %}
+                                    {% if option %}
+                                        <li>{{ option }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <p><strong>Your Answer:</strong> 
+                            {% for answer in question.user_answer_list %}
+                                {{ answer }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                
+                        <p class="correct-answer"><strong>Correct Answer:</strong>
+                            {% for answer in question.correct_answer_list %}
+                                {{ answer }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        
+                        <p><strong>Points:</strong> {% if question.is_correct %}{{ question.points }}{% else %}0{% endif %}/{{ question.points }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>The quiz results are not available for viewing.</p>
+        {% endif %}
+
+        <a href="{% url 'student_home' %}" class="back-button">Back to Home</a>
+    </div>
+</body>
+</html>

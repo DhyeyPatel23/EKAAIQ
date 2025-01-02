@@ -1,0 +1,503 @@
+[
+    {
+        "question": "Which keyword is used to define a class in Java?",
+        "options": ["class", "interface", "struct", "define"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the default value of a boolean variable in Java?",
+        "options": ["true", "false", "0", "null"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which method is the entry point of a Java program?",
+        "options": ["init()", "start()", "main()", "run()"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which symbol is used to end a statement in Java?",
+        "options": [".", ":", ";", ","],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is a reserved keyword in Java?",
+        "options": ["goto", "implement", "extends", "namespace"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which data type is used to create a variable that should store text?",
+        "options": ["String", "char", "int", "boolean"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the size of an int data type in Java?",
+        "options": ["8-bit", "16-bit", "32-bit", "64-bit"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these operators can be used to concatenate two strings?",
+        "options": ["+", "-", "*", "&"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is a valid declaration of an integer array in Java?",
+        "options": ["int arr[];", "int arr;", "array int arr;", "int[] arr;"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which method must be implemented by all threads in Java?",
+        "options": ["wait()", "sleep()", "start()", "run()"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of the expression 7 + 3 * 2?",
+        "options": ["20", "26", "13", "10"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these are selection statements in Java?",
+        "options": ["break", "continue", "if", "goto"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is not a primitive data type in Java?",
+        "options": ["int", "float", "char", "String"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which keyword is used to import a package in Java?",
+        "options": ["import", "package", "include", "export"],
+        "answer": "option1"
+    },
+    {
+        "question": "What does the 'final' keyword in Java mean?",
+        "options": ["A variable cannot be changed", "A method cannot be overridden", "A class cannot be inherited", "All of the above"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the extension of a Java bytecode file?",
+        "options": [".java", ".class", ".exe", ".jbyte"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which method is used to find the length of a string in Java?",
+        "options": ["getSize()", "length()", "size()", "getLength()"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the parent class of all classes in Java?",
+        "options": ["Object", "Class", "Super", "Parent"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which exception is thrown when a dividing by zero operation is performed in Java?",
+        "options": ["NullPointerException", "IOException", "ArithmeticException", "DivideByZeroException"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is used to handle exceptions in Java?",
+        "options": ["try-catch", "throw-catch", "try-throw", "throw-finally"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which keyword is used to inherit a class in Java?",
+        "options": ["implement", "inherits", "extends", "follows"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these keywords is used to define an abstract class in Java?",
+        "options": ["final", "static", "abstract", "extends"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which method is used to start a thread execution in Java?",
+        "options": ["run()", "start()", "resume()", "begin()"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these are valid Java comments?",
+        "options": ["// comment", "/* comment */", "// comment /* comment */", "All of the above"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of the following is a superclass of every class in Java?",
+        "options": ["Object", "ParentClass", "Class", "SuperClass"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these is a valid identifier in Java?",
+        "options": ["1_variable", "variable1", "variable-1", "variable@1"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which operator is used to compare two values in Java?",
+        "options": ["=", "==", "<=", "!="],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is a valid constructor declaration in Java?",
+        "options": ["MyClass()", "void MyClass()", "MyClass void()", "void MyClass(void)"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following loops in Java is guaranteed to execute at least once?",
+        "options": ["for", "while", "do-while", "None of the above"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these is not a Java feature?",
+        "options": ["Object-oriented", "Use of pointers", "Portable", "Dynamic"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the result of the following code snippet?",
+        "options": ["2.5", "2", "2.0", "None of the above"],
+        "answer": "option2" , 
+        "image_loc" : "images/jv_easy/img1.png"
+    },
+    {
+        "question": "Which method can be used to convert an integer into a string in Java?",
+        "options": ["String.valueOf()", "Integer.toString()", "Both A and B", "None of the above"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these statements is incorrect?",
+        "options": ["Java is case-sensitive", "Java is platform-independent", "Java supports operator overloading", "Java does not support pointers"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which keyword is used in Java to declare a constant?",
+        "options": ["final", "const", "static", "define"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these cannot be used for a variable name in Java?",
+        "options": ["keyword", "identifier", "literal", "both A and C"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which data type is used to create a variable that should store whole numbers?",
+        "options": ["float", "int", "boolean", "char"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these keywords is used to define an interface in Java?",
+        "options": ["class", "interface", "extends", "implements"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these is not an access modifier in Java?",
+        "options": ["private", "public", "protected", "internal"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which keyword is used to create an object in Java?",
+        "options": ["new", "create", "make", "object"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to print text in Java?",
+        "options": ["System.out.print()", "System.out.println()", "Both A and B", "None of the above"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is not a Java keyword?",
+        "options": ["static", "void", "int", "print"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these statements is true about constructors in Java?",
+        "options": ["They must have the same name as the class", "They can have any name", "They return void", "None of the above"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method is called when an object is created in Java?",
+        "options": ["finalize()", "init()", "new()", "constructor"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these methods can be used to find the highest value of x and y in Java?",
+        "options": ["Math.max(x, y)", "Math.min(x, y)", "Math.high(x, y)", "Math.ceil(x, y)"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the output of the following code?",
+        "options": ["4", "3", "5", "None of the above"],
+        "answer": "option1" , 
+        "image_loc" : "images/jv_easy/img2.png"
+    },
+    {
+        "question": "Which of these is a reserved keyword in Java?",
+        "options": ["const", "goto", "void", "Both A and B"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these keywords is used to define a package in Java?",
+        "options": ["pack", "package", "include", "import"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which method in Java is used to check if a string starts with a specified prefix?",
+        "options": ["startsWith()", "beginWith()", "initWith()", "None of the above"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which operator is used to add together two values?",
+        "options": ["-", "+", "*", "/"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is a loop structure in Java?",
+        "options": ["if-else", "switch", "while", "try-catch"],
+        "answer": "option3"
+    } ,
+    {
+        "question": "Which keyword is used to prevent a method from being overridden in Java?",
+        "options": ["final", "static", "private", "protected"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method is used to stop a thread in Java?",
+        "options": ["stop()", "terminate()", "suspend()", "destroy()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which keyword is used to refer to the current object in Java?",
+        "options": ["self", "this", "current", "object"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the size of a char data type in Java?",
+        "options": ["8-bit", "16-bit", "32-bit", "64-bit"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which keyword is used to declare an enumeration in Java?",
+        "options": ["enum", "enumeration", "enumtype", "define"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a type of constructor in Java?",
+        "options": ["Default Constructor", "Parameterized Constructor", "Copy Constructor", "Static Constructor"],
+        "answer": "option4"
+    },
+    {
+        "question": "What will be the output of the following code snippet?",
+        "options": ["Yes", "No", "true", "false"],
+        "answer": "option1" , 
+        "image_loc" : "images/jv_easy/img3.png"
+    },
+    {
+        "question": "Which method is used to convert a string to lowercase in Java?",
+        "options": ["toLower()", "toLowerCase()", "lowerCase()", "toLowerCase(String)"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which keyword is used to create an exception in Java?",
+        "options": ["throw", "throws", "try", "catch"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to declare an abstract method in Java?",
+        "options": ["abstract method()", "void method() abstract", "abstract void method()", "method() abstract"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which collection in Java allows null values and does not guarantee any order?",
+        "options": ["ArrayList", "HashSet", "LinkedList", "TreeSet"],
+        "answer": "option2"
+    },
+    {
+        "question": "What does JVM stand for?",
+        "options": ["Java Virtual Machine", "Java Visual Machine", "Java Verification Machine", "Java Variable Machine"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these is a marker interface in Java?",
+        "options": ["Runnable", "Cloneable", "Comparable", "Readable"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which method is used to break a string into an array of substrings in Java?",
+        "options": ["split()", "divide()", "partition()", "break()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which keyword is used to define a subclass in Java?",
+        "options": ["subclass", "inherit", "extends", "sub"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which operator is used for bitwise AND in Java?",
+        "options": ["&", "|", "^", "~"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these data types has the highest memory storage in Java?",
+        "options": ["byte", "int", "double", "char"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is a checked exception in Java?",
+        "options": ["ArithmeticException", "ArrayIndexOutOfBoundsException", "IOException", "NullPointerException"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is the correct way to declare a generic type in Java?",
+        "options": ["List<E>", "List<>", "List<E, T>", "List<Generic>"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method can be used to convert a character to an integer in Java?",
+        "options": ["Integer.parseInt()", "Character.getNumericValue()", "String.toInt()", "Character.toInt()"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is not a valid scope for a variable in Java?",
+        "options": ["Block", "Class", "Global", "Method"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these classes can be used to implement an array of characters in Java?",
+        "options": ["Array", "String", "StringBuilder", "StringBuffer"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these methods is used to start an Applet in Java?",
+        "options": ["run()", "start()", "init()", "main()"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the result of the expression 10 % 3?",
+        "options": ["1", "2", "3", "0"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a loop in Java?",
+        "options": ["for", "while", "repeat", "do-while"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which keyword is used to import a static member in Java?",
+        "options": ["import", "include", "static", "import static"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which exception is thrown when an array is accessed with an illegal index in Java?",
+        "options": ["ArrayIndexOutOfBoundsException", "IllegalArgumentException", "IndexOutOfBoundsException", "ArithmeticException"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method in Java is used to check if two strings are equal?",
+        "options": ["equals()", "==", "isEqual()", "equalsIgnoreCase()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these is not a type of loop in Java?",
+        "options": ["for", "foreach", "do-while", "while"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the output of the following code snippet?",
+        "options": ["HelloWorld", "Hello World", "Hello", "World"],
+        "answer": "option2" ,
+        "image_loc" : "images/jv_easy/img4.png"
+    },
+    {
+        "question": "Which of these is not a valid access modifier in Java?",
+        "options": ["public", "private", "protected", "default"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these methods is a part of the Object class in Java?",
+        "options": ["toString()", "equals()", "hashCode()", "All of the above"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of the following is not a valid method in the String class?",
+        "options": ["trim()", "toUpperCase()", "parseInt()", "substring()"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these methods is used to pause the execution of a thread in Java?",
+        "options": ["wait()", "pause()", "sleep()", "halt()"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which keyword is used to create an interface in Java?",
+        "options": ["interface", "class", "implements", "define"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a feature of Java?",
+        "options": ["Platform independent", "Object-oriented", "Pointer-based", "Multithreaded"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the result of the following code snippet?",
+        "options": ["true", "false", "1", "0"],
+        "answer": "option1" , 
+        "image_loc" : "images/jv_easy/img5.png"
+    },
+    {
+        "question": "Which of these methods can be used to reverse a string in Java?",
+        "options": ["reverse()", "StringBuilder.reverse()", "String.reverse()", "None of the above"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these operators is used to allocate memory for an object in Java?",
+        "options": ["new", "malloc", "alloc", "create"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these is a valid keyword in Java?",
+        "options": ["interface", "unsigned", "typeof", "short"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method is used to terminate a thread in Java?",
+        "options": ["end()", "stop()", "exit()", "kill()"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the return type of the hashCode() method in Java?",
+        "options": ["int", "boolean", "long", "double"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which keyword is used to inherit a class in Java?",
+        "options": ["inherit", "extends", "implements", "super"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which exception is thrown when an arithmetic operation is not valid in Java?",
+        "options": ["IllegalArgumentException", "ArithmeticException", "NumberFormatException", "IndexOutOfBoundsException"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these methods is used to determine the class of an object in Java?",
+        "options": ["getClass()", "classOf()", "objectClass()", "getObjectClass()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the default value of a boolean variable in Java?",
+        "options": ["true", "false", "0", "null"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is not a valid declaration of an array in Java?",
+        "options": ["int[] arr;", "int arr[];", "int[] arr = new int[5];", "int arr[5];"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these methods is used to write data to a file in Java?",
+        "options": ["write()", "output()", "print()", "writeToFile()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a feature of the Java programming language?",
+        "options": ["Secure", "Architecture Neutral", "Portable", "Machine dependent"],
+        "answer": "option4"
+    }
+]
+

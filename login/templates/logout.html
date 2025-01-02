@@ -1,0 +1,260 @@
+<!-- delete_confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Confirmation</title>
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      :root {
+        --foreground: #4d64e6;
+        --background: #80af81;
+        --main-bg: #d6efd8;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+        font-family: "Poppins";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .login-container {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.59);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 1px solid rgba(1, 4, 9, 1);
+        max-width: 350px;
+        width: 80%;
+      }
+
+      .login-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--foreground);
+      }
+
+      .login-form input[type="text"],
+      .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        color: var(--foreground);
+        border-radius: 5px;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid var(--foreground);
+        background: transparent;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="text"]:hover,
+      .login-form input[type="password"]:hover {
+        transform: scale(1);
+      }
+
+      .login-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4d64e6;
+        border-radius: 5px;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="submit"]:hover {
+        transform: scale(1);
+        font-size: 15px;
+      }
+
+      .login-form input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--foreground);
+        border-radius: 5px;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transform: scale(0.98);
+        transition: 0.3s ease-in-out;
+      }
+
+      .login-form input[type="button"]:hover {
+        transform: scale(1);
+        font-size: 15px;
+      }
+
+      .login-form span {
+        font-size: 13px;
+        color: #000;
+      }
+
+      .login-form span a {
+        color: var(--foreground);
+        text-decoration: none;
+      }
+
+      .login-form span a:hover {
+        text-decoration: underline;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .login-container {
+          width: 90%;
+          max-width: 300px;
+        }
+      }
+
+      /* Signup Modal Styles */
+      .signup-popup {
+        min-width: 40%;
+        min-height: 30vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        border-radius: 1vw;
+        border: 2px solid var(--foreground);
+        padding: 1vw 2vw;
+        background: var(--main-bg);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        color: var(--foreground);
+        transition: 0.6s ease;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 200;
+      }
+      .signup-popup.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .signup-popup h1 {
+        font-size: 1.8vw;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--foreground);
+        margin-bottom: 2vh;
+      }
+      .signup-popup .fa-solid {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 13px 8px;
+        margin: 20px;
+        background: var(--foreground);
+        color: var(--main-bg);
+        border-radius: 25%;
+      }
+      .signup-popup .option {
+        width: 100%;
+        text-align: center;
+        margin: 1.5vh 0;
+      }
+      .signup-popup .option a {
+        text-decoration: none;
+        border: 1px solid var(--foreground);
+        font-size: 1.2vw;
+        padding: 0.8vw 1.2vw;
+        border-radius: 5px;
+        color: var(--foreground);
+        font-weight: 600;
+        transition: 0.6s ease-in-out;
+      }
+      .signup-popup .option a:hover {
+        border: 1px solid transparent;
+        background-color: var(--foreground);
+        color: white;
+      }
+
+      /* Responsive Design for Signup Modal */
+      @media (max-width: 850px) {
+        .signup-popup {
+          width: 65%;
+        }
+        .signup-popup h1 {
+          font-size: 4vh;
+        }
+        .signup-popup .option a {
+          font-size: 2.5vh;
+          padding: 0.6vh 0.8vh;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .signup-popup {
+          width: 75%;
+        }
+        .signup-popup h1 {
+          font-size: 3vh;
+        }
+        .signup-popup .option a {
+          font-size: 2.4vh;
+          padding: 0.8vh 1vh;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .signup-popup {
+          width: 85%;
+          border-radius: 10px;
+          padding: 18px;
+        }
+        .signup-popup h1 {
+          font-size: 2.6vh;
+        }
+        .signup-popup .option a {
+          font-size: 2vh;
+          padding: 1vh 1.4vh;
+        }
+      }
+
+    </style>
+</head>
+<body>
+    <!-- <h1>Are you sure you want to delete this {{ type }}?</h1>
+    <p>{{ object }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+    </form> -->
+    <div class="login-container">
+        <h2>LOGOUT</h2>
+        <h4 align="center">Are you sure you want to logout ?</h4>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <!-- <button type="submit" class="btn btn-danger">Yes, delete</button> -->
+            <input type="submit" value="Yes , logout">
+            <!-- <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a> -->
+            <!-- <input type="button" value="No , Cancel"> -->
+            <input type="button" onclick="history.back()" value="No , Cancel">
+        </form>
+    </div>
+</body>
+</html>

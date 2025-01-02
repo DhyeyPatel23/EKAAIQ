@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .options-container {
+            margin: 10px 0;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .radio-group:hover, .checkbox-group:hover {
+            background-color: #f0f0f0;
+        }
+
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 15px;
+            }
+
+            .question-block {
+                padding: 10px;
+            }
+
+            .submit-btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .timer {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>{{ quiz.title }}</h1>
+        <div class="timer">Time Remaining: <span id="timer"></span></div>
+        
+        <form method="POST">
+            {% csrf_token %}
+            {% for question in quiz.questions.all %}
+            <div class="question-block">
+                <h3>Question {{ forloop.counter }}: {{ question.question_text }}</h3>
+                
+                {% if question.images %}
+                    <img src="{{ question.images.url }}" alt="Question Image" class="question-image">
+                {% endif %}
+                
+                {% if question.question_type == 'MCQ' %}
+                    <!-- Single Choice Question -->
+                    <div class="options-container">
+                        <div class="radio-group">
+                            <input type="radio" id="q{{ question.id }}_1" name="answers_{{ question.id }}" value="option1" required>
+                            <label for="q{{ question.id }}_1">{{ question.option1 }}</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="q{{ question.id }}_2" name="answers_{{ question.id }}" value="option2" required>
+                            <label for="q{{ question.id }}_2">{{ question.option2 }}</label>
+                        </div>
+                        {% if question.option3 %}
+                        <div class="radio-group">
+                            <input type="radio" id="q{{ question.id }}_3" name="answers_{{ question.id }}" value="option3" required>
+                            <label for="q{{ question.id }}_3">{{ question.option3 }}</label>
+                        </div>
+                        {% endif %}
+                        {% if question.option4 %}
+                        <div class="radio-group">
+                            <input type="radio" id="q{{ question.id }}_4" name="answers_{{ question.id }}" value="option4" required>
+                            <label for="q{{ question.id }}_4">{{ question.option4 }}</label>
+                        </div>
+                        {% endif %}
+                    </div>
+                
+                {% elif question.question_type == 'MCA' %}
+                    <!-- Multiple Choice Question -->
+                    <div class="options-container">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="q{{ question.id }}_1" name="answers_{{ question.id }}[]" value="option1">
+                            <label for="q{{ question.id }}_1">{{ question.option1 }}</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="q{{ question.id }}_2" name="answers_{{ question.id }}[]" value="option2">
+                            <label for="q{{ question.id }}_2">{{ question.option2 }}</label>
+                        </div>
+                        {% if question.option3 %}
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="q{{ question.id }}_3" name="answers_{{ question.id }}[]" value="option3">
+                            <label for="q{{ question.id }}_3">{{ question.option3 }}</label>
+                        </div>
+                        {% endif %}
+                        {% if question.option4 %}
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="q{{ question.id }}_4" name="answers_{{ question.id }}[]" value="option4">
+                            <label for="q{{ question.id }}_4">{{ question.option4 }}</label>
+                        </div>
+                        {% endif %}
+                    </div>
+                
+                {% elif question.question_type == 'TF' %}
+                    <!-- True/False Question -->
+                    <div class="options-container">
+                        <div class="radio-group">
+                            <input type="radio" id="q{{ question.id }}_true" name="answers_{{ question.id }}" value="True" required>
+                            <label for="q{{ question.id }}_true">True</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="q{{ question.id }}_false" name="answers_{{ question.id }}" value="False" required>
+                            <label for="q{{ question.id }}_false">False</label>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+            <button type="submit" class="submit-btn">Submit Quiz</button>
+        </form>
+    </div>
+
+    <script>
+        // Timer logic
+        document.addEventListener('DOMContentLoaded', function() {
+            let quizDuration = {{ quiz.duration }} * 60; // Convert minutes to seconds
+            let timerDisplay = document.getElementById('timer');
+            let isSubmitting = false;
+            let quizOver = false;
+
+            function updateTimer() {
+                let minutes = Math.floor(quizDuration / 60);
+                let seconds = quizDuration % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (quizDuration <= 0) {
+                    if (!isSubmitting && !quizOver) {
+                        quizOver = true;
+                        alert("Time's up! Your quiz will be submitted.");
+                        document.querySelector('form').submit();
+                    }
+                } else {
+                    quizDuration--;
+                    setTimeout(updateTimer, 1000);
+                }
+            }
+
+            updateTimer();
+
+            // Handle form submission
+            document.querySelector('form').addEventListener('submit', function() {
+                isSubmitting = true;
+            });
+
+            // Handle tab switching, minimizing, and clicking outside the quiz page
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && !isSubmitting && !quizOver) {
+                    quizOver = true;
+                    alert("You switched tabs or minimized the browser! Your quiz will be terminated.");
+                    window.location.href = "{% url 'join_room' %}";
+                }
+            });
+
+            window.addEventListener('blur', function() {
+                if (!isSubmitting && !quizOver) {
+                    quizOver = true;
+                    alert("You clicked outside the quiz page! Your quiz will be terminated.");
+                    window.location.href = "{% url 'join_room' %}";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Question</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="question_text">Question Text</label>
+                <textarea id="question_text" name="question_text">{{ question.question_text }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="option1">Option 1</label>
+                <input type="text" id="option1" name="option1" value="{{ question.option1 }}">
+            </div>
+            <div class="form-group">
+                <label for="option2">Option 2</label>
+                <input type="text" id="option2" name="option2" value="{{ question.option2 }}">
+            </div>
+            <div class="form-group">
+                <label for="option3">Option 3</label>
+                <input type="text" id="option3" name="option3" value="{{ question.option3 }}">
+            </div>
+            <div class="form-group">
+                <label for="option4">Option 4</label>
+                <input type="text" id="option4" name="option4" value="{{ question.option4 }}">
+            </div>
+            <div class="form-group">
+                <label for="correct_option">Correct Option</label>
+                <input type="text" id="correct_option" name="correct_option" value="{{ question.correct_option }}">
+            </div>
+            <div class="form-group">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .current-image {
+            display: block;
+            margin: 10px 0;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Question</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="question_text">Question Text</label>
+                <textarea id="question_text" name="question_text">{{ question.question_text }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Question Image</label>
+                <!-- Display current image if it exists -->
+                {% if question.images and question.images.url %}
+                    <img src="{{ question.images.url }}" alt="Current Image" class="current-image">
+                {% endif %}
+                <input type="file" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <label for="option1">Option 1</label>
+                <input type="text" id="option1" name="option1" value="{{ question.option1 }}">
+            </div>
+            <div class="form-group">
+                <label for="option2">Option 2</label>
+                <input type="text" id="option2" name="option2" value="{{ question.option2 }}">
+            </div>
+            <div class="form-group">
+                <label for="option3">Option 3</label>
+                <input type="text" id="option3" name="option3" value="{{ question.option3 }}">
+            </div>
+            <div class="form-group">
+                <label for="option4">Option 4</label>
+                <input type="text" id="option4" name="option4" value="{{ question.option4 }}">
+            </div>
+            <div class="form-group">
+                <label for="correct_option">Correct Option</label>
+                <input type="text" id="correct_option" name="correct_option" value="{{ question.correct_option }}">
+            </div>
+            <div class="form-group">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

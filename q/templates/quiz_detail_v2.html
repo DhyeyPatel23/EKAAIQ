@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }}</title>
+    {% comment %} <link rel="stylesheet" href="{% static "/css/quiz-v2.css" %}"> {% endcomment %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+            margin: 0px 0 0 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Changed to flex-start to allow scrolling */
+            min-height: 100vh;
+            overflow-y: auto; /* Ensure the body scrolls if content overflows */
+        }
+        
+        .quiz-container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+            margin-top: 170px;
+            width: 90%;
+            max-width: 700px;
+            overflow-y: auto;
+        }
+        
+        .quiz-container h1 {
+            text-align: center;
+            color: #4d64e6;
+        }
+        .submit-quiz{
+            font-size: 17px;
+            color: #fff;
+            display: block;
+            width: 100%;
+            padding: 10px 0 10px 0;
+            background-color: #4d64e6;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 3px solid rgba(255, 255, 255, 1);
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>{{ quiz.title }}</h1>
+        <h2 align="center" id="link">Room Id : {{ quiz.code }}</h2>
+        <button onclick="copyText()"  id="submitQuizBtn" class="submit-quiz">Copy link to clipboard</button>
+        <form action="/q/view/{{ quiz.id }}">
+            <button id="submitQuizBtn" class="submit-quiz">view results</button>
+        </form>
+        <form action="{% url 'teacher_home' %}">
+
+            <button type="submit"  id="submitQuizBtn" class="submit-quiz">Home</button>
+
+        </form>
+        <!-- <br><br><br>
+        <table border="1" align="center">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Score</th>
+                    <th>Submitted At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.user.first_name }}</td>
+                        <td>{{ result.score }}</td>
+                        <td>{{ result.submitted_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+    
+    </div>
+
+    <!-- <a href="http://127.0.0.1:8000/q/join/{{ quiz.code }}">Open Quiz</a> -->
+
+
+    <!-- <p type="hidden">http://127.0.0.1:8000/q/join/{{ quiz.code }}</p> -->
+
+
+
+    <!-- <input type="hidden" name="link" value="http://127.0.0.1:8000/q/join/{{ quiz.code }}">
+    <br>
+    <br> -->
+    <!-- <button onclick="copyToClipboard()">Copy link to clipboard</button> -->
+<!-- 
+    <h2>Questions</h2>
+    <ul>
+        {% for question in quiz.questions.all %}
+            <li>{{ question.question_text }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'teacher_home'%}">dashboard</a> -->
+
+    <!-- <script>
+        function copyToClipboard() {
+            // Get the input field
+            var copyText = document.getElementById("link");
+            
+            // Select the text
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            
+            // Copy the text to the clipboard
+            navigator.clipboard.writeText(copyText.value)
+                .then(() => {
+                    alert("Copied the text: " + copyText.value);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+    </script> -->
+ 
+    <script>
+        function copyText() {
+
+            /* Copy selected text into clipboard */
+            navigator.clipboard.writeText("{{ quiz.code }}");
+
+            alert("text copied !")
+        }
+    </script>
+
+    <!-- <div class="quiz-results">
+        <h3>Quiz Results</h3>
+        <div class="statistics">
+            <p>Total Attempts: {{ total_attempts }}</p>
+            <p>Average Score: {{ avg_score }}%</p>
+        </div>
+        
+        {% if results %}
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Score</th>
+                    <th>Percentage</th>
+                    <th>Submitted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.user.get_full_name|default:result.user.email }}</td>
+                    <td>{{ result.score }}/{{ result.total_points }}</td>
+                    <td>{{ result.percentage }}%</td>
+                    <td>{{ result.submitted_at|date:"M d, Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'view_student_answers' result_id=result.id %}" class="btn btn-sm btn-primary">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No results yet.</p>
+        {% endif %}
+    </div> -->
+
+</body>
+</html>
+

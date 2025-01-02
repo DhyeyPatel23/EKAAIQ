@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard </title>
+    <!-- ======= Styles ====== -->
+
+    <link rel="stylesheet" href="{% static 'css/dashboard_tea.css' %}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+	$(document).ready(function() {
+	  $('.user-results').DataTable({
+      		"paging": true,     
+      		"searching": true,    
+      		"ordering": true,     
+      		"info": true         
+  	  });
+	});
+    </script>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon-main">
+                            <img width="55" height="55" src="{% static 'images/hlgo.png' %}" alt="exterior"/>
+                        </span>
+                        <span class="title-main">QuizBOT</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img width="25" height="25" src="https://img.icons8.com/small/50/1A1A1A/exterior.png" alt="exterior"/>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'create_quiz' %}">
+                        <span class="icon">
+                            <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/50/1A1A1A/test-passed.png" alt="test-passed"/>
+                        </span>
+                        <span class="title">Create Quiz</span>
+                    </a>
+                </li>
+
+                <!-- ai sections  -->
+                <!-- <li>
+                    <a href="{% url 'ai_select' %}">
+                        <span class="icon">
+                            <img width="25" height="25" src="https://img.icons8.com/?size=100&id=i9i0mLdBTSia&format=png&color=000000"/>
+                        </span>
+                        <span class="title">Generate Quiz using AI</span>
+                    </a>
+                </li> -->
+                <!-- -------------------------- -->
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="icon">
+                            <img width="25" height="25" src="https://img.icons8.com/forma-regular/50/1A1A1A/exit.png" alt="exit"/>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="user">
+                    <img width="25" height="25" src="{% static 'images/mandala.png' %}" alt="">
+                </div>
+            </div>
+	    <section class="content">
+                <div class="welcome-message">
+                    <h1>Welcome, {{ user.first_name }}!</h1>
+                    <p>Create and manage your quiz from here.</p>
+                </div>
+            
+                <br><br><br>
+            
+                <div class="cta-buttons">
+                    <button onclick="createQuiz()">Create a New Quiz</button>
+                    <button onclick="aiQuiz()">Create with AI</button>
+                </div>
+            
+                <br><br><br>
+            
+                <div class="welcome-message">
+                    <h1>Your Quiz</h1>
+                </div>
+                <div class="quiz-history">
+                    <table class="user-results" align="center">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Code</th>
+                                <th>Created At</th>
+                                <th>Details</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quiz in quizzes %}
+                                <tr>
+                                    <td>{{ quiz.title }}</td>
+                                    <td>{{ quiz.code }}</td>
+                                    <td>{{ quiz.created_at }}</td>
+				    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+                                    <td><a href="{% url 'view_questions' quiz.id %}">View Questions</a></td>
+                                    <td><a href="/q/quiz/delete/{{ quiz.id }}" class="delete-link">Delete</a></td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="6">You haven't created any quizzes yet.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            
+                <br><br><br>
+            </section>
+
+    <!-- =========== Scripts =========  -->
+    <script src="{% static 'JavaScript/dashboard.js' %}"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+</head>
+<body>
+    <h1>Results for Quiz: {{ quiz.title }}</h1>
+    <h2>your score is : {{ score }}</h2>
+    <!-- <table border="1">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Score</th>
+                <th>Submitted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+                <tr>
+                    <td>{{ result.user.first_name }}</td>
+                    <td>{{ result.score }}</td>
+                    <td>{{ result.submitted_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+</body>
+</html>
+

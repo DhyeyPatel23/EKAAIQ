@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="quiz-container">
+    <h1>Create Enhanced Quiz</h1>
+    <form id="quizForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Quiz Settings -->
+        <div class="quiz-settings">
+            <div class="form-group">
+                <label for="title">Quiz Title:</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="duration">Duration (minutes):</label>
+                <input type="number" name="duration" id="duration" value="30" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="show_results_to_student" checked>
+                    Show results to students
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="is_active" checked>
+                    Quiz is active
+                </label>
+            </div>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questionsContainer">
+            <!-- Template for new questions will be added here -->
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn" onclick="addQuestion('MCQ')">Add MCQ</button>
+            <button type="button" class="btn" onclick="addQuestion('MCA')">Add Multiple Choice</button>
+            <button type="button" class="btn" onclick="addQuestion('TF')">Add True/False</button>
+            <button type="submit" class="btn btn-primary">Create Quiz</button>
+        </div>
+    </form>
+</div>
+
+<!-- Question Templates -->
+<template id="mcq-template">
+    <div class="question-block" data-type="MCQ">
+        <input type="hidden" name="question_types[]" value="MCQ">
+        <div class="form-group">
+            <label>Question Text:</label>
+            <textarea name="questions[]" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Points:</label>
+            <input type="number" name="points[]" value="1" min="1">
+        </div>
+        
+        <div class="form-group">
+            <label>Image (optional):</label>
+            <input type="file" name="images[]" accept="image/*">
+        </div>
+        
+        <div class="options-group">
+            <label>Options:</label>
+            <input type="text" name="options_${index}[]" placeholder="Option A" required>
+            <input type="text" name="options_${index}[]" placeholder="Option B" required>
+            <input type="text" name="options_${index}[]" placeholder="Option C" required>
+            <input type="text" name="options_${index}[]" placeholder="Option D" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Correct Answer:</label>
+            <select name="correct_option_${index}" required>
+                <option value="option1">Option A</option>
+                <option value="option2">Option B</option>
+                <option value="option3">Option C</option>
+                <option value="option4">Option D</option>
+            </select>
+        </div>
+        
+        <button type="button" class="btn btn-danger" onclick="removeQuestion(this)">Remove Question</button>
+    </div>
+</template>
+
+<!-- Similar templates for MCA and TF questions -->
+
+<script>
+    let questionIndex = 0;
+    
+    function addQuestion(type) {
+        const container = document.getElementById('questionsContainer');
+        const template = document.getElementById(`${type.toLowerCase()}-template`);
+        const clone = template.content.cloneNode(true);
+        
+        // Replace ${index} with actual index
+        const html = clone.innerHTML.replace(/\${index}/g, questionIndex);
+        
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        container.appendChild(wrapper);
+        
+        questionIndex++;
+    }
+    
+    function removeQuestion(button) {
+        button.closest('.question-block').remove();
+    }
+</script>
+{% endblock %}

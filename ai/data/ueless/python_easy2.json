@@ -1,0 +1,507 @@
+[
+    {
+      "question": "What is the correct file extension for Python files?",
+      "options": [".py", ".python", ".pt", ".p"],
+      "answer": ".py"
+    },
+    {
+      "question": "Which of the following is a Python keyword?",
+      "options": ["function", "while", "define", "create"],
+      "answer": "while"
+    },
+    {
+      "question": "Which function is used to output text in Python?",
+      "options": ["echo", "print", "write", "display"],
+      "answer": "print"
+    },
+    {
+      "question": "What is the output of print(2 ** 3)?",
+      "options": ["8", "6", "9", "12"],
+      "answer": "8"
+    },
+    {
+      "question": "How do you insert COMMENTS in Python code?",
+      "options": ["// this is a comment", "# this is a comment", "/* this is a comment */", "-- this is a comment"],
+      "answer": "# this is a comment"
+    },
+    {
+      "question": "Which of the following data types is not supported in Python?",
+      "options": ["int", "str", "array", "list"],
+      "answer": "array"
+    },
+    {
+      "question": "Which method is used to add an element to a list in Python?",
+      "options": ["append()", "add()", "insert()", "push()"],
+      "answer": "append()"
+    },
+    {
+      "question": "What is the output of the expression: 'hello'.upper()?",
+      "options": ["Hello", "HELLO", "hello", "HeLLo"],
+      "answer": "HELLO"
+    },
+    {
+      "question": "How do you start defining a function in Python?",
+      "options": ["function myFunction()", "def myFunction():", "def myFunction[]:", "func myFunction()"],
+      "answer": "def myFunction():"
+    },
+    {
+      "question": "What is the correct syntax to output the type of a variable or object in Python?",
+      "options": ["print(typeof x)", "print(type(x))", "echo type(x)", "echo typeof(x)"],
+      "answer": "print(type(x))"
+    },
+    {
+      "question": "Which of these is a tuple in Python?",
+      "options": ["[1, 2, 3]", "(1, 2, 3)", "{1, 2, 3}", "<1, 2, 3>"],
+      "answer": "(1, 2, 3)"
+    },
+    {
+      "question": "Which of these is used to handle exceptions in Python?",
+      "options": ["try-except", "catch-except", "try-catch", "catch-finally"],
+      "answer": "try-except"
+    },
+    {
+      "question": "What is the output of print(bool(0))?",
+      "options": ["True", "False", "0", "None"],
+      "answer": "False"
+    },
+    {
+      "question": "Which module in Python is used for regular expressions?",
+      "options": ["re", "regex", "pyregex", "express"],
+      "answer": "re"
+    },
+    {
+      "question": "What is the default value of the end parameter in the print function?",
+      "options": ["newline", "space", "none", "comma"],
+      "answer": "newline"
+    },
+    {
+      "question": "Which of the following is a mutable data type in Python?",
+      "options": ["str", "tuple", "list", "int"],
+      "answer": "list"
+    },
+    {
+      "question": "How can you convert a string '123' to an integer in Python?",
+      "options": ["int('123')", "string(123)", "float('123')", "str(123)"],
+      "answer": "int('123')"
+    },
+    {
+      "question": "Which of the following is not a valid variable name in Python?",
+      "options": ["my_var", "2nd_var", "_var", "var2"],
+      "answer": "2nd_var"
+    },
+    {
+      "question": "What keyword is used to create a class in Python?",
+      "options": ["function", "class", "struct", "object"],
+      "answer": "class"
+    },
+    {
+      "question": "Which of the following is used to create an empty set in Python?",
+      "options": ["{}", "set()", "[]", "dict()"],
+      "answer": "set()"
+    },
+    {
+      "question": "What is the output of: print('5' + '5')?",
+      "options": ["10", "55", "5+5", "Error"],
+      "answer": "55"
+    },
+    {
+      "question": "How do you create a dictionary in Python?",
+      "options": ["{}", "[]", "dict()", "dict[]"],
+      "answer": "dict()"
+    },
+    {
+      "question": "What does the len() function do?",
+      "options": ["Returns the length of a string", "Returns the length of a list", "Returns the number of items in an object", "All of the above"],
+      "answer": "All of the above"
+    },
+    {
+      "question": "Which statement is used to stop a loop?",
+      "options": ["stop", "break", "exit", "end"],
+      "answer": "break"
+    },
+    {
+      "question": "What will the following code output: print(10 == 10)?",
+      "options": ["True", "False", "10", "None"],
+      "answer": "True"
+    },
+    {
+      "question": "How do you create a comment in Python?",
+      "options": ["// comment", "# comment", "<!-- comment -->", "/* comment */"],
+      "answer": "# comment"
+    },
+    {
+      "question": "What is the output of print(type([]))?",
+      "options": ["<class 'list'>", "<class 'tuple'>", "<class 'dict'>", "<class 'set'>"],
+      "answer": "<class 'list'>"
+    },
+    {
+      "question": "Which of the following methods is used to remove whitespace from the beginning and end of a string?",
+      "options": ["strip()", "trim()", "remove()", "cut()"],
+      "answer": "strip()"
+    },
+    {
+      "question": "How can you check if a number is even in Python?",
+      "options": ["if n % 2 == 0", "if n // 2 == 0", "if n / 2 == 0", "if n ** 2 == 0"],
+      "answer": "if n % 2 == 0"
+    },
+    {
+      "question": "Which of the following is used to define a block of code in Python?",
+      "options": ["Curly braces", "Square brackets", "Indentation", "Parentheses"],
+      "answer": "Indentation"
+    },
+    {
+      "question": "What will be the output of print(4 / 2)?",
+      "options": ["2", "2.0", "2.00", "2.000"],
+      "answer": "2.0"
+    },
+    {
+      "question": "How do you check if a list is empty?",
+      "options": ["if len(list) == 0", "if list == []", "if not list", "All of the above"],
+      "answer": "All of the above"
+    },
+    {
+      "question": "Which keyword is used to create an anonymous function in Python?",
+      "options": ["lambda", "def", "anonymous", "func"],
+      "answer": "lambda"
+    },
+    {
+      "question": "What is the output of print(type(3.14))?",
+      "options": ["<class 'float'>", "<class 'int'>", "<class 'double'>", "<class 'str'>"],
+      "answer": "<class 'float'>"
+    },
+    {
+      "question": "How do you create a list in Python?",
+      "options": ["list = {}", "list = []", "list = ()", "list = <>"],
+      "answer": "list = []"
+    },
+    {
+      "question": "Which of the following operators is used for exponentiation in Python?",
+      "options": ["^", "**", "//", "%"],
+      "answer": "**"
+    },
+    {
+      "question": "What is the result of 'Hello' + 'World'?",
+      "options": ["HelloWorld", "Hello World", "HelloWorld ", "Error"],
+      "answer": "HelloWorld"
+    },
+    {
+      "question": "What does the 'continue' statement do?",
+      "options": ["Ends the loop", "Skips the rest of the code inside the loop for the current iteration", "Pauses the loop", "Exits the current function"],
+      "answer": "Skips the rest of the code inside the loop for the current iteration"
+    },
+    {
+      "question": "Which of these is used to exit a loop in Python?",
+      "options": ["exit", "end", "quit", "break"],
+      "answer": "break"
+    },
+    {
+      "question": "How do you declare a global variable inside a function?",
+      "options": ["global", "declare", "globalize", "public"],
+      "answer": "global"
+    },
+    {
+      "question": "Which of the following is not a core data type in Python?",
+      "options": ["lists", "class", "tuples", "dictionary"],
+      "answer": "class"
+    },
+    {
+      "question": "Which function converts a string to a float in Python?",
+      "options": ["int()", "str()", "float()", "toFloat()"],
+      "answer": "float()"
+    },
+    {
+      "question": "Which of the following is a built-in function in Python?",
+      "options": ["random()", "print()", "math()", "write()"],
+      "answer": "print()"
+    },
+    {
+      "question": "Which of these is a logical operator in Python?",
+      "options": ["AND", "OR", "XOR", "not"],
+      "answer": "not"
+    },
+    {
+      "question": "How do you start writing a while loop in Python?",
+      "options": ["while (x > y)", "while x > y:", "while x > y {", "while x > y then"],
+      "answer": "while x > y:"
+    },
+    {
+      "question": "What is the output of print(bool([]))?",
+      "options": ["True", "False", "None", "Error"],
+      "answer": "False"
+    },
+    {
+      "question": "Which of the following is the correct way to write a comment in Python?",
+      "options": ["#comment", "//comment", "/*comment*/", "Comment"],
+      "answer": "#comment"
+    },
+    {
+      "question": "What is the output of print(7 // 2)?",
+      "options": ["3.5", "3", "4", "3.0"],
+      "answer": "3"
+    },
+    {
+      "question": "Which of the following is used to import a module in Python?",
+      "options": ["import", "include", "require", "load"],
+      "answer": "import"
+    },
+    {
+      "question": "What is the output of the expression: 5 % 2?",
+      "options": ["2", "1", "0", "5"],
+      "answer": "1"
+    },
+    {
+      "question": "Which of the following is not a Python built-in data type?",
+      "options": ["list", "dictionary", "tuple", "array"],
+      "answer": "array"
+    },
+    {
+      "question": "What is the output of print('Hello'[-1])?",
+      "options": ["H", "o", "e", "l"],
+      "answer": "o"
+    },
+    {
+      "question": "Which of the following statements is used to create a for loop in Python?",
+      "options": ["foreach", "for in", "for", "loop"],
+      "answer": "for"
+    },
+    {
+      "question": "How do you create a variable with the numeric value 5?",
+      "options": ["x = 5", "int x = 5", "x := 5", "num x = 5"],
+      "answer": "x = 5"
+    },
+    {
+      "question": "What does the method str.split() do in Python?",
+      "options": ["Splits a string into a list", "Joins a list into a string", "Splits a string into characters", "Splits a string into a dictionary"],
+      "answer": "Splits a string into a list"
+    },
+    {
+      "question": "Which of the following statements is used to create an object in Python?",
+      "options": ["function", "class", "def", "new"],
+      "answer": "class"
+    },
+    {
+      "question": "Which of the following is a valid way to define a function in Python?",
+      "options": ["function myFunc():", "def myFunc():", "myFunc() ->", "myFunc[]:"],
+      "answer": "def myFunc():"
+    },
+    {
+      "question": "What is the output of print(len('Python'))?",
+      "options": ["6", "7", "5", "8"],
+      "answer": "6"
+    },
+    {
+      "question": "Which keyword is used to define a block of statements in Python?",
+      "options": ["begin", "do", "pass", "indentation"],
+      "answer": "indentation"
+    },
+    {
+      "question": "Which of these data types is immutable in Python?",
+      "options": ["list", "set", "tuple", "dictionary"],
+      "answer": "tuple"
+    },
+    {
+      "question": "Which Python keyword is used to inherit a class?",
+      "options": ["extend", "inherit", "super", "class"],
+      "answer": "class"
+    },
+    {
+      "question": "Which of the following methods can be used to remove an element from a list in Python?",
+      "options": ["remove()", "delete()", "pop()", "Both remove() and pop()"],
+      "answer": "Both remove() and pop()"
+    },
+    {
+      "question": "What is the output of: 'Python'[0:2]?",
+      "options": ["Py", "th", "on", "Pyth"],
+      "answer": "Py"
+    },
+    {
+      "question": "What will be the output of print(type({}))?",
+      "options": ["<class 'set'>", "<class 'dict'>", "<class 'list'>", "<class 'tuple'>"],
+      "answer": "<class 'dict'>"
+    },
+    {
+      "question": "Which operator is used for floor division in Python?",
+      "options": ["/", "//", "%", "**"],
+      "answer": "//"
+    },
+    {
+      "question": "Which function returns a sorted list of the specified iterable’s elements?",
+      "options": ["sorted()", "sort()", "arrange()", "None of the above"],
+      "answer": "sorted()"
+    },
+    {
+      "question": "How do you convert a string '10' into an integer in Python?",
+      "options": ["str('10')", "int('10')", "float('10')", "toInt('10')"],
+      "answer": "int('10')"
+    },
+    {
+      "question": "What is the output of: print('Hello World'.replace('l', 'k'))?",
+      "options": ["Hekko Workd", "Hecco Workd", "Hecco World", "Hekko World"],
+      "answer": "Hekko Workd"
+    },
+    {
+      "question": "Which Python module is used for mathematical functions?",
+      "options": ["math", "cmath", "numpy", "numbers"],
+      "answer": "math"
+    },
+    {
+      "question": "What is the result of print(bool('False'))?",
+      "options": ["True", "False", "None", "Error"],
+      "answer": "True"
+    },
+    {
+      "question": "Which of the following statements can be used to check if a variable 'x' is of type int?",
+      "options": ["if type(x) == int:", "if isinstance(x, int):", "Both of the above", "None of the above"],
+      "answer": "Both of the above"
+    },
+    {
+      "question": "Which of the following functions is used to find the highest value in a list?",
+      "options": ["max()", "highest()", "maximum()", "top()"],
+      "answer": "max()"
+    },
+    {
+      "question": "Which method is used to find the length of a list in Python?",
+      "options": ["length()", "size()", "len()", "count()"],
+      "answer": "len()"
+    },
+    {
+      "question": "Which of the following is not a reserved keyword in Python?",
+      "options": ["class", "finally", "boolean", "is"],
+      "answer": "boolean"
+    },
+    {
+      "question": "What will be the output of print('2' + '2')?",
+      "options": ["22", "4", "TypeError", "SyntaxError"],
+      "answer": "22"
+    },
+    {
+      "question": "Which of the following is the correct syntax to import the 'math' module?",
+      "options": ["import math", "import Math", "include math", "using math"],
+      "answer": "import math"
+    },
+    {
+      "question": "How do you create a set in Python?",
+      "options": ["set()", "{1, 2, 3}", "Both set() and {1, 2, 3}", "set[]"],
+      "answer": "Both set() and {1, 2, 3}"
+    },
+    {
+      "question": "Which statement is used to check for a specific condition in Python?",
+      "options": ["if", "switch", "case", "None of the above"],
+      "answer": "if"
+    },
+    {
+      "question": "Which of the following methods can be used to concatenate two lists?",
+      "options": ["+", "extend()", "Both + and extend()", "append()"],
+      "answer": "Both + and extend()"
+    },
+    {
+      "question": "How do you create a comment in Python?",
+      "options": ["# comment", "// comment", "/* comment */", "<!-- comment -->"],
+      "answer": "# comment"
+    },
+    {
+      "question": "Which of the following can be used to iterate over a sequence in Python?",
+      "options": ["for", "foreach", "while", "Both for and while"],
+      "answer": "Both for and while"
+    },
+    {
+      "question": "What is the output of print(type(5.0))?",
+      "options": ["<class 'int'>", "<class 'float'>", "<class 'double'>", "<class 'decimal'>"],
+      "answer": "<class 'float'>"
+    },
+    {
+      "question": "What will be the output of print(bool(0))?",
+      "options": ["True", "False", "None", "Error"],
+      "answer": "False"
+    },
+    {
+      "question": "Which of the following functions can be used to find the minimum value in a list?",
+      "options": ["min()", "minimum()", "least()", "low()"],
+      "answer": "min()"
+    },
+    {
+      "question": "Which operator is used to assign a value to a variable?",
+      "options": ["=", "==", "<-", ":="],
+      "answer": "="
+    },
+    {
+      "question": "What is the output of print(3 * 3.0)?",
+      "options": ["9", "9.0", "TypeError", "None of the above"],
+      "answer": "9.0"
+    },
+    {
+      "question": "Which of the following is used to handle exceptions in Python?",
+      "options": ["try", "catch", "except", "Both try and except"],
+      "answer": "Both try and except"
+    },
+    {
+      "question": "Which of the following is not a valid way to declare a variable in Python?",
+      "options": ["my_var = 5", "5myvar = 5", "myVar = 5", "Myvar = 5"],
+      "answer": "5myvar = 5"
+    },
+    {
+      "question": "Which of these operators is used to check equality?",
+      "options": ["==", "=", "!=", "<="],
+      "answer": "=="
+    },
+    {
+      "question": "Which of these is a mutable data type in Python?",
+      "options": ["list", "tuple", "string", "frozenset"],
+      "answer": "list"
+    },
+    {
+      "question": "What is the correct syntax to output 'Hello World' in Python?",
+      "options": ["echo('Hello World')", "print('Hello World')", "p('Hello World')", "printf('Hello World')"],
+      "answer": "print('Hello World')"
+    },
+    {
+      "question": "What does the 'continue' statement do in a loop?",
+      "options": ["Exits the loop", "Skips the rest of the code inside the loop for the current iteration", "Restarts the loop", "None of the above"],
+      "answer": "Skips the rest of the code inside the loop for the current iteration"
+    },
+    {
+      "question": "Which of these is the correct way to define a set in Python?",
+      "options": ["set = {1, 2, 3}", "set(1, 2, 3)", "[1, 2, 3]", "{1, 2, 3}"],
+      "answer": "{1, 2, 3}"
+    },
+    {
+      "question": "Which function is used to find the absolute value of a number in Python?",
+      "options": ["abs()", "absolute()", "fabs()", "modulus()"],
+      "answer": "abs()"
+    },
+    {
+      "question": "Which of these is used to read input from the user in Python 3?",
+      "options": ["input()", "read()", "scan()", "inputUser()"],
+      "answer": "input()"
+    },
+    {
+      "question": "Which of these keywords is used to create a function in Python?",
+      "options": ["func", "define", "function", "def"],
+      "answer": "def"
+    },
+    {
+      "question": "What will be the output of print('Python'.lower())?",
+      "options": ["python", "PYTHON", "Python", "error"],
+      "answer": "python"
+    },
+    {
+      "question": "Which of the following methods is used to add an item to the end of a list in Python?",
+      "options": ["append()", "add()", "push()", "insert()"],
+      "answer": "append()"
+    },
+    {
+      "question": "Which of the following is the correct way to open a file in read mode in Python?",
+      "options": ["open('file.txt', 'r')", "open('file.txt', 'w')", "open('file.txt', 'read')", "open('file.txt', 'rw')"],
+      "answer": "open('file.txt', 'r')"
+    },
+    {
+      "question": "Which of these is not a valid comparison operator in Python?",
+      "options": [">=", "<=", "!=", "<>", "=="],
+      "answer": "<>"
+    },
+    {
+      "question": "Which Python function can be used to get the data type of a variable?",
+      "options": ["type()", "typeof()", "datatype()", "instanceof()"],
+      "answer": "type()"
+    }    
+]  

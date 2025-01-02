@@ -1,0 +1,49 @@
+<!-- templates/join_room.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Quiz Room</title>
+</head>
+<body>
+    <h1>Enter Room ID to Join Quiz</h1>
+    <form action="{% url 'join_room' %}" method="POST">
+        {% csrf_token %}
+        <label for="room_id">Room ID:</label>
+        <input type="number" id="room_id" name="room_id" required>
+        <button type="submit">Join</button>
+    </form>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Room Code</title>
+    <script>
+        function redirectToRoom() {
+            var roomCode = document.getElementById("room_code").value;
+            if (roomCode) {
+                // Redirect to the room URL with the room code
+                window.location.href = "/q/join/" + roomCode;
+            } else {
+                alert("Please enter a room code.");
+            }
+            return false;  // Prevent form submission
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter Room Code</h1>
+    <form onsubmit="return redirectToRoom();">
+        <label for="room_code">Room Code:</label>
+        <input type="text" id="room_code" name="room_code" required>
+        <button type="submit">Join</button>
+    </form>
+</body>
+</html>
+

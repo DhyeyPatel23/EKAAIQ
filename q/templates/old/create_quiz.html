@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+</head>
+<body>
+    <h1>Create a New Quiz</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="title">Quiz Title:</label>
+        <input type="text" name="title" id="title" required><br><br>
+
+        <div id="questions">
+            <h2>Question 1:</h2>
+            <textarea name="questions" placeholder="Enter your question here" required></textarea><br><br>
+            <label>Option 1:</label><input type="text" name="options" required><br>
+            <label>Option 2:</label><input type="text" name="options" required><br>
+            <label>Option 3:</label><input type="text" name="options" required><br>
+            <label>Option 4:</label><input type="text" name="options" required><br>
+            <label>Correct Option:</label>
+            <select name="correct_options" required>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+            </select><br><br>
+        </div>
+
+        <button type="button" onclick="addQuestion()">Add Another Question</button><br><br>
+
+        <button type="submit">Create Quiz</button>
+    </form>
+
+    <script>
+        let questionCount = 1;
+
+        function addQuestion() {
+            questionCount++;
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `
+                <h2>Question ${questionCount}:</h2>
+                <textarea name="questions" placeholder="Enter your question here" required></textarea><br><br>
+                <label>Option 1:</label><input type="text" name="options" required><br>
+                <label>Option 2:</label><input type="text" name="options" required><br>
+                <label>Option 3:</label><input type="text" name="options" required><br>
+                <label>Option 4:</label><input type="text" name="options" required><br>
+                <label>Correct Option:</label>
+                <select name="correct_options" required>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option4">Option 4</option>
+                </select><br><br>
+            `;
+            document.getElementById('questions').appendChild(questionDiv);
+        }
+    </script>
+</body>
+</html>

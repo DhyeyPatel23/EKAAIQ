@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <style>
+        body {
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/hi.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .result-container {
+            background: rgba(212, 228, 236, 0.83);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(6.1px);
+            -webkit-backdrop-filter: blur(6.1px);
+            border: 1px solid rgba(212, 228, 236, 1);
+            padding: 30px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh; 
+            overflow-y: auto; 
+            -ms-overflow-style: none;  /* Hide scrollbar in IE and Edge */
+            scrollbar-width: none;
+        }
+
+        .result-container h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .result-container .score {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        .result-container .details, .detailed-results {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #555;
+            text-align: left;
+        }
+
+        .detailed-results .question-block {
+            margin: 20px 0;
+        }
+
+        .detailed-results .question-text {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .detailed-results .option {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .detailed-results .correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .detailed-results .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .actions button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .actions button.share {
+            background-color: #2196F3;
+            color: #fff;
+        }
+
+        .actions button.share:hover {
+            background-color: #1976d2;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .result-container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .option {
+                padding: 12px;
+            }
+
+            .question-text h2 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .question-points, .question-type {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Quiz Completed!</h1>
+        <h3>Quiz Name: {{ quiz.title }}</h3>
+        <div class="score">Your Score: {{ score }} / {{ total }}</div>
+        {% if quiz.show_results_to_student %}
+            <div class="details">
+                <p>Total Questions: {{ total }}</p>
+            </div>
+        {% endif %}
+        
+        <div class="detailed-results">
+            {% if quiz.show_results_to_student %}
+                
+                {% for result in detailed_results %}
+                <div class="question-block">
+                    <div class="question-text" id="question{{ forloop.counter }}">
+                        <hr>
+                        <h2>Question {{ forloop.counter }} :</h2>
+                        <h3>{{ result.question }}</h3>
+
+                        <img src="{% static result.img_loc %}" alt="" style="max-width: 500px;">
+                        {% if result.img and result.img.url %}
+                            <img src="{{ result.img.url }}" alt="" style="max-width: 500px;">
+                        {% endif %}
+                    </div>
+                    {% for key, option in result.options.items %}
+                        <div class="option {% if result.user_answer == key and result.user_answer == result.correct_answer %}correct{% elif result.user_answer == key %}incorrect{% elif result.correct_answer == key %}correct{% endif %}">
+                            Option {{ forloop.counter }} : {{ option }}
+                            <br>
+                            
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p></p>
+            {% endif %}
+        </div>
+
+        <div class="actions" style="display: flex; gap: 10px; justify-content: center" align="center">
+        
+        {% if email %}
+            <p></p>
+        {% else %}
+            <div class="actions">
+                <form action="{% url 'student_home' %}" method="get">
+                    <button class="share">Home</button>
+                </form>
+            </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div>
+                <p>Question {{ forloop.counter }} : {{ question.question }}</p>
+                <!-- <textarea name="questions" id="question1Input" placeholder="enter your question" value="{{ question.question }}"  required ></textarea> -->
+                <!-- <input type="text" name="questions" id="question1Input" value="{{ question.question }}"> <br> -->
+                <input type="radio" name="question_{{ forloop.counter }}" value="{{ question.options.0 }}"> {{ question.options.0 }}<br>
+                <input type="radio" name="question_{{ forloop.counter }}" value="{{ question.options.1 }}"> {{ question.options.1 }}<br>
+                <input type="radio" name="question_{{ forloop.counter }}" value="{{ question.options.2 }}"> {{ question.options.2 }}<br>
+                <input type="radio" name="question_{{ forloop.counter }}" value="{{ question.options.3 }}"> {{ question.options.3 }}<br>
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

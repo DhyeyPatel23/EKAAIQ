@@ -1,0 +1,171 @@
+<!-- delete_confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Confirmation</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+  
+        :root {
+          --foreground: #1a5319;
+          --background: #80af81;
+          --main-bg: #d6efd8;
+        }
+  
+        body {
+          margin: 0;
+          background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);
+          font-family: "Poppins";
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+  
+        .login-container {
+          padding: 20px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.59);
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(7.3px);
+          -webkit-backdrop-filter: blur(7.3px);
+          border: 1px solid rgba(1, 4, 9, 1);
+          max-width: 350px;
+          width: 80%;
+        }
+  
+        .login-container h2 {
+          text-align: center;
+          margin-bottom: 20px;
+          color: var(--foreground);
+        }
+  
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          background: rgba(255, 255, 255, 0.59);
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(7.3px);
+          -webkit-backdrop-filter: blur(7.3px);
+          border: 1px solid rgba(1, 4, 9, 1);
+          transform: scale(0.98);
+          transition: 0.3s ease-in-out;
+        }
+  
+        .login-form input[type="text"]:hover,
+        .login-form input[type="password"]:hover {
+          transform: scale(1);
+        }
+  
+        .login-form input[type="submit"] {
+          width: 100%;
+          padding: 10px;
+          background-color: #4d64e6;
+          border-radius: 5px;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          margin-bottom: 15px;
+          transform: scale(0.98);
+          transition: 0.3s ease-in-out;
+        }
+  
+        .login-form input[type="submit"]:hover {
+          transform: scale(1);
+          font-size: 15px;
+        }
+
+        .login-form input[type="button"] {
+          width: 100%;
+          padding: 10px;
+          background-color: #4d64e6;
+          border-radius: 5px;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          margin-bottom: 15px;
+          transform: scale(0.98);
+          transition: 0.3s ease-in-out;
+        }
+  
+        .login-form input[type="button"]:hover {
+          transform: scale(1);
+          font-size: 15px;
+        }
+  
+        .login-form span {
+          font-size: 13px;
+        }
+  
+        .login-form span a {
+          color: var(--foreground);
+          text-decoration: none;
+        }
+  
+        .login-form span a:hover {
+          text-decoration: underline;
+        }
+  
+        .error {
+          color: red;
+          font-size: 0.9em;
+        }
+  
+        .form-group {
+          margin-bottom: 15px;
+        }
+  
+        @media only screen and (max-width: 600px) {
+          .login-container {
+            width: 90%;
+            max-width: 300px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .login-container {
+              width: 90%;
+              padding: 15px;
+          }
+  
+          .login-form input[type="text"],
+          .login-form input[type="password"] {
+              padding: 8px;
+          }
+  
+          .login-form input[type="submit"],
+          .login-form input[type="button"] {
+              padding: 8px;
+              font-size: 14px;
+          }
+        }
+      </style>
+</head>
+<body>
+    <!-- <h1>Are you sure you want to delete this {{ type }}?</h1>
+    <p>{{ object }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+    </form> -->
+    <div class="login-container">
+        <h2>Are you sure ?</h2>
+        <h4 align="center">Are you sure you want to delete "{{ object }}" ?</h4>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <!-- <button type="submit" class="btn btn-danger">Yes, delete</button> -->
+            <input type="submit" value="Yes , Delete">
+            <!-- <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a> -->
+            <!-- <input type="button" value="No , Cancel"> -->
+            <input type="button" onclick="history.back()" value="Cancel">
+        </form>
+    </div>
+</body>
+</html>

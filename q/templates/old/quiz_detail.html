@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }}</title>
+</head>
+<body>
+    <h1>{{ quiz.title }}</h1>
+    <h2>room id : {{ quiz.code }}</h2>
+    <a href="http://127.0.0.1:8000/q/join/{{ quiz.code }}">Open Quiz</a>
+
+
+    <!-- <p type="hidden">http://127.0.0.1:8000/q/join/{{ quiz.code }}</p> -->
+
+
+
+    <input type="hidden" name="link" value="http://127.0.0.1:8000/q/join/{{ quiz.code }}">
+    <br>
+    <br>
+    <button onclick="copyToClipboard()">Copy link to clipboard</button>
+
+    <h2>Questions</h2>
+    <ul>
+        {% for question in quiz.questions.all %}
+            <li>{{ question.question_text }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'view_quiz_results' quiz.id %}">View Quiz Results</a>
+    <a href="{% url 'home_page'%}">dashboard</a>
+
+    <script>
+        function copyToClipboard() {
+            // Get the input field
+            var copyText = document.getElementById("link");
+            
+            // Select the text
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            
+            // Copy the text to the clipboard
+            navigator.clipboard.writeText(copyText.value)
+                .then(() => {
+                    alert("Copied the text: " + copyText.value);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+    </script>
+
+
+</body>
+</html>
+

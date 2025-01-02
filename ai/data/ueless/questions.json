@@ -1,0 +1,52 @@
+[
+        {
+          "question": "What is the correct file extension for Python files?",
+          "options": [".py", ".python", ".pt", ".p"],
+          "answer": ".py"
+        },
+        {
+          "question": "Which of the following is a Python keyword?",
+          "options": ["function", "while", "define", "create"],
+          "answer": "while"
+        },
+        {
+          "question": "How do you create a variable with the numeric value 5 in Python?",
+          "options": ["x = 5", "var x = 5", "int x = 5", "num x = 5"],
+          "answer": "x = 5"
+        },
+        {
+          "question": "Which function is used to output text in Python?",
+          "options": ["print()", "echo()", "write()", "display()"],
+          "answer": "print()"
+        },
+        {
+          "question": "Which operator is used for exponentiation in Python?",
+          "options": ["^", "**", "^^", "//"],
+          "answer": "**"
+        },
+        {
+          "question": "What is the correct syntax to define a function in Python?",
+          "options": ["def functionName():", "function functionName():", "create function functionName()", "functionName def()"],
+          "answer": "def functionName():"
+        },
+        {
+          "question": "What data type is the result of: 3 + 2.5 in Python?",
+          "options": ["int", "float", "complex", "string"],
+          "answer": "float"
+        },
+        {
+          "question": "Which of these collections is ordered and mutable?",
+          "options": ["tuple", "set", "list", "dictionary"],
+          "answer": "list"
+        },
+        {
+          "question": "How do you insert comments in Python code?",
+          "options": ["# This is a comment", "// This is a comment", "/* This is a comment */", "-- This is a comment"],
+          "answer": "# This is a comment"
+        },
+        {
+          "question": "What is the output of this code: print(type([]))?",
+          "options": ["<class 'tuple'>", "<class 'list'>", "<class 'set'>", "<class 'dict'>"],
+          "answer": "<class 'list'>"
+        }
+]

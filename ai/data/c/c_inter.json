@@ -1,0 +1,1035 @@
+[
+    {
+        "question": "Which of the following is used to find the size of a data type in C?",
+        "options": ["sizeof operator", "length operator", "dim operator", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of the expression `5/2` in C?",
+        "options": ["2", "2.5", "2.0", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a valid storage class in C?",
+        "options": ["auto", "register", "volatile", "static"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of : ",
+        "options": ["45", "25", "15", "None of these"],
+        "answer": "option2" , 
+        "image_loc": "images/c_inter/img1.png"
+    },
+    {
+        "question": "Which operator is used to access the value at the address stored in a pointer?",
+        "options": ["&", "*", "->", "[]"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which keyword is used to prevent modification of a variable?",
+        "options": ["const", "static", "volatile", "auto"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following correctly declares a pointer in C?",
+        "options": ["int ptr", "int *ptr", "ptr int", "int &ptr"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which function is used to dynamically allocate memory in C?",
+        "options": ["malloc()", "alloc()", "memalloc()", "calloc()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to free the allocated memory in C?",
+        "options": ["release()", "free()", "delete()", "deallocate()"],
+        "answer": "option2"
+    },
+    {
+        "question": "What does `NULL` pointer indicate?",
+        "options": ["Points to no address", "Points to zero", "Points to a memory address", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of the following: ",
+        "options": ["5", "6", "Undefined behavior", "None of these"],
+        "answer": "option1" ,
+        "image_loc" : "images/c_inter/img2.png"
+    },
+    {
+        "question": "What is the output of : ",
+        "options": ["4", "8", "16", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img3.png"
+    },
+    {
+        "question": "Which library function is used to compare two strings in C?",
+        "options": ["strcmp()", "strcpy()", "strlen()", "strcat()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which operator has the highest precedence in C?",
+        "options": ["*", "/", "+", "++"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of the following cannot be used as a variable name in C?",
+        "options": ["volatile", "count", "_number", "temp"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code : ",
+        "options": ["5", "10", "0", "None of these"],
+        "answer": "option1" ,
+        "image_loc" : "images/c_inter/img4.png"
+    },
+    {
+        "question": "Which header file is required for using the `strlen()` function in C?",
+        "options": ["<stdio.h>", "<conio.h>", "<string.h>", "<stdlib.h>"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following can be used to define macros in C?",
+        "options": ["#define", "#include", "#macro", "#define_macro"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of : ",
+        "options": ["10", "20", "40", "Undefined"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img5.png"
+    },
+    {
+        "question": "Which of the following is not a valid looping construct in C?",
+        "options": ["for", "while", "do", "repeat"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the result of the following code : ",
+        "options": ["True", "False", "Error", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img6.png"
+    },
+    {
+        "question": "Which type specifier is used for a hexadecimal integer in `printf()`?",
+        "options": ["%x", "%h", "%X", "%d"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which operator is used to get the address of a variable?",
+        "options": ["&", "*", "->", "address()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following statements about C arrays is true?",
+        "options": ["Array size must be specified at compile time", "Arrays can have variable size", "Array size can be altered at runtime", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which function is used to terminate a C program?",
+        "options": ["exit()", "terminate()", "end()", "stop()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code : ",
+        "options": ["0", "10", "Address of a", "None of these"],
+        "answer": "option2" , 
+        "image_loc"  : "images/c_inter/img7.png"
+    },
+    {
+        "question": "Which of the following cannot be used with a pointer?",
+        "options": ["Arithmetic operations", "Increment", "Decrement", "Multiplication"],
+        "answer": "option4"
+    },
+    {
+        "question": "What will be the result of the following : ",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img8.png"
+    },
+    {
+        "question": "Which of the following is not a keyword in C?",
+        "options": ["break", "case", "return", "function"],
+        "answer": "option4"
+    },
+    {
+        "question": "What does the `continue` statement do in C?",
+        "options": ["Exits the loop", "Skips the current iteration", "Stops the program", "Skips all remaining iterations"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the output of the following code : ",
+        "options": ["0", "1", "5", "Undefined behavior"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img9.png"
+    },
+    {
+        "question": "Which of the following is not a valid escape sequence in C?",
+        "options": ["\\n", "\\r", "\\t", "\\b"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of the following code : ",
+        "options": ["0", "1", "2", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img10.png"
+    },
+    {
+        "question": "Which of the following is used for dynamic memory deallocation?",
+        "options": ["free()", "dealloc()", "delete()", "memfree()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a valid C preprocessor directive?",
+        "options": ["#define", "#include", "#ifdef", "#endif"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of the following operators is used for bitwise XOR in C?",
+        "options": ["&", "|", "^", "~"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which function is used to convert a string to an integer in C?",
+        "options": ["strtoint()", "atoi()", "stoi()", "intconv()"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is a valid multi-line comment in C?",
+        "options": ["/* comment */", "// comment", "/ comment /", "/* comment // */"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code: ",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img11.png"
+    },
+    {
+        "question": "Which of the following is not an arithmetic operator in C?",
+        "options": ["+", "-", "=", "/"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the result of : ",
+        "options": ["0", "1", "2", "Undefined behavior"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img12.png"
+    },
+    {
+        "question": "What will the following code output : ",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img13.png"
+    },
+    {
+        "question": "Which function can be used to copy a string in C?",
+        "options": ["strcpy()", "strcat()", "strcmp()", "strlen()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is true about static variables in C?",
+        "options": ["They are initialized once", "They are initialized every time a function is called", "They are local to a function", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a valid function declaration in C?",
+        "options": ["int func()", "void func(int)", "char* func(void)", "float func[]()"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of : ",
+        "options": ["2", "4", "8", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img14.png"
+    },
+    {
+        "question": "Which of the following functions is used to concatenate strings in C?",
+        "options": ["strcat()", "strcpy()", "strcmp()", "strlen()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of : ",
+        "options": ["A", "B", "C", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img15.png"
+    },
+    {
+        "question": "What is the default value of an uninitialized static variable in C?",
+        "options": ["0", "Garbage value", "NULL", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which function is used to read a single character from the user in C?",
+        "options": ["getchar()", "gets()", "fgets()", "scanf()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of : ",
+        "options": ["11", "10", "6", "Undefined behavior"],
+        "answer": "option4" ,
+        "image_loc" : "images/c_inter/img16.png"
+    },
+    {
+        "question": "Which of the following is not a logical operator in C?",
+        "options": ["&&", "||", "!", "&"],
+        "answer": "option4"
+    },
+    {
+        "question": "What will be the output of the following code : ",
+        "options": ["10", "11", "5", "Undefined behavior"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img17.png"
+    },
+    {
+        "question": "Which function is used to allocate memory for an array in C?",
+        "options": ["calloc()", "malloc()", "realloc()", "memalloc()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not an increment operator in C?",
+        "options": ["++", "--", "+=", "-="],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of `printf(\"%d\", 8 >> 1);`?",
+        "options": ["4", "8", "16", "Error"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is the correct syntax to define a constant in C?",
+        "options": ["#define PI 3.14", "PI = 3.14", "const float PI = 3.14", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will the following code output : ",
+        "options": ["1", "6", "7", "8"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img18.png"
+    },
+    {
+        "question": "What does the `return` statement do in a function?",
+        "options": ["Exits the program", "Returns control to the calling function", "Exits the loop", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the output of the following code : ",
+        "options": ["4", "6", "8", "None of these"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img19.png"
+    },
+    {
+        "question": "Which of the following can be used to declare a constant variable in C?",
+        "options": ["const", "static", "extern", "auto"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of the following code : ",
+        "options": ["1", "2", "3", "7"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img20.png"
+    },
+    {
+        "question": "Which of the following functions is used to open a file in C?",
+        "options": ["fopen()", "fread()", "fwrite()", "open()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code : ",
+        "options": ["0", "1", "2", "3"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img21.png"
+    },
+    {
+        "question": "What does the `do-while` loop guarantee in C?",
+        "options": ["At least one iteration", "No iteration", "Multiple iterations", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to initialize a union in C?",
+        "options": ["Only one member at a time", "All members at once", "Based on member types", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of the following code : ",
+        "options": ["20", "40", "80", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img22.png"
+    },
+    {
+        "question": "Which of the following is a valid syntax for a function pointer in C?",
+        "options": ["int (*ptr)()", "int ptr()", "int *ptr()", "ptr int()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following operators is used to check if two variables are equal?",
+        "options": ["=", "==", "equals", "!="],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is not a bitwise operator in C?",
+        "options": ["&", "|", "^", "&&"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which function is used to copy a block of memory from one location to another in C?",
+        "options": ["memcpy()", "strcpy()", "memmove()", "memset()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which function is used to find the length of a string in C?",
+        "options": ["strlen()", "strcpy()", "strcat()", "strcmp()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a valid relational operator in C?",
+        "options": ["==", "!=", "<=", "=>"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the result of : ",
+        "options": ["0", "1", "2", "3"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img23.png"
+    },
+    {
+        "question": "Which of the following statements is correct about recursion in C?",
+        "options": ["Recursion is a function calling itself", "Recursion creates an infinite loop", "Recursion is a loop inside a function", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a valid loop control statement in C?",
+        "options": ["break", "continue", "exit", "goto"],
+        "answer": "option3"
+    },
+    {
+        "question": "What will the following code output : ",
+        "options": ["0", "1", "5", "Undefined behavior"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img24.png"
+    },
+    {
+        "question": "What is the result of the following : ",
+        "options": ["0", "1", "10", "Error"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img25.png"
+    },
+    {
+        "question": "Which operator is used to test whether a specific bit is set in a number?",
+        "options": ["&", "|", "==", "!"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of the following code : ",
+        "options": ["0", "1", "2", "3"],
+        "answer": "option4" , 
+        "image_loc": "images/c_inter/img26.png"
+    },
+    {
+        "question": "Which function is used to search for a substring in a string in C?",
+        "options": ["strstr()", "strchr()", "strtok()", "strrchr()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to handle errors in C?",
+        "options": ["errno", "errcheck()", "errflag", "error()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the output of the following code : ",
+        "options": ["1", "2", "4", "8"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img27.png"
+    },
+    {
+        "question": "Which function is used to append one string to another in C?",
+        "options": ["strcat()", "strcpy()", "strncat()", "strcmp()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is not a valid type of preprocessor directive in C?",
+        "options": ["#define", "#include", "#ifdef", "#assert"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": ["0", "1", "5", "Undefined behavior"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img28.png"
+    },
+    {
+        "question": "Which of the following is the correct way to declare a constant pointer in C?",
+        "options": ["int *const ptr", "const int *ptr", "int const *ptr", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of : ",
+        "options": ["7", "9", "6", "None of these"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img29.png"
+    },
+    {
+        "question": "Which function is used to compare two blocks of memory in C?",
+        "options": ["memcmp()", "strcpy()", "strcmp()", "memset()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is true about the `switch` statement in C?",
+        "options": ["It must have a default case", "It evaluates expressions of type `int` or `char`", "It can have floating-point cases", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is a valid `while` loop syntax in C?",
+        "options": ["while(cond);", "while(cond) {}", "while{cond};", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the output of ?",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img30.png"
+    },
+    {
+        "question": "Which operator is used for performing division of two numbers in C?",
+        "options": ["+", "-", "/", "%"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option1" , 
+        "image_loc" :  "images/c_inter/img31.png"
+    },
+    {
+        "question": "What is the result of the following code? ",
+        "options": ["0", "1", "2", "3"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img32.png"
+    },
+    {
+        "question": "Which of the following data types has the smallest size in C?",
+        "options": ["char", "int", "float", "double"],
+        "answer": "option1"
+    }, 
+    {
+        "question": "Which of the following functions can be used to dynamically allocate memory in C?",
+        "options": ["malloc()", "calloc()", "realloc()", "All of these"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of ?",
+        "options": ["1", "1.5", "1.0", "Error"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img33.png"
+    },
+    {
+        "question": "What will the following code output?",
+        "options": ["2", "3", "4", "Error"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img34.png"
+    },
+    {
+        "question": "Which of the following correctly defines a macro in C?",
+        "options": ["#macro PI 3.14", "#define PI 3.14", "macro PI = 3.14", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["3", "4", "5", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img35.png"
+    },
+    {
+        "question": "Which of the following keywords is used to define a structure in C?",
+        "options": ["struct", "union", "typedef", "class"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following types of variables can retain its value between function calls?",
+        "options": ["auto", "static", "extern", "register"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will the following code output?",
+        "options": ["1", "0", "5", "None of these"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img36.png"
+    },
+    {
+        "question": "Which of the following operators has the highest precedence in C?",
+        "options": ["+", "*", "&&", "()"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the result of the expression `10 % 3` in C?",
+        "options": ["0", "1", "2", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following functions is used to format strings in C?",
+        "options": ["sprintf()", "printf()", "scanf()", "fgets()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the correct syntax for declaring a function pointer in C?",
+        "options": ["int *ptr()", "int (*ptr)()", "ptr int()", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the result of ?",
+        "options": ["0", "2", "4", "8"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img37.png"
+    },
+    {
+        "question": "Which of the following is true for an infinite loop in C?",
+        "options": ["It must use `break`", "It must use `continue`", "It runs indefinitely", "None of these"],
+        "answer": "option3"
+    },
+    {
+        "question": "What does the following code do?",
+        "options": ["Increases `x` by 5", "Decreases `x` by 5", "Sets `x` to 0", "Error"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img38.png"
+    },
+    {
+        "question": "Which of the following is true about the `for` loop in C?",
+        "options": ["It must include an initialization", "It must include a condition", "It must include an increment", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the result of code on a 32-bit system?",
+        "options": ["1", "2", "4", "8"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img39.png"
+    },
+    {
+        "question": "Which function is used to reverse a string in C?",
+        "options": ["strrev()", "strcpy()", "strcat()", "strncat()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": ["1", "2", "4", "8"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img40.png"
+    },
+    {
+        "question": "Which of the following is not a valid storage class in C?",
+        "options": ["auto", "register", "volatile", "const"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["5", "-5", "-6", "6"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img41.png"
+    },
+    {
+        "question": "Which of the following is not a valid way to define a function in C?",
+        "options": ["int func();", "void func(int x);", "float func();", "void func(x);"],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of the following functions compares two strings in C?",
+        "options": ["strcmp()", "strcpy()", "strcat()", "strlen()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to access a pointer in C?",
+        "options": ["*", "&", "%", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will the following code output? ",
+        "options": ["1", "2", "3", "4"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img42.png"
+    },
+    {
+        "question": "What is the correct syntax for declaring a multi-dimensional array in C?",
+        "options": ["int arr[][];", "int arr[3][];", "int arr[3][3];", "None of these"],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following types is typically the largest in C?",
+        "options": ["int", "float", "double", "char"],
+        "answer": "option3"
+    },
+    {
+        "question": "What will be the output of ?",
+        "options": ["9", "13", "5", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img43.png"
+    },
+    {
+        "question": "Which function can be used to deallocate memory dynamically in C?",
+        "options": ["free()", "malloc()", "delete()", "realloc()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of ?",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img44.png"
+    },
+    {
+        "question": "Which of the following is true about the `switch` statement?",
+        "options": ["It must have a break after every case", "It evaluates character and integer types", "It supports floating point cases", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the result of ?",
+        "options": ["1", "2", "4", "8"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img45.png"
+    },
+    {
+        "question": "Which of the following is used to find the remainder of division in C?",
+        "options": ["%", "//", "/", "*"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following operators cannot be overloaded in C?",
+        "options": ["+", "==", "*", "."],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["4", "5", "0", "None of these"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img46.png"
+    },
+    {
+        "question": "Which function is used to compare memory blocks in C?",
+        "options": ["memcmp()", "strcmp()", "strcpy()", "memset()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of code on a 64-bit system?",
+        "options": ["2", "4", "8", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img47.png"
+    },
+    {
+        "question": "What will the following code output? ",
+        "options": ["4", "5", "6", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img48.png"
+    },
+    {
+        "question": "Which of the following functions is used to concatenate strings in C?",
+        "options": ["strcat()", "strcpy()", "strcmp()", "strtok()"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which operator is used to perform bitwise OR in C?",
+        "options": ["&", "|", "^", "&&"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["8", "16", "24", "32"],
+        "answer": "option2" ,
+        "image_loc" : "images/c_inter/img49.png"
+    },
+    {
+        "question": "Which of the following statements is correct about typedef in C?",
+        "options": ["It defines a new type", "It renames a type", "It declares a constant", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the result of ?",
+        "options": ["5", "10", "2", "None of these"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img50.png"
+    },
+    {
+        "question": "Which of the following functions is used to tokenize a string in C?",
+        "options": ["strtok()", "strcpy()", "strcat()", "strcmp()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of the following code? ",
+        "options": ["1", "2", "3", "0"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img51.png"
+    },
+    {
+        "question": "Which of the following is used to check the size of a variable in C?",
+        "options": ["sizeof()", "lengthof()", "strlen()", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following operators cannot be used with floating-point variables?",
+        "options": ["+", "-", "%%", "*"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["9", "5", "7", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img52.png"
+    }, 
+    {
+        "question": "Which of the following functions is used to copy memory from one location to another in C?",
+        "options": ["memmove()", "strncpy()", "strcpy()", "fgets()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the output of ?",
+        "options": ["A", "B", "C", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img53.png"
+    },
+    {
+        "question": "Which of the following statements is true about the `do-while` loop?",
+        "options": ["The condition is checked before the loop runs", "The loop runs at least once", "It is equivalent to a `for` loop", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the result of the following code?",
+        "options": ["10", "15", "25", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img54.png"
+    },
+    {
+        "question": "Which of the following types cannot be used as an array index in C?",
+        "options": ["int", "char", "float", "short"],
+        "answer": "option3"
+    },
+    {
+        "question": "What will the following code output ? ",
+        "options": ["True", "False", "Error", "None of these"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img55.png"
+    },
+    {
+        "question": "Which operator is used for dereferencing a pointer in C?",
+        "options": ["&", "*", "->", "[]"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is the correct syntax for a `switch` statement?",
+        "options": ["switch(expression) {}", "switch expression {}", "switch{expression};", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of the following expression: `7 | 2`?",
+        "options": ["7", "5", "3", "9"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which function can be used to convert a string to an integer in C?",
+        "options": ["atoi()", "atof()", "strtol()", "itoa()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of ?",
+        "options": ["14", "10", "11", "7"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img56.png"
+    },
+    {
+        "question": "Which of the following is not a valid loop in C?",
+        "options": ["for", "while", "foreach", "do-while"],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the result of the following expression: `5 % 2`?",
+        "options": ["1", "2", "0", "5"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the correct syntax for defining a union in C?",
+        "options": ["union {int a; float b;}", "union {int a: float b:}", "union(a, b)", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will the following code output on a 64-bit system?",
+        "options": ["4", "8", "16", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img57.png"
+    },
+    {
+        "question": "Which of the following operations can be performed on a file pointer?",
+        "options": ["fopen()", "fclose()", "fwrite()", "All of these"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["1", "-3", "-4", "None of these"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img58.png"
+    },
+    {
+        "question": "What is the correct way to define a pointer to an array of integers?",
+        "options": ["int *ptr[];", "int (*ptr)[];", "int *ptr;", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the output of the following code ?",
+        "options": ["0", "1", "10", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img59.png"
+    },
+    {
+        "question": "Which operator is used to perform bitwise AND in C?",
+        "options": ["&", "|", "^", "~"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code? ",
+        "options": ["1", "2", "3", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img60.png"
+    },
+    {
+        "question": "Which of the following functions is used to write data to a file in C?",
+        "options": ["fprintf()", "fread()", "fscanf()", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the result of ?",
+        "options": ["1", "2", "6", "None of these"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img61.png"
+    },
+    {
+        "question": "Which of the following correctly defines a function in C?",
+        "options": ["int func();", "void func(int);", "float func();", "All of these"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of ?",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img62.png"
+    },
+    {
+        "question": "Which of the following functions is used to compare two strings in C?",
+        "options": ["strcmp()", "strcpy()", "strcat()", "strlen()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of the following code ? ",
+        "options": ["2", "4", "8", "16"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img63.png"
+    },
+    {
+        "question": "Which of the following operators cannot be used with pointers in C?",
+        "options": ["+", "-", "*", "%"],
+        "answer": "option4"
+    },
+    {
+        "question": "What is the output of ?",
+        "options": ["4", "8", "16", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img64.png"
+    },
+    {
+        "question": "Which of the following operators is used to increment the value of a variable by 1 in C?",
+        "options": ["--", "++", "+=", "="],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the result of the following code ?",
+        "options": ["3", "4", "5", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img65.png"
+    },
+    {
+        "question": "Which function is used to convert a string to a floating-point number in C?",
+        "options": ["atof()", "atoi()", "strtod()", "itoa()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["5", "3", "7", "0"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img66.png"
+    },
+    {
+        "question": "Which of the following keywords is used to terminate a loop in C?",
+        "options": ["continue", "break", "return", "exit"],
+        "answer": "option2"
+    },
+    {
+        "question": "Which operator is used to perform bitwise XOR in C?",
+        "options": ["&", "|", "^", "&&"],
+        "answer": "option3"
+    },
+    {
+        "question": "What will be the output of ?",
+        "options": ["1", "2", "4", "Error"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img67.png"
+    },
+    {
+        "question": "Which of the following operators has the lowest precedence in C?",
+        "options": ["&&", "+", "-", "="],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of the following is used to store the address of another variable in C?",
+        "options": ["Array", "Pointer", "Structure", "None of these"],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["7", "6", "10", "Error"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img68.png"
+    },
+    {
+        "question": "What will be the output of the following code ? ",
+        "options": ["2", "3", "5", "Error"],
+        "answer": "option3" , 
+        "image_loc" : "images/c_inter/img69.png"
+    },
+    {
+        "question": "Which of the following data types is typically the smallest in C?",
+        "options": ["char", "int", "float", "double"],
+        "answer": "option1"
+    },
+    {
+        "question": "Which operator is used to access the members of a structure through a pointer in C?",
+        "options": ["*", "&", "->", "."],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["6", "12", "3", "24"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img70.png"
+    },
+    {
+        "question": "What is the output of the following code? ",
+        "options": ["0", "1", "2", "Error"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img71.png"
+    },
+    {
+        "question": "Which function can be used to close a file in C?",
+        "options": ["fclose()", "fopen()", "fwrite()", "None of these"],
+        "answer": "option1"
+    },
+    {
+        "question": "What will the following code output ?",
+        "options": ["2", "5", "10", "None of these"],
+        "answer": "option2" , 
+        "image_loc" : "images/c_inter/img72.png"
+    },
+    {
+        "question": "Which of the following functions is used to read a line from a file in C?",
+        "options": ["fgets()", "fscanf()", "fprintf()", "fgetc()"],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of ?",
+        "options": ["1", "2", "4", "0"],
+        "answer": "option1" , 
+        "image_loc" : "images/c_inter/img73.png"
+    }
+]

@@ -1,0 +1,982 @@
+[
+    {
+        "question": "Which of these statements is true about Java's access modifiers?",
+        "options": [
+            "Private members are accessible within the same class only.",
+            "Protected members are accessible only within the same package.",
+            "Public members are accessible within the same package only.",
+            "Default members are accessible from any class."
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the result of the following code?",
+        "options": [
+            "0",
+            "null",
+            "Compilation error",
+            "NullPointerException"
+        ],
+        "answer": "option4" ,
+        "image_loc" : "images/jv_inter/img1.png"
+    },
+    {
+        "question": "Which of these collections guarantees no duplicates and natural ordering?",
+        "options": [
+            "HashSet",
+            "LinkedHashSet",
+            "TreeSet",
+            "ArrayList"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the purpose of the 'transient' keyword in Java?",
+        "options": [
+            "To specify that a variable is not part of the object's serialized state",
+            "To indicate that a variable is constant",
+            "To declare a variable that cannot be changed",
+            "To define a method that is abstract"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method from the following is not defined in the Object class?",
+        "options": [
+            "wait()",
+            "notify()",
+            "equals()",
+            "clone()"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "What does the 'finally' block do?",
+        "options": [
+            "It is executed only when an exception is thrown",
+            "It is executed only when no exception is thrown",
+            "It is executed whether an exception is thrown or not",
+            "It is executed only when a specific exception is thrown"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these exceptions is an unchecked exception?",
+        "options": [
+            "IOException",
+            "SQLException",
+            "NullPointerException",
+            "InterruptedException"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "30",
+            "1020",
+            "Compilation error",
+            "20"
+        ],
+        "answer": "option2" , 
+        "image_loc" : "images/jv_inter/img2.png"
+    },
+    {
+        "question": "Which of the following is used to perform a narrowing type conversion in Java?",
+        "options": [
+            "Casting",
+            "Autoboxing",
+            "Unboxing",
+            "Implicit conversion"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these classes is synchronized?",
+        "options": [
+            "ArrayList",
+            "Vector",
+            "HashMap",
+            "LinkedList"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which keyword is used to refer to a parent class in Java?",
+        "options": [
+            "this",
+            "parent",
+            "super",
+            "base"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "Java",
+            "avaJ",
+            "Jav",
+            "Compilation error"
+        ],
+        "answer": "option2" , 
+        "image_loc" : "images/jv_inter/img3.png"
+    },
+    {
+        "question": "Which method must be implemented by all threads in Java?",
+        "options": [
+            "start()",
+            "run()",
+            "stop()",
+            "sleep()"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the use of the 'volatile' keyword in Java?",
+        "options": [
+            "To indicate that a variable's value can be changed asynchronously",
+            "To make a variable constant",
+            "To create a synchronized method",
+            "To prevent a method from being overridden"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is a functional interface in Java?",
+        "options": [
+            "Comparable",
+            "Runnable",
+            "List",
+            "Callable"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these methods returns the last element in a list without removing it?",
+        "options": [
+            "getLast()",
+            "peekLast()",
+            "last()",
+            "None of the above"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which type of inheritance is not supported in Java?",
+        "options": [
+            "Single Inheritance",
+            "Multilevel Inheritance",
+            "Multiple Inheritance",
+            "Hierarchical Inheritance"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "5",
+            "6",
+            "7",
+            "Compilation error"
+        ],
+        "answer": "option2" , 
+        "image_loc" :"images/jv_inter/img4.png"
+    },
+    {
+        "question": "Which of these keywords can be used to handle exceptions in Java?",
+        "options": [
+            "throw",
+            "catch",
+            "throws",
+            "All of the above"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the correct way to synchronize a block of code in Java?",
+        "options": [
+            "synchronized()",
+            "synchronized block",
+            "synchronize block",
+            "synchronized() method"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these interfaces handles the output of events in Java?",
+        "options": [
+            "ActionListener",
+            "OutputListener",
+            "EventHandler",
+            "OutputHandler"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the output of the following code?",
+        "options": [
+            "1050",
+            "10 50",
+            "15 50",
+            "Compilation error"
+        ],
+        "answer": "option3" , 
+        "image_loc" :"images/jv_inter/img5.png"
+    },
+    {
+        "question": "What is the correct way to define a lambda expression in Java?",
+        "options": [
+            "x -> x + 1",
+            "(x) -> x + 1",
+            "(int x) -> { return x + 1; }",
+            "All of the above"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "What will be the output of the following code?",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "Compilation error"
+        ],
+        "answer": "option2" , 
+        "image_loc" : "images/jv_inter/img6.png"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "A",
+            "B",
+            "null",
+            "Compilation error"
+        ],
+        "answer": "option1" ,
+        "image_loc" :"images/jv_inter/img7.png"
+    },
+    {
+        "question": "Which of these methods is used to get the length of an array in Java?",
+        "options": [
+            "length()",
+            "size()",
+            "length",
+            "size"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What does the 'break' statement do in Java?",
+        "options": [
+            "Exits the current method",
+            "Exits the current loop or switch block",
+            "Skips the current iteration of a loop",
+            "Throws an exception"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these is a valid way to create a thread in Java?",
+        "options": [
+            "Implementing the Runnable interface",
+            "Extending the Thread class",
+            "Both A and B",
+            "None of the above"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the correct syntax to declare an array of integers in Java?",
+        "options": [
+            "int[] arr;",
+            "int arr[];",
+            "Both A and B",
+            "int[] arr = new int[10];"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these is a valid return type for a method in Java?",
+        "options": [
+            "int",
+            "void",
+            "String",
+            "All of the above"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these methods can be used to remove all elements from a List in Java?",
+        "options": [
+            "clear()",
+            "removeAll()",
+            "deleteAll()",
+            "empty()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What will be the output of the following code?",
+        "options": [
+            "J",
+            "a",
+            "v",
+            "Compilation error"
+        ],
+        "answer": "option2" , 
+        "image_loc" : "images/jv_inter/img8.png"
+    },
+    {
+        "question": "What is the difference between '==' and 'equals()' in Java?",
+        "options": [
+            "'==' compares object references, while 'equals()' compares object content",
+            "'==' compares object content, while 'equals()' compares object references",
+            "Both are the same",
+            "'==' compares strings only, while 'equals()' compares all objects"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which method is called when an object is created in Java?",
+        "options": [
+            "main()",
+            "finalize()",
+            "constructor",
+            "None of the above"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the use of the 'instanceof' keyword in Java?",
+        "options": [
+            "To check whether an object is an instance of a specific class",
+            "To create an instance of a class",
+            "To convert one type into another",
+            "None of the above"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these data types is used to create a variable that should store text in Java?",
+        "options": [
+            "String",
+            "Text",
+            "char",
+            "All of the above"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these operators is used to test for equality in Java?",
+        "options": [
+            "=",
+            "==",
+            "!=",
+            "<="
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which method is used to convert a string into a lowercase string in Java?",
+        "options": [
+            "toLower()",
+            "toLowerCase()",
+            "convertToLower()",
+            "None of the above"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these methods is used to compare two strings, ignoring case considerations?",
+        "options": [
+            "compareTo()",
+            "compare()",
+            "equalsIgnoreCase()",
+            "equals()"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is true about Java's garbage collection?",
+        "options": [
+            "It can be forced to run at any specific time",
+            "It is guaranteed to run when the program is running low on memory",
+            "It automatically deletes objects that are no longer referenced",
+            "It frees memory used by local variables"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is not a valid keyword in Java?",
+        "options": [
+            "strictfp",
+            "volatile",
+            "interface",
+            "implement"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "What will be the output of the following code?",
+        "options": [
+            "He",
+            "el",
+            "ll",
+            "lo"
+        ],
+        "answer": "option2" ,
+        "image_loc" :"images/jv_inter/img9.png"
+    },
+    {
+        "question": "Which of these is not a valid data type in Java?",
+        "options": [
+            "int",
+            "float",
+            "double",
+            "decimal"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "Which method can be used to determine the size of an ArrayList in Java?",
+        "options": [
+            "size()",
+            "length()",
+            "length",
+            "getSize()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these methods can be used to check whether two strings have the same value?",
+        "options": [
+            "equals()",
+            "compareTo()",
+            "equalsIgnoreCase()",
+            "Both A and C"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "What does the term 'autoboxing' mean in Java?",
+        "options": [
+            "Automatically converting a primitive type to its corresponding wrapper class",
+            "Automatically converting a wrapper class to its corresponding primitive type",
+            "Converting a string to a number",
+            "None of the above"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these classes provides methods to manipulate the size of an array that is used internally to store the list?",
+        "options": [
+            "ArrayList",
+            "LinkedList",
+            "HashSet",
+            "Vector"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which keyword is used to prevent inheritance of a class in Java?",
+        "options": [
+            "final",
+            "static",
+            "private",
+            "abstract"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these access modifiers can be used for a method that needs to be accessible within the same package and by subclasses?",
+        "options": [
+            "private",
+            "protected",
+            "default",
+            "public"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What does the following code print?",
+        "options": [
+            "abcdef",
+            "abc",
+            "def",
+            "Compilation error"
+        ],
+        "answer": "option2" ,
+        "image_loc" : "images/jv_inter/img10.png"
+    },
+    {
+        "question": "What is the purpose of the 'super' keyword in Java?",
+        "options": [
+            "To create an instance of a class",
+            "To call a method of the current class",
+            "To refer to the parent class constructor",
+            "To define a subclass"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following is not a valid functional interface?",
+        "options": [
+            "Runnable",
+            "Comparator",
+            "Callable",
+            "List"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "Which method can be used to find the highest key less than or equal to the given key in a TreeMap?",
+        "options": [
+            "ceilingKey()",
+            "floorKey()",
+            "lowerKey()",
+            "higherKey()"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these is a correct way to declare a generic method in Java?",
+        "options": [
+            "public <T> void print(T t)",
+            "public void <T> print(T t)",
+            "public void print<T>(T t)",
+            "public void print(T t)"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these annotations indicates that a method is overridden from a superclass?",
+        "options": [
+            "@Inherited",
+            "@Override",
+            "@SuppressWarnings",
+            "@Deprecated"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What will be the output of the following code?",
+        "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "answer": "option3" , 
+        "image_loc" : "images/jv_inter/img11.png"
+    },
+    {
+        "question": "Which of these is not a valid use of the 'this' keyword?",
+        "options": [
+            "To refer to the current class instance variable",
+            "To invoke the current class constructor",
+            "To invoke the current class method",
+            "To refer to the parent class instance"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these exceptions is thrown when a negative size is specified for an array?",
+        "options": [
+            "ArrayIndexOutOfBoundsException",
+            "NegativeArraySizeException",
+            "NullPointerException",
+            "IndexOutOfBoundsException"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following methods can be used to remove all elements from a HashSet?",
+        "options": [
+            "delete()",
+            "clear()",
+            "removeAll()",
+            "None of the above"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What does the following code snippet output?",
+        "options": [
+            "5",
+            "6",
+            "Compilation error",
+            "None of the above"
+        ],
+        "answer": "option1" , 
+        "image_loc" : "images/jv_inter/img12.png"
+    },
+    {
+        "question": "Which of the following Java features ensures that applications cannot access unauthorized resources?",
+        "options": [
+            "Platform independent",
+            "Robust",
+            "Secure",
+            "Object-oriented"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "java",
+            "Java",
+            "JAVA",
+            "Compilation error"
+        ],
+        "answer": "option3" , 
+        "image_loc" : "images/jv_inter/img13.png"
+    },
+    {
+        "question": "Which of these operators can be used to concatenate two strings in Java?",
+        "options": [
+            "+",
+            "&",
+            "*",
+            "concat()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What does the following code do?",
+        "options": [
+            "1",
+            "2",
+            "3",
+            "IndexOutOfBoundsException"
+        ],
+        "answer": "option2" ,
+        "image_loc" : "images/jv_inter/img14.png"
+    },
+    {
+        "question": "Which of these keywords is used to define a constant variable in Java?",
+        "options": [
+            "const",
+            "final",
+            "static",
+            "volatile"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What will happen if you try to compile and run the following code?",
+        "options": [
+            "0",
+            "Compilation error",
+            "ArrayIndexOutOfBoundsException",
+            "NullPointerException"
+        ],
+        "answer": "option3" , 
+        "image_loc" :"images/jv_inter/img15.png"
+    },
+    {
+        "question": "Which of these methods returns the number of key-value mappings in a Map?",
+        "options": [
+            "map.size()",
+            "map.length()",
+            "map.count()",
+            "map.capacity()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which statement is true about constructor chaining in Java?",
+        "options": [
+            "Constructor chaining is possible only in single inheritance",
+            "Constructor chaining is achieved using 'super' and 'this' keywords",
+            "Constructor chaining can only be used once per class",
+            "Constructor chaining is used to create multiple instances of a class"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these classes is not part of Java's collection framework?",
+        "options": [
+            "HashMap",
+            "Hashtable",
+            "Dictionary",
+            "SortedSet"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What does the following code do?",
+        "options": [
+            "Returns -10",
+            "Returns 10",
+            "Returns 0",
+            "Compilation error"
+        ],
+        "answer": "option2" , 
+        "image_loc" :"images/jv_inter/img16.png"
+    },
+    {
+        "question": "Which of these methods can be used to compare two string objects for equality?",
+        "options": [
+            "compareTo()",
+            "equals()",
+            "==",
+            "All of the above"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these classes provides an implementation of a resizable array?",
+        "options": [
+            "LinkedList",
+            "ArrayList",
+            "HashMap",
+            "HashSet"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these keywords is used to inherit a class in Java?",
+        "options": [
+            "extends",
+            "implements",
+            "super",
+            "import"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the default value of a char variable in Java?",
+        "options": [
+            "0",
+            "'\u0000'",
+            "null",
+            "' '"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these methods is used to terminate a thread in Java?",
+        "options": [
+            "terminate()",
+            "end()",
+            "stop()",
+            "None of the above"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following classes are synchronized?",
+        "options": [
+            "ArrayList",
+            "HashSet",
+            "Hashtable",
+            "HashMap"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these methods can be used to insert elements into a LinkedList?",
+        "options": [
+            "add()",
+            "insert()",
+            "put()",
+            "append()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "true",
+            "false",
+            "Compilation error",
+            "None of the above"
+        ],
+        "answer": "option2" , 
+        "image_loc" :"images/jv_inter/img17.png"
+    },
+    {
+        "question": "Which of these methods returns the name of the file or directory denoted by this abstract pathname?",
+        "options": [
+            "getName()",
+            "getPath()",
+            "getFile()",
+            "getDirectory()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these exceptions is thrown by the clone() method?",
+        "options": [
+            "IOException",
+            "CloneNotSupportedException",
+            "InterruptedException",
+            "IllegalArgumentException"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What does the 'volatile' keyword in Java signify?",
+        "options": [
+            "It is a hint to the compiler that a variable may change asynchronously",
+            "It defines a constant variable",
+            "It ensures the variable cannot be modified",
+            "It provides a synchronized version of the variable"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following is used to synchronize the access of multiple threads to a shared resource?",
+        "options": [
+            "Synchronized block",
+            "Volatile variable",
+            "Atomic variable",
+            "None of the above"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of these methods can be used to remove a key-value pair from a HashMap?",
+        "options": [
+            "delete()",
+            "clear()",
+            "remove()",
+            "discard()"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which method in Java is used to start a thread execution?",
+        "options": [
+            "run()",
+            "start()",
+            "execute()",
+            "init()"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "Ja",
+            "av",
+            "Java",
+            "None of the above"
+        ],
+        "answer": "option1" , 
+        "image_loc" :"images/jv_inter/img18.png"
+    },
+    {
+        "question": "Which of these data structures does not allow duplicate elements?",
+        "options": [
+            "ArrayList",
+            "LinkedList",
+            "HashSet",
+            "Vector"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "What is the output of the following code?",
+        "options": [
+            "5",
+            "10",
+            "true",
+            "false"
+        ],
+        "answer": "option2" , 
+        "image_loc" :"images/jv_inter/img19.png"
+    },
+    {
+        "question": "Which of these methods can be used to determine whether two arrays are equal?",
+        "options": [
+            "equals()",
+            "deepEquals()",
+            "compare()",
+            "None of the above"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these is not a type of inheritance in Java?",
+        "options": [
+            "Single inheritance",
+            "Multiple inheritance",
+            "Multilevel inheritance",
+            "Hierarchical inheritance"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of these methods checks whether a string is empty or not?",
+        "options": [
+            "isEmpty()",
+            "length() == 0",
+            "Both A and B",
+            "None of the above"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of the following exceptions is not checked at compile time?",
+        "options": [
+            "IOException",
+            "FileNotFoundException",
+            "RuntimeException",
+            "SQLException"
+        ],
+        "answer": "option3"
+    },
+    {
+        "question": "Which of these can be a return type for a method in Java?",
+        "options": [
+            "void",
+            "int",
+            "boolean",
+            "All of the above"
+        ],
+        "answer": "option4"
+    },
+    {
+        "question": "Which of these methods removes the first occurrence of the specified element in a LinkedList?",
+        "options": [
+            "remove()",
+            "delete()",
+            "discard()",
+            "clear()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "What does the 'finally' block do in Java?",
+        "options": [
+            "It executes only if an exception is thrown",
+            "It executes after the try-catch block",
+            "It handles exceptions",
+            "It stops the program execution"
+        ],
+        "answer": "option2"
+    },
+    {
+        "question": "Which of the following is a valid method signature in Java?",
+        "options": [
+            "public void methodName()",
+            "public void methodName",
+            "public methodName()",
+            "void methodName()"
+        ],
+        "answer": "option1"
+    },
+    {
+        "question": "Which of the following can be used to read data from a file in Java?",
+        "options": [
+            "FileReader",
+            "FileInputStream",
+            "BufferedReader",
+            "All of the above"
+        ],
+        "answer": "option4"
+    }
+]
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuizBOT</title>
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navbar -->
+      <div class="navbar">
+        <div class="left">
+          {% comment %} <img src="{% static 'images/new-logo-green.png' %}" alt="QuizBOT Logo"> {% endcomment %}
+          {% comment %} <img src="{% static 'images/lg1.png' %}" alt="QuizBOT Logo"> {% endcomment %}
+          <img src="{% static 'images/h(2).png' %}" alt="QuizBOT Logo">
+        </div>
+        <div class="center">
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+        <div class="right">
+          <a href="/login/">Log in</a>
+          <a href="#" id="signupBtn">Sign up</a>
+        </div>
+
+        <div class="mobile-nav-icon">
+          <i class="fa-solid fa-bars fa-2xl" id="mobileMenu"></i>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation Menu -->
+      <div class="mobileMenuDiv" id="mobileMenuDiv">
+        <div class="mobileLinks">
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+        <div class="mobileBtns">
+          <a href="/login/">Log in</a>
+          <a href="#" id="signupBtnMobile">Sign up</a>
+        </div>
+      </div>
+
+      <!-- Homepage Content -->
+      <div class="homePage">
+        <h2>Welcome TO QuizBOT</h2>
+        {% comment %} <p>AI-Powered QUIZZES, Where Learning Meets Innovation.</p> {% endcomment %}
+        <div class="buttons">
+	<form action="/login/" method="get">
+          <button>START QUIZ</button>
+	</form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Quiz Popup -->
+    <div class="start-quiz-popup">
+      <h1>Select your quiz type</h1>
+      <i class="fa-solid fa-xmark fa-lg"></i>
+      <div class="first-option">
+        <h2>AI-Generated QUIZ</h2>
+        <p>
+          Get quizzes generated automatically by our AI based on your interests.
+          Just select a topic, and let the AI create a fun quiz for you!
+        </p>
+        <a href="/HTML/ai-generated.html">AI Generated Quiz</a>
+      </div>
+      <div class="second-option">
+        <h2>Create QUIZ</h2>
+        <p>
+          Create your own quiz with custom questions and answers. Design your
+          quiz the way you want and share it with others!
+        </p>
+        <a href="/create_quiz/">Create Quiz</a>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="signup-popup" id="signupPopup">
+      <h1>Sign up as</h1>
+      <i class="fa-solid fa-xmark fa-lg" id="closeSignupPopup"></i>
+      <div class="option">
+        <a href="/student/signup/">Sign up as Student</a>
+      </div>
+      <div class="option">
+        <a href="/teacher/signup/">Sign up as Teacher</a>
+      </div>
+    </div>
+
+    <script src="{% static 'JavaScript/landing.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  </body>
+</html>

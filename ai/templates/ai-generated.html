@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Generated Quiz | QuizBOT</title>
+    <link rel="stylesheet" href="{% static 'css/ai-generated.css' %}" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+      }
+      :root {
+        --blue: #2a2185;
+        --white: #fff;
+        --gray: #f5f5f5;
+        --black1: #222;
+        --black2: #999;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(0deg, #4d64e6 0%, #ffffff 99%);;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        width: 45%;
+        height: 83vh;
+        background: rgba(255, 255, 255, 0.59);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 1px solid rgba(1, 4, 9, 1);
+        padding: 22px;
+        text-align: center;
+      }
+      h1 {
+        color: var(--blue);
+        font-size: 20px;
+      }
+      h2 {
+        margin-bottom: 32px;
+        color: var(--blue);
+      }
+      form label {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--black1);
+      }
+      form select {
+        text-align: center;
+        background-color: #fff;
+        color: #4d64e6;
+        border: 3px solid #4d64e6;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 15px;
+        border-radius: 8px;
+        outline: none;
+        cursor: pointer;
+        margin: 8px 0px 24px 0px;
+        transition: 0.3s ease-out;
+      }
+
+      form input {
+        text-align: center;
+        background: #fff;
+        color: #4d64e6;
+        padding: 10px 15px;
+        font-size: 16px;
+        outline: none;
+        border: 3px solid #4d64e6;
+        transition: 0.3s ease-out;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 8px;
+        margin: 8px 0px 24px 0px;
+      }
+      form input:last-child:hover {
+        background: #4d64e6;
+        color: white;
+        border: 3px solid #000;
+      }
+      form input:nth-last-child(3) {
+        width: 75px;
+      }
+
+      form input:last-child {
+        background: #fff;
+        border: 3px solid #4d64e6;
+        color: #4d64e6;
+        padding: 10px 20px;
+      }
+      .div {
+        text-align: center;
+      }
+
+      @media (max-width: 1300px) {
+        .container {
+          min-width: 90%;
+          min-height: 98vh;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .container {
+          text-align: left;
+          min-height: 98vh;
+        }
+        h1 {
+          font-size: 18px;
+        }
+        h2 {
+          font-size: 20px;
+        }
+        form label {
+          font-size: 18px;
+        }
+        form select {
+          font-size: 15px;
+        }
+        form input {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Your QUIZ Is Going To Create</h1>
+      <h2>Select Your Preference</h2>
+      <form method="post">
+        {% csrf_token %}
+        <label for="">Select a subject area for your QUIZ.</label>
+        <br />
+        <select name="subject" required>
+          <!-- <option value="">Subject for quiz</option> -->
+          <option value="python">python</option>
+          <option value="java">java</option>
+          <option value="c">C / C++</option>
+        </select>
+        <br />
+        <label for="">Choose a difficulty level of your QUIZ.</label>
+        <br />
+        <select name="level" required>
+          <!-- <option value="">Level of question</option> -->
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advance">Advance</option>
+        </select>
+        <!-- <br /> -->
+        <!-- <label for="">C. Select the type of questions you prefer.</label> -->
+        <!-- <br />
+        <select>
+          <option value="">Type of question</option>
+          <option value="">MCQs Based</option>
+          <option value="">Fill in the Blanks</option>
+          <option value="">True or False</option>
+        </select> -->
+        <br />
+        <label for=""
+          >How many questions whould you like in your QUIZ ?</label
+        >
+        <br />
+        <input type="number" name="num" value="10" max="20" min="5" required/>
+        <br />
+        <br>
+        <br>
+        <div class="div">
+          <input type="submit" value="Generate Quiz" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

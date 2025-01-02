@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard </title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="{% static 'css/dashboard_stu.css' %}" />
+</head>
+
+<body>
+    <!-- =============== Top Navigation ================ -->
+    <B>
+    <div class="top-navigation">
+        <div class="logo">
+            <img width="55" height="55" src="{% static 'images/hlgo.png' %}" alt="test-passed"/>
+            <span class="title-main">QuizBOT</span>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'logout' %}">
+                <span class="icon">
+                    <img width="25" height="25" src="https://img.icons8.com/forma-regular/50/1A1A1A/exit.png" alt="exit"/>
+                </span>
+                <span class="title">Logout</span>
+            </a>
+            <a href="{% url 'profile_view' %}">
+                {% if user.profile_picture %}
+                    <img width="25" height="25" src="{{ user.profile_picture.url }}" alt="Profile Image">
+                {% else %}
+                    <img width="25" height="25" src="{% static 'images/prfpic.png' %}" alt="Default Profile Image">
+                {% endif %}
+            </a>
+        </div>
+    </div>
+
+    <!-- ========================= Main ==================== -->
+    <div class="main">
+        <section class="content">
+            <div class="welcome-message">
+                <h1>Welcome, {{ user.first_name }} {{ user.last_name }}&#10024;</h1>
+                <p>Join your quiz from here.</p>
+            </div>
+
+            <br><br><br>
+
+            <div class="cta-buttons">
+                <button onclick="joinQuiz()">Join a Quiz</button>
+            </div>
+
+            <br><br><br>
+
+            <div class="welcome-message">
+                 <h1>Attended by You</h1>
+            </div>
+            <div class="quiz-history">
+                <table class="user-results" align="center">
+                    <thead>
+                        <tr>
+                            <th>Quiz</th>
+                            <th>Score</th>
+                            <th>Submitted At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.quiz }}</td>
+                                <td>{{ result.score }}</td>
+                                <td>{{ result.submitted_at }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">You haven't created any quizzes yet.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="{% static 'JavaScript/dashboard.js' %}"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

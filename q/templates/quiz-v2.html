@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Quiz by QuizBOT</title>
+    {% comment %} <link rel="stylesheet" href="{% static "/css/quiz-v2.css" %}"> {% endcomment %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgba(38,66,222,1) 12%, rgba(165,179,255,1) 100%);
+            margin: 30px 0 0 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Changed to flex-start to allow scrolling */
+            min-height: 100vh;
+            overflow-y: auto; /* Ensure the body scrolls if content overflows */
+        }
+        
+        .quiz-container {
+            margin-top: 70px;
+            overflow: hidden;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+            max-width: 750px;
+            width: 60%;
+        }
+        
+        .quiz-container h1 {
+            text-align: center;
+            color: #4d64e6;
+        }
+        
+        .question-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(70, 90, 173, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        
+        .question-block label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-block textarea  {
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            background: rgba(50, 50, 90, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        
+        .options-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        ::placeholder {
+            color: white;
+            opacity: 1; /* Firefox */
+          }
+
+        .options-container input.option {
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            background: rgba(50, 50, 90, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        
+        .question-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 50%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            background: rgba(50, 50, 90, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        
+        .select-answer, .delete-question-btn {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .select-answer {
+            width: 40%;
+            border: 1px solid #C5ECC5;
+        }
+        
+        .delete-question-btn {
+            background-color: #F44336;
+            color: white;
+        }
+        
+        #addQuestionBtn, #submitQuizBtn , #cancelbtn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        #addQuestionBtn {
+            background-color: #4d64e6;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        #submitQuizBtn {
+            background-color: #4d64e6;
+            color: white;
+        }
+	
+	#cancelbtn {
+            background-color: #4d64e6;
+            color: white;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Custom Quiz by QuizBOT</h1>
+        <form id="quizForm" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="question-block" id="question1">
+                <label for="question1Input">Quiz Title:</label>
+                <!-- <input type="text" name="title" id="title" required><br><br> -->
+                <div class="options-container">
+                    <input type="text" name="title" value="my quiz" placeholder="Enter quiz title" class="option" required>
+                    <br>
+                </div>
+                <label for="duration">Duration (minutes):</label>
+                <div class="options-container">
+                    <input type="number" name="duration" id="duration" value="1" min="1" class="option" required>
+                </div>
+                <label for="show_results_to_student">Show results to students:</label>
+                <div class="options-container">
+                    <input type="checkbox" name="show_results_to_student" id="show_results_to_student" checked>
+                </div>
+                <label for="is_active">Quiz is Active:</label>
+                <div class="options-container">
+                    <input type="checkbox" name="is_active" id="is_active" checked>
+                </div>    
+            </div>
+
+            <div id="questionsContainer">
+                <div class="question-block" id="question1">
+                    <label for="question1Input">Question 1</label>
+                    <textarea name="questions" id="question1Input" placeholder="Enter Question here..." required ></textarea>
+                    <input type="file" name="images">
+                    <br>
+
+                    <div class="options-container">
+                        <input type="text" name="options" placeholder="Option A" class="option" required>
+                    </div>
+                    <div class="options-container">
+                        <input type="text" name="options" placeholder="Option B" class="option" required>
+                    </div>
+                    <div class="options-container">
+                        <input type="text" name="options" placeholder="Option C" class="option" required>
+                    </div>
+                    <div class="options-container">
+                        <input type="text" name="options" placeholder="Option D" class="option" required>
+                    </div>
+                    <div class="question-controls">
+                        <select class="select-answer" name="correct_options" required >
+                            <option value="option1">Option A</option>
+                            <option value="option2">Option B</option>
+                            <option value="option3">Option C</option>
+                            <option value="option4">Option D</option>
+                        </select>
+                    </div>
+                    <button type="button" class="delete-question-btn">Delete Question</button>
+                </div>
+            </div>
+            <button type="button" id="addQuestionBtn">Add Another Question</button>
+            <button type="submit" id="submitQuizBtn">Submit Quiz</button>
+        </form>
+	<form action="{% url 'teacher_home' %}" method="get">
+            <button type="submit" id="cancelbtn">Cancel</button>
+        </form>
+    </div>
+    <script src="{% static "/js/quiz-v2.js" %}"></script>
+</body>
+</html>
