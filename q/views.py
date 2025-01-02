@@ -9,7 +9,7 @@ from django.conf import settings
 from django.shortcuts import render
 import re
 import os
-from django.db.models import Avg, F  # Add this import at the top of the file
+from django.db.models import Avg, F, Sum  # Add this import at the top of the file
 
 
 @login_required
@@ -489,14 +489,12 @@ def view_student_answers(request, result_id):
     quiz_result = get_object_or_404(QuizResult, id=result_id)
     quiz = quiz_result.quiz
     student = quiz_result.user
-    total = quiz.questions.count()
-
-    # Calculate percentage
-    percentage = round((quiz_result.score / total * 100), 1) if total > 0 else 0
+    total_points = quiz.questions.aggregate(total_points=Sum('points'))['total_points'] or 0
 
     # Get all the answers related to this quiz result
     student_answers = StudentAnswer.objects.filter(quiz_result=quiz_result)
     detailed_results = []
+    total_score = 0
 
     for answer in student_answers:
         # Create option mapping
@@ -515,7 +513,7 @@ def view_student_answers(request, result_id):
         if answer.question.question_type == 'MCA':
             user_answer = answer.user_answer.split(',') if answer.user_answer else []
             correct_answer = answer.correct_answer.split(',')
-        
+
         # Convert option values to actual text
         if answer.question.question_type in ['MCQ', 'MCA']:
             if isinstance(user_answer, list):
@@ -528,6 +526,10 @@ def view_student_answers(request, result_id):
             else:
                 correct_answer = option_mapping.get(correct_answer, correct_answer)
 
+        is_correct = user_answer == correct_answer
+        if is_correct:
+            total_score += answer.question.points
+
         detailed_results.append({
             'question': answer.question.question_text,
             'question_type': answer.question.question_type,
@@ -535,15 +537,18 @@ def view_student_answers(request, result_id):
             'user_answer': user_answer,
             'correct_answer': correct_answer,
             'options': option_mapping,
-            'is_correct': user_answer == correct_answer,
+            'is_correct': is_correct,
             'points': answer.question.points
         })
+
+    # Calculate percentage
+    percentage = round((total_score / total_points * 100), 1) if total_points > 0 else 0
 
     return render(request, 'view_answers.html', {
         'quiz': quiz,
         'student': student,
         'result': quiz_result,
-        'total': total,
+        'total': total_points,
         'percentage': percentage,
         'detailed_results': detailed_results
     })
