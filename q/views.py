@@ -9,7 +9,298 @@ from django.conf import settings
 from django.shortcuts import render
 import re
 import os
+import fitz  # PyMuPDF
+import PyPDF2
+import ollama
+import json
+from .ai import get_generated_quiz , generate_question
+from django.views.decorators.http import require_http_methods
 from django.db.models import Avg, F, Sum  # Add this import at the top of the file
+
+# def extract_text_from_pdf(pdf_path):
+#     """Extract text from a PDF file"""
+#     document = fitz.open(pdf_path)
+#     text = ""
+#     for page_num in range(document.page_count):
+#         page = document.load_page(page_num)
+#         text += page.get_text()
+def extract_text_from_pdf(pdf_path):
+    """Extract text from the uploaded PDF file."""
+    text = ""
+    with open(pdf_path, "rb") as pdf_file:
+        reader = PyPDF2.PdfReader(pdf_file)
+        for page in reader.pages:
+            text += page.extract_text() + "\n"
+    return text
+
+# def generate_mcqs_with_ollama(text):
+    """Generate MCQs using Ollama and return JSON"""
+    prompt = f"""
+    Generate 10 multiple-choice questions in JSON format from the following text:
+    
+    {text}
+    
+    Ensure each question has:
+    - 4 options
+    - The correct answer should be mentioned as (option1, option2, option3, or option4)
+    - JSON format strictly as shown below:
+    
+    {{
+        "mcqs": [
+            {{
+                "question": "What is the capital of France?",
+                "options": ["Paris", "London", "Berlin", "Rome"],
+                "correct_answer": "option1"
+            }},
+            {{
+                "question": "What is the capital of India?",
+                "options": ["Gujarat", "Mumbai", "Dehli", "Kashmir"],
+                "correct_answer": "option3"
+            }},
+            {{
+                "question": "What is the capital of Australia?",
+                "options": ["Paris", "London", "Berlin", "Canberra"],
+                "correct_answer": "option4"
+            }},
+            ...
+        ]
+    }}
+
+    generate 10 mcq in such way .
+    """
+    
+    response = ollama.chat(
+        model="llama3.2",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    try:
+        return json.loads(response["message"]["content"])["mcqs"]
+    except json.JSONDecodeError:
+        return []  # Return empty list if parsing fails
+
+def generate_mcqs_with_ollama(text):
+    """Generate MCQs using Ollama and return JSON"""
+
+    # prompt = f"""
+    # Generate a JSON object containing exactly 10 multiple-choice questions about Python programming. Format:
+
+    # {
+    # "mcqs": [
+    #     {
+    #     "question": "QUESTION_TEXT",
+    #     "options": ["OPTION1", "OPTION2", "OPTION3", "OPTION4"],
+    #     "correct_answer": "optionX"
+    #     }
+    # ]
+    # }
+
+    # Requirements:
+    # - Exactly 10 questions
+    # - Each question must have exactly 4 options
+    # - Correct answer format must be "option1", "option2", "option3", or "option4"
+    # - Output only the JSON object with no additional text"""
+    prompt = f"""
+    Generate 10 multiple-choice questions in JSON format from the following text:
+    
+    {text}
+    
+    Ensure each question has:
+    - 4 options
+    - The correct answer should be mentioned as (option1, option2, option3, or option4)
+    - make sure to open and close the brackets properly.
+    - JSON format strictly as shown below:
+    
+    {{
+        "mcqs": [
+            {{
+                "question": "What is the capital of France?",
+                "options": ["Paris", "London", "Berlin", "Rome"],
+                "correct_answer": "option1"
+            }},
+            {{
+                "question": "What is the capital of India?",
+                "options": ["Gujarat", "Mumbai", "Delhi", "Kashmir"],
+                "correct_answer": "option3"
+            }},
+            {{
+                "question": "What is the capital of Australia?",
+                "options": ["Paris", "London", "Berlin", "Canberra"],
+                "correct_answer": "option4"
+            }}
+        ]
+    }}
+
+    Generate 10 MCQs in this exact format.
+    make sure to open and close the brackets properly.
+    """
+
+    # don't add anything like "Here are 10 MCQs in JSON format:" in the starting of the prompt directly start with "mcqs" json .
+    # Call Ollama API
+    # response = ollama.chat(
+    #     # model="mistral",
+    #     model="llama3.2",
+    #     messages=[{"role": "user", "content": prompt}]
+    # )
+    response = ollama.chat(
+        model="llama3.2",
+        messages=[
+            {
+                "role": "system", 
+                "content": "You are a JSON generator. Respond only with valid JSON following the specified schema. Do not include any explanatory text, markdown formatting, or additional content."
+            },
+            {
+                "role": "user", 
+                "content": prompt
+            }
+        ]
+    )
+    # Debugging: Print the raw response
+    print("Raw Response:", response)
+
+    try:
+        # Extract the message content
+        response_content = response.get("message", {}).get("content", "")
+        # response_content = response_content.split("\n", 1)[1]  
+        # response_content = "\n".join(response_content.split("\n")[1:])
+        # print("Extracted Content:", response_content)
+
+        json_start = response_content.find("{")
+        json_end = response_content.rfind("}") + 1
+        cleaned_json = response_content[json_start:json_end]
+
+        print("Extracted Content:", cleaned_json)
+
+        # Try parsing the response as JSON
+        parsed_json = json.loads(cleaned_json)
+
+        # Ensure "mcqs" exists in the parsed data
+        return parsed_json.get("mcqs", [])
+    
+    except json.JSONDecodeError as e:
+        print("JSON Decode Error:", e)
+        return []
+
+
+
+@login_required
+def upload_pdf(request):
+    if request.method == 'POST':
+        title = request.POST.get('title', 'Untitled Quiz')
+        show_results_to_student = request.POST.get('show_results_to_student') == 'on'
+        duration = int(request.POST.get('duration', 2))  # Ensure it's an integer
+        count = int(request.POST.get('count'))  # Ensure it's an integer
+        request.session['offset'] = count
+        is_active = request.POST.get('is_active') == 'on'
+        pdf_file = request.FILES.get('pdf')
+
+        if pdf_file:
+            pdf_path = f"media/pdfs/{pdf_file.name}"
+            with open(pdf_path, "wb") as f:
+                for chunk in pdf_file.chunks():
+                    f.write(chunk)
+
+            # Extract text and generate MCQs
+            pdf_text = extract_text_from_pdf(pdf_path)
+            request.session['pdf_text'] = pdf_text
+            ai_mcqs = get_generated_quiz(pdf_text , count)
+
+            # Store questions in session before finalizing the quiz
+            request.session['quiz_data'] = {
+                'title': title,
+                'show_results_to_student': show_results_to_student,
+                'duration': duration,
+                'is_active': is_active,
+                'questions': ai_mcqs,
+            }
+
+            return redirect('edit_questions')  # Redirect to the question edit page
+
+    return render(request, "upload.html")
+
+@login_required
+def edit_questions(request):
+    quiz_data = request.session.get('quiz_data', {})
+
+    if not quiz_data:
+        return redirect('upload_pdf')  # Redirect if no quiz data found
+
+    if request.method == 'POST':
+        # Retrieve edited questions from the form
+        updated_questions = []
+        questions = request.POST.getlist('questions')
+        options_list = request.POST.getlist('options')
+        correct_answers = request.POST.getlist('correct_options')
+
+        for i in range(len(questions)):
+            updated_questions.append({
+                "question": questions[i],
+                "options": options_list[i * 4: (i + 1) * 4],  # Slice options into groups of 4
+                "correct_answer": correct_answers[i]
+            })
+
+        # Update session with modified questions
+        quiz_data['questions'] = updated_questions
+        request.session['quiz_data'] = quiz_data
+
+        return redirect('finalize_quiz')  # Redirect to finalize and save in DB
+
+    return render(request, "pdf_edit_page.html", {"questions": quiz_data.get('questions', [])})
+
+@login_required
+def finalize_quiz(request):
+    quiz_data = request.session.get('quiz_data', {})
+
+    if not quiz_data:
+        return redirect('upload_pdf')
+
+    # Create the Quiz
+    quiz = Quiz.objects.create(
+        title=quiz_data['title'],
+        host=request.user,
+        show_results_to_student=quiz_data['show_results_to_student'],
+        duration=quiz_data['duration'],
+        is_active=quiz_data['is_active']
+    )
+
+    # Save Questions
+    for mcq in quiz_data['questions']:
+        Question.objects.create(
+            quiz=quiz,
+            question_text=mcq["question"],
+            option1=mcq["options"][0],
+            option2=mcq["options"][1],
+            option3=mcq["options"][2],
+            option4=mcq["options"][3],
+            correct_option=mcq["correct_answer"]
+        )
+
+    # Clear session data
+    del request.session['quiz_data']
+
+    return redirect('quiz_detail', quiz_id=quiz.id)  # Redirect to quiz details page
+
+@require_http_methods(["POST"])
+def generate_ai_questions(request):
+    try:
+        text = request.session.get('pdf_text', '')
+        count = 1
+        offset = int(request.session.get('offset'))
+        print("offset :" , offset)
+        questions = generate_question(text=text, offset=offset ,  count=count)
+        request.session['offset'] = offset + 1
+
+        print("Questions:", questions)
+        return JsonResponse({
+            'success': True,
+            'questions': questions
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=500)
 
 
 @login_required
@@ -21,11 +312,12 @@ def create_quiz(request):
         show_results_to_student = request.POST.get('show_results_to_student') == 'on'  # Checkbox for showing results
         duration = request.POST.get('duration')
         is_active = request.POST.get('is_active') == 'on'  # Checkbox for active status
+        pdf_file = request.FILES.get('pdf')  # Get uploaded PDF
 
-        questions = request.POST.getlist('questions')
-        options = request.POST.getlist('options')
-        correct_options = request.POST.getlist('correct_options')
-        images = request.FILES.getlist('images')
+        # questions = request.POST.getlist('questions')
+        # options = request.POST.getlist('options')
+        # correct_options = request.POST.getlist('correct_options')
+        # images = request.FILES.getlist('images')
 
         quiz = Quiz.objects.create(
             title=title, 
@@ -35,19 +327,57 @@ def create_quiz(request):
             is_active=is_active
         )
         
-        for i in range(len(questions)):
-            image_file = images[i] if i < len(images) else None
+        if pdf_file:
+            # Save the PDF
+            pdf_path = f"media/pdfs/{pdf_file.name}"
+            with open(pdf_path, "wb") as f:
+                for chunk in pdf_file.chunks():
+                    f.write(chunk)
 
-            Question.objects.create(
-                quiz=quiz,
-                question_text=questions[i],
-                option1=options[i * 4],
-                option2=options[i * 4 + 1],
-                option3=options[i * 4 + 2],
-                option4=options[i * 4 + 3],
-                correct_option=correct_options[i],
-                images=image_file
-            )
+            # Extract text and generate MCQs
+            pdf_text = extract_text_from_pdf(pdf_path)
+            ai_mcqs = generate_mcqs_with_ollama(pdf_text)
+
+            # Store AI-generated MCQs in the database
+            for mcq in ai_mcqs:
+                question_text = mcq.get("question")
+                options = mcq.get("options", ["", "", "", ""])
+                correct_answer = mcq.get("correct_answer")
+
+                if len(options) == 4:
+                    correct_option_index = options.index(correct_answer) + 1  # Convert to 1-based index
+                    Question.objects.create(
+                        quiz=quiz,
+                        question_text=question_text,
+                        option1=options[0],
+                        option2=options[1],
+                        option3=options[2],
+                        option4=options[3],
+                        correct_option=correct_option_index
+                    )
+
+            return redirect('quiz_detail', quiz_id=quiz.id)
+
+        else:
+            # Manual question entry
+            questions = request.POST.getlist('questions')
+            options = request.POST.getlist('options')
+            correct_options = request.POST.getlist('correct_options')
+            images = request.FILES.getlist('images')
+
+            for i in range(len(questions)):
+                image_file = images[i] if i < len(images) else None
+
+                Question.objects.create(
+                    quiz=quiz,
+                    question_text=questions[i],
+                    option1=options[i * 4],
+                    option2=options[i * 4 + 1],
+                    option3=options[i * 4 + 2],
+                    option4=options[i * 4 + 3],
+                    correct_option=correct_options[i],
+                    images=image_file
+                )
 
         return redirect('quiz_detail', quiz_id=quiz.id)
 
@@ -534,6 +864,7 @@ def view_student_answers(request, result_id):
             'question': answer.question.question_text,
             'question_type': answer.question.question_type,
             'img': answer.question.images,
+            'img_loc': answer.question.image_loc,
             'user_answer': user_answer,
             'correct_answer': correct_answer,
             'options': option_mapping,
@@ -594,6 +925,177 @@ def update_quiz_settings(request, quiz_id):
 
     return render(request, 'view_questions.html', {'quiz': quiz , 'total_questions': total_questions,})
 
+
+@login_required
+def create_quiz_enhanced(request):
+    if not request.user.is_teacher:
+        return HttpResponseForbidden("You are not allowed to access this page.")
+    if request.method == 'POST':
+        try:
+            # Debug print
+            print("Form data:", request.POST)
+            print("Files:", request.FILES)
+
+            title = request.POST.get('title')
+            show_results_to_student = request.POST.get('show_results_to_student') == 'on'
+            duration = request.POST.get('duration')
+            is_active = request.POST.get('is_active') == 'on'
+
+            # Create the quiz
+            quiz = Quiz.objects.create(
+                title=title,
+                host=request.user,
+                show_results_to_student=show_results_to_student,
+                duration=duration,
+                is_active=is_active
+            )
+
+            # Process questions
+            question_texts = request.POST.getlist('questions[]')
+            question_types = request.POST.getlist('question_types[]')
+            
+            print(f"Found {len(question_texts)} questions")  # Debug print
+            
+            for i in range(len(question_texts)):
+                question_type = question_types[i]
+                image = request.FILES.get(f'images_{i}')
+                points = request.POST.get(f'points_{i}', 1)
+
+                print(f"Processing question {i + 1}, type: {question_type}")  # Debug print
+
+                if question_type == 'MCQ':
+                    # Get individual options
+                    option1 = request.POST.get(f'option1_{i}')
+                    option2 = request.POST.get(f'option2_{i}')
+                    option3 = request.POST.get(f'option3_{i}')
+                    option4 = request.POST.get(f'option4_{i}')
+                    correct_option = request.POST.get(f'correct_option_{i}')
+                    
+                    print(f"MCQ Options: {option1}, {option2}, {option3}, {option4}")  # Debug print
+                    
+                    Question.objects.create(
+                        quiz=quiz,
+                        question_text=question_texts[i],
+                        question_type='MCQ',
+                        option1=option1,
+                        option2=option2,
+                        option3=option3,
+                        option4=option4,
+                        correct_option=correct_option,
+                        images=image,
+                        points=points
+                    )
+                
+                elif question_type == 'MCA':
+                    # Get individual options
+                    option1 = request.POST.get(f'option1_{i}')
+                    option2 = request.POST.get(f'option2_{i}')
+                    option3 = request.POST.get(f'option3_{i}')
+                    option4 = request.POST.get(f'option4_{i}')
+                    correct_options = request.POST.getlist(f'correct_options_{i}[]')
+                    
+                    print(f"MCA Options: {option1}, {option2}, {option3}, {option4}")  # Debug print
+                    print(f"Correct options: {correct_options}")  # Debug print
+                    
+                    Question.objects.create(
+                        quiz=quiz,
+                        question_text=question_texts[i],
+                        question_type='MCA',
+                        option1=option1,
+                        option2=option2,
+                        option3=option3,
+                        option4=option4,
+                        correct_option=','.join(correct_options),
+                        images=image,
+                        points=points
+                    )
+                
+                elif question_type == 'TF':
+                    correct_answer = request.POST.get(f'correct_tf_{i}')
+                    
+                    print(f"TF Correct answer: {correct_answer}")  # Debug print
+                    
+                    Question.objects.create(
+                        quiz=quiz,
+                        question_text=question_texts[i],
+                        question_type='TF',
+                        option1='True',
+                        option2='False',
+                        correct_option=correct_answer,
+                        images=image,
+                        points=points
+                    )
+
+            return redirect('quiz_detail', quiz_id=quiz.id)
+        
+        except Exception as e:
+            print(f"Error creating quiz: {str(e)}")
+            import traceback
+            traceback.print_exc()  # This will print the full traceback
+            return render(request, 'quiz_enhanced.html', {'error': str(e)})
+
+    return render(request, 'quiz_enhanced.html')
+
+@login_required
+def view_answers(request, result_id):
+    if not request.user.is_teacher:
+        return HttpResponseForbidden("You are not allowed to access this page.")
+    quiz_result = get_object_or_404(QuizResult, id=result_id)
+    student_answers = StudentAnswer.objects.filter(quiz_result=quiz_result)
+    
+    detailed_results = []
+    total_points = 0
+    
+    for answer in student_answers:
+        # Create option mapping
+        option_mapping = {
+            'option1': answer.question.option1,
+            'option2': answer.question.option2,
+            'option3': answer.question.option3,
+            'option4': answer.question.option4
+        }
+
+        # Convert option values to actual text
+        user_answer = answer.user_answer
+        correct_answer = answer.correct_answer
+
+        # For MCA questions, convert to list
+        if answer.question.question_type == 'MCA':
+            user_answer = answer.user_answer.split(',') if answer.user_answer else []
+            correct_answer = answer.correct_answer.split(',')
+        
+        # Convert option values to actual text
+        if answer.question.question_type in ['MCQ', 'MCA']:
+            if isinstance(user_answer, list):
+                user_answer = [option_mapping.get(opt, opt) for opt in user_answer]
+            else:
+                user_answer = option_mapping.get(user_answer, user_answer)
+            
+            if isinstance(correct_answer, list):
+                correct_answer = [option_mapping.get(opt, opt) for opt in correct_answer]
+            else:
+                correct_answer = option_mapping.get(correct_answer, correct_answer)
+
+        detailed_results.append({
+            'question': answer.question.question_text,
+            'question_type': answer.question.question_type,
+            'img': answer.question.images,
+            'user_answer': user_answer,
+            'correct_answer': correct_answer,
+            'options': option_mapping,
+            'is_correct': user_answer == correct_answer,
+            'points': answer.question.points
+        })
+
+    context = {
+        'quiz': quiz_result.quiz,
+        'student': quiz_result.user,
+        'result': quiz_result,
+        'detailed_results': detailed_results,
+        'total': sum(q.points for q in quiz_result.quiz.questions.all())
+    }
+    
+    return render(request, 'view_answers.html', context)
 
 ###########################################################################################################
 
@@ -930,174 +1432,3 @@ def update_quiz_settings(request, quiz_id):
 #                 # If the room code does not exist, show an error
 #                 return render(request, 'room.html', {'error': 'Room not found.'})
 #     return render(request, 'room.html')
-
-@login_required
-def create_quiz_enhanced(request):
-    if not request.user.is_teacher:
-        return HttpResponseForbidden("You are not allowed to access this page.")
-    if request.method == 'POST':
-        try:
-            # Debug print
-            print("Form data:", request.POST)
-            print("Files:", request.FILES)
-
-            title = request.POST.get('title')
-            show_results_to_student = request.POST.get('show_results_to_student') == 'on'
-            duration = request.POST.get('duration')
-            is_active = request.POST.get('is_active') == 'on'
-
-            # Create the quiz
-            quiz = Quiz.objects.create(
-                title=title,
-                host=request.user,
-                show_results_to_student=show_results_to_student,
-                duration=duration,
-                is_active=is_active
-            )
-
-            # Process questions
-            question_texts = request.POST.getlist('questions[]')
-            question_types = request.POST.getlist('question_types[]')
-            
-            print(f"Found {len(question_texts)} questions")  # Debug print
-            
-            for i in range(len(question_texts)):
-                question_type = question_types[i]
-                image = request.FILES.get(f'images_{i}')
-                points = request.POST.get(f'points_{i}', 1)
-
-                print(f"Processing question {i + 1}, type: {question_type}")  # Debug print
-
-                if question_type == 'MCQ':
-                    # Get individual options
-                    option1 = request.POST.get(f'option1_{i}')
-                    option2 = request.POST.get(f'option2_{i}')
-                    option3 = request.POST.get(f'option3_{i}')
-                    option4 = request.POST.get(f'option4_{i}')
-                    correct_option = request.POST.get(f'correct_option_{i}')
-                    
-                    print(f"MCQ Options: {option1}, {option2}, {option3}, {option4}")  # Debug print
-                    
-                    Question.objects.create(
-                        quiz=quiz,
-                        question_text=question_texts[i],
-                        question_type='MCQ',
-                        option1=option1,
-                        option2=option2,
-                        option3=option3,
-                        option4=option4,
-                        correct_option=correct_option,
-                        images=image,
-                        points=points
-                    )
-                
-                elif question_type == 'MCA':
-                    # Get individual options
-                    option1 = request.POST.get(f'option1_{i}')
-                    option2 = request.POST.get(f'option2_{i}')
-                    option3 = request.POST.get(f'option3_{i}')
-                    option4 = request.POST.get(f'option4_{i}')
-                    correct_options = request.POST.getlist(f'correct_options_{i}[]')
-                    
-                    print(f"MCA Options: {option1}, {option2}, {option3}, {option4}")  # Debug print
-                    print(f"Correct options: {correct_options}")  # Debug print
-                    
-                    Question.objects.create(
-                        quiz=quiz,
-                        question_text=question_texts[i],
-                        question_type='MCA',
-                        option1=option1,
-                        option2=option2,
-                        option3=option3,
-                        option4=option4,
-                        correct_option=','.join(correct_options),
-                        images=image,
-                        points=points
-                    )
-                
-                elif question_type == 'TF':
-                    correct_answer = request.POST.get(f'correct_tf_{i}')
-                    
-                    print(f"TF Correct answer: {correct_answer}")  # Debug print
-                    
-                    Question.objects.create(
-                        quiz=quiz,
-                        question_text=question_texts[i],
-                        question_type='TF',
-                        option1='True',
-                        option2='False',
-                        correct_option=correct_answer,
-                        images=image,
-                        points=points
-                    )
-
-            return redirect('quiz_detail', quiz_id=quiz.id)
-        
-        except Exception as e:
-            print(f"Error creating quiz: {str(e)}")
-            import traceback
-            traceback.print_exc()  # This will print the full traceback
-            return render(request, 'quiz_enhanced.html', {'error': str(e)})
-
-    return render(request, 'quiz_enhanced.html')
-
-@login_required
-def view_answers(request, result_id):
-    if not request.user.is_teacher:
-        return HttpResponseForbidden("You are not allowed to access this page.")
-    quiz_result = get_object_or_404(QuizResult, id=result_id)
-    student_answers = StudentAnswer.objects.filter(quiz_result=quiz_result)
-    
-    detailed_results = []
-    total_points = 0
-    
-    for answer in student_answers:
-        # Create option mapping
-        option_mapping = {
-            'option1': answer.question.option1,
-            'option2': answer.question.option2,
-            'option3': answer.question.option3,
-            'option4': answer.question.option4
-        }
-
-        # Convert option values to actual text
-        user_answer = answer.user_answer
-        correct_answer = answer.correct_answer
-
-        # For MCA questions, convert to list
-        if answer.question.question_type == 'MCA':
-            user_answer = answer.user_answer.split(',') if answer.user_answer else []
-            correct_answer = answer.correct_answer.split(',')
-        
-        # Convert option values to actual text
-        if answer.question.question_type in ['MCQ', 'MCA']:
-            if isinstance(user_answer, list):
-                user_answer = [option_mapping.get(opt, opt) for opt in user_answer]
-            else:
-                user_answer = option_mapping.get(user_answer, user_answer)
-            
-            if isinstance(correct_answer, list):
-                correct_answer = [option_mapping.get(opt, opt) for opt in correct_answer]
-            else:
-                correct_answer = option_mapping.get(correct_answer, correct_answer)
-
-        detailed_results.append({
-            'question': answer.question.question_text,
-            'question_type': answer.question.question_type,
-            'img': answer.question.images,
-            'user_answer': user_answer,
-            'correct_answer': correct_answer,
-            'options': option_mapping,
-            'is_correct': user_answer == correct_answer,
-            'points': answer.question.points
-        })
-
-    context = {
-        'quiz': quiz_result.quiz,
-        'student': quiz_result.user,
-        'result': quiz_result,
-        'detailed_results': detailed_results,
-        'total': sum(q.points for q in quiz_result.quiz.questions.all())
-    }
-    
-    return render(request, 'view_answers.html', context)

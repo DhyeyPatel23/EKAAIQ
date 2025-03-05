@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'login',
     'q',
     'ai',
-    'upload',
 ]
 
 MIDDLEWARE = [

@@ -63,7 +63,9 @@
             <div class="cta-buttons">
                 <button onclick="createQuiz()">Create a New Quiz</button>
                 <button onclick="aiQuiz()">QuizBot AI</button>
-                <button onclick="location.href='{% url 'upload_file' %}'">Upload Excel File</button>
+                {% comment %} <button onclick="location.href='{% url 'upload_file' %}'">Upload Excel File</button> {% endcomment %}
+                <button onclick="pdfQuiz()">PDF to Quiz</button>
+
             </div>
         
             <br><br><br>

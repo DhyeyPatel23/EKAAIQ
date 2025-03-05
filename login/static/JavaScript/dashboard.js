@@ -34,6 +34,12 @@ function createQuiz() {
     window.location.href = "/q/create_enhanced";
 }
 
+function pdfQuiz() {
+  // Redirect to the create quiz page
+  // alert('Redirecting to Create Quiz Page');
+  window.location.href = "/q/upload";
+}
+
 function aiQuiz() {
     // Redirect to the create quiz page
     // alert('Redirecting to Create Quiz Page');

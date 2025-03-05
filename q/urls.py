@@ -22,4 +22,8 @@ urlpatterns = [
     path('result/<int:result_id>/view_answers/', views.view_student_answers, name='view_student_answers'),
     path('quiz/<int:quiz_id>/update-settings/', views.update_quiz_settings, name='update_quiz_settings'),
     
+    path('upload/', views.upload_pdf, name='upload_pdf'),
+    path('edit_questions/', views.edit_questions, name='edit_questions'),  # Edit AI-generated questions
+    path('finalize_quiz/', views.finalize_quiz, name='finalize_quiz'), 
+    path('generate_ai_questions/', views.generate_ai_questions, name='generate_ai_questions'),
 ] 

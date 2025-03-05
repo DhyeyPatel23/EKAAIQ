@@ -31,6 +31,7 @@ static_storage = FileSystemStorage(location=settings.BASE_DIR / 'static/question
 
 class Quiz(models.Model):
     title = models.CharField(max_length=255)
+    pdf = models.FileField(upload_to='pdfs/', null=True, blank=True)
     code = models.IntegerField(unique=True, editable=False, null=True, blank=True)
     host = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -68,6 +69,7 @@ class Question(models.Model):
     option3 = models.CharField(max_length=255, blank=True, null=True)
     option4 = models.CharField(max_length=255, blank=True, null=True)
     correct_option = models.CharField(max_length=255)
+    image_loc = models.CharField(max_length=255, blank=True, null=True)
     images = models.ImageField(upload_to='questions/', null=True, blank=True)
     points = models.IntegerField(default=1)
 

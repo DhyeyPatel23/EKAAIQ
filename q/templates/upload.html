@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF - QuizBOT</title>
+    <style>
+        /* ... Previous styles remain the same ... */
+        #vanta-bg {
+            width: 100%;
+            height: 110vh;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, rgba(38,66,222,0.95) 0%, rgba(165,179,255,0.95) 100%);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            line-height: 1.5;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 150px;
+            margin-bottom: 250px;
+            margin-left: 20px;
+            margin-right: 20px;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: translateY(-1px);
+        }
+
+        h1 {
+            color: #2f8c2f;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 93%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #4d64e6;
+            box-shadow: 0 0 0 3px rgba(77, 100, 230, 0.2);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4d64e6;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4d64e6;
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(77, 100, 230, 0.2);
+        }
+
+        button:hover {
+            background-color: #3b50cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(77, 100, 230, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            color: #2f8c2f;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .back-link:hover {
+            background-color: rgba(47, 140, 47, 0.1);
+            transform: translateX(-5px);
+        }
+
+        /* Loading overlay styles */
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4d64e6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        .loading-text {
+            color: #4d64e6;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                padding: 1rem;
+                overflow: hidden;
+            }
+            
+            .container {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                overflow: hidden;
+            }
+            
+            .container {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="file"] {
+                width: 100%;
+                padding: 0.5rem;
+            }
+
+            button {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .back-link {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+                overflow: hidden;
+            }
+            
+            .container {
+                padding: 1rem;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="file"] {
+                width: 100%;
+                padding: 0.5rem;
+            }
+
+            button {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .back-link {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body id="vanta-bg">
+    <div class="container">
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Generating Quiz ...</div>
+        </div>
+
+        <h1>Upload PDF to Generate Quiz</h1>
+        <form method="post" action="{% url 'upload_pdf' %}" enctype="multipart/form-data" id="quizForm">
+            {% csrf_token %}
+
+            <label for="title">Quiz Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter quiz title" value="Generated Quiz" required>
+
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" min="1" value="5" required>
+
+            <label for="count">Numbers of MCQ :</label>
+            <input type="number" id="count" name="count" min="1" value="5" max="20" required>
+
+            <div class="checkbox-container">
+                <label for="show_results_to_student">Show Results to Students:</label>
+                <input type="checkbox" id="show_results_to_student" name="show_results_to_student" checked>
+            </div>
+
+            <div class="checkbox-container">
+                <label for="is_active">Quiz is Active:</label>
+                <input type="checkbox" id="is_active" name="is_active" checked>
+            </div>
+
+            <label for="pdf">Upload PDF:</label>
+            <input type="file" id="pdf" name="pdf" accept="application/pdf" required>
+
+            <button type="submit">Generate Quiz</button>
+
+            <a href="{% url 'teacher_home' %}" class="back-link">← Back to Dashboard</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            // Show loading overlay
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            // Optional: Disable the submit button to prevent double submission
+            document.querySelector('button[type="submit"]').disabled = true;
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+
+    <script>
+        VANTA.NET({
+            el: "#vanta-bg",
+            color: 0xd9def9, // Change color of the net
+            backgroundColor: 0x40609f, // Background color
+            points: 20.0, // Number of points in the net
+            maxDistance: 5.0, // Maximum distance between points
+            spacing: 25.0 // Spacing of the net
+        });
+    </script>
+</body>
+</html>

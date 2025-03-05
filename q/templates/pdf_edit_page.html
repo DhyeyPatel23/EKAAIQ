@@ -1,0 +1,365 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Quiz by QuizBOT</title>
+    <link rel="stylesheet" href="{% static 'css/ai-show.css' %}">
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgba(38,66,222,1) 12%, rgba(165,179,255,1) 100%);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            margin-top: 70px;
+            overflow: hidden;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+            max-width: 750px;
+            width: 60%;
+          }
+        
+        h1 {
+            text-align: center;
+            color: #2f8c2f;
+        }
+        
+        .quiz-title, .question-container {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(70, 90, 173, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        
+        .quiz-title label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .quiz-title input, .question-container input{
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            background: rgba(50, 50, 90, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        .question-container select {
+            width: 50%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            background: rgba(50, 50, 90, 0.59);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+        }
+        
+        .question-container h2 {
+            color: #000;
+            margin-bottom: 10px;
+        }
+        
+        .delete-question {
+            background: #ff5b5b;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 1px solid rgba(1, 4, 9, 1);
+            cursor: pointer;
+        }
+        
+        .add-question {
+            display: block;
+            width: 100%;
+            background-color: #4d64e6;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 3px solid rgba(255, 255, 255, 1);
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        
+        .submit-quiz {
+            display: block;
+            width: 100%;
+            background-color: #4d64e6;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.3px);
+            -webkit-backdrop-filter: blur(7.3px);
+            border: 3px solid rgba(255, 255, 255, 1);
+            margin-top: 10px;
+            cursor: pointer;
+        }        
+    </style> -->
+
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            color: #333;
+        }
+
+        .container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            width: 90%;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .quiz-title, .question-container {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e1e8f0;
+            transition: transform 0.2s ease;
+        }
+
+        .quiz-title:hover, .question-container:hover {
+            transform: translateY(-2px);
+        }
+
+        .quiz-title label {
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+            color: #34495e;
+            font-size: 1.1rem;
+        }
+
+        .quiz-title input, .question-container input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            color: #2c3e50;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-title input:focus, .question-container input:focus {
+            outline: none;
+            border-color: #4b6cb7;
+            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.1);
+        }
+
+        .question-container select {
+            width: auto;
+            min-width: 200px;
+            padding: 10px 15px;
+            margin: 8px 0;
+            color: #2c3e50;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .question-container h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .delete-question {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .delete-question:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .add-question, .submit-quiz {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-question {
+            background: #4b6cb7;
+            color: white;
+        }
+
+        .submit-quiz {
+            background: #2563eb;
+            color: white;
+        }
+
+        .add-question:hover, .submit-quiz:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .options-container {
+            margin: 10px 0;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        input[type="text"] {
+            width: 95%;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        input[type="number"] {
+            width: 100px !important;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+                margin-top: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .quiz-title, .question-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>AI Generated Quiz</h1>
+        <form method="post" action="{% url 'edit_questions' %}">
+            {% csrf_token %}
+            <!-- <div class="quiz-title">
+                <label for="quizTitle">Quiz Title:</label>
+                <input type="text" id="quizTitle" name="title" placeholder="Enter quiz title" value="My Ai quiz" required>
+                <label for="duration">Duration (minutes):</label>
+                <div class="options-container">
+                    <input type="number" name="duration" id="duration" value="5" min="1" class="option" required>
+                </div>
+                <label for="show_results_to_student">Show results to students:</label>
+                <div class="options-container">
+                    <input type="checkbox" name="show_results_to_student" id="show_results_to_student" checked>
+                </div>
+                <label for="is_active">Quiz is Active:</label>
+                <div class="options-container">
+                    <input type="checkbox" name="is_active" id="is_active" checked>
+                </div> 
+            </div> -->
+
+            <div id="question-list">
+                {% for question in questions %}
+                <div class="question-container">
+                    <h2>Question {{ forloop.counter }}</h2>
+                    <input type="text" name="questions" value="{{ question.question }}" placeholder="Enter Question here..." required>
+
+                    <img src="{% static question.image_loc %}" alt="" style="max-width: 500px;">
+                    <input type="text" name="img" value="{{ question.image_loc }}" hidden>
+                    <br>
+
+                    Option 1 : <input type="text" name="options" value="{{ question.options.0 }}" placeholder="Option A" required>
+                    <br>
+                    Option 2 : <input type="text" name="options" value="{{ question.options.1 }}" placeholder="Option B" required>
+                    <br>
+                    Option 3 : <input type="text" name="options" value="{{ question.options.2 }}" placeholder="Option C" required>
+                    <br>
+                    Option 4 : <input type="text" name="options" value="{{ question.options.3 }}" placeholder="Option D" required>
+
+                    <br>
+                    Correct Answer :
+                    <br>
+                    <select name="correct_options">
+                        <option value="{{ question.correct_answer }}">{{ question.correct_answer }}</option>
+                        <!-- <option value="{{ question.options.1 }}">Option B</option>
+                        <option value="{{ question.options.2 }}">Option C</option>
+                        <option value="{{ question.options.3 }}">Option D</option> -->
+                    </select>
+                    <br>
+
+                    <button type="button" class="delete-question">Delete Question</button>
+                </div>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="add-question">Add More With AI</button>
+            <button type="submit" class="submit-quiz">Submit Quiz</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/pdf-edit.js' %}"></script>
+</body>
+
+</html>
