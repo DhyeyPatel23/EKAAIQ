@@ -19,3 +19,4 @@ pandas
 openpyxl
 PyPDF2
 ollama
+gradio
