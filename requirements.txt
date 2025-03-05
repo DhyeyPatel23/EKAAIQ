@@ -18,3 +18,4 @@ uritemplate==4.1.1
 pandas
 openpyxl
 PyPDF2
+ollama
