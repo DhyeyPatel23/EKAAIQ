@@ -9,7 +9,7 @@ from django.conf import settings
 from django.shortcuts import render
 import re
 import os
-import fitz  # PyMuPDF
+# import fitz  # PyMuPDF
 import PyPDF2
 import ollama
 import json
