@@ -119,7 +119,7 @@ def ai_create_quiz(request):
                 option3=filtered_options[i * 4 + 2],
                 option4=filtered_options[i * 4 + 3],
                 correct_option=filtered_correct_options[i],
-                images=filtered_image_loc[i] if filtered_image_loc else None
+                image_loc=filtered_image_loc[i] if filtered_image_loc else None
             )
 
         return redirect('quiz_detail', quiz_id=quiz.id)
