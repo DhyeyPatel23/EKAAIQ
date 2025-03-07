@@ -17,3 +17,6 @@ tzdata==2024.2
 uritemplate==4.1.1
 pandas
 openpyxl
+PyPDF2
+ollama
+gradio
