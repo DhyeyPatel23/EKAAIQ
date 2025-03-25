@@ -16,7 +16,7 @@
     <div class="top-navigation">
         <div class="logo">
             <img width="55" height="55" src="{% static 'images/hlgo.png' %}" alt="test-passed"/>
-            <span class="title-main">QuizBOT</span>
+            <span class="title-main" style="font-size: 1.5em;">एकाAiQ</span>
         </div>
         <div class="nav-links">
             <a href="{% url 'logout' %}">
@@ -27,9 +27,9 @@
             </a>
             <a href="{% url 'profile_view' %}">
                 {% if user.profile_picture %}
-                    <img width="25" height="25" src="{{ user.profile_picture.url }}" alt="Profile Image">
+                    <img width="50" height="50" src="{{ user.profile_picture.url }}" alt="Profile Image">
                 {% else %}
-                    <img width="25" height="25" src="{% static 'images/prfpic.png' %}" alt="Default Profile Image">
+                    <img width="50" height="50" src="{% static 'images/prfpic.png' %}" alt="Default Profile Image">
                 {% endif %}
             </a>
         </div>
@@ -52,7 +52,60 @@
             <br><br><br>
 
             <div class="welcome-message">
-                 <h1>Attended by You</h1>
+                 <h1>Quizzes attended by You</h1>
+            </div>
+            <div class="quiz-history">
+                <table class="user-results" align="center">
+                    <thead>
+                        <tr>
+                            <th>Quiz</th>
+                            <th>Score</th>
+                            <th>Submitted At</th>
+                            <th>Results</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.quiz }}</td>
+                                <td>{{ result.score }}</td>
+                                <td>{{ result.submitted_at }}</td>
+                                <td>
+                                    {% if result.quiz.show_results_to_student %}
+                                        <a href="{% url 'quiz_result' result.quiz.id %}">View Result</a>
+                                    {% else %}
+                                        <span style="color: red;">The result is not visible for this quiz. Please contact the quiz creator.</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">You haven't attended any quizzes yet.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    {% comment %} <div class="main">
+        <section class="content">
+            <div class="welcome-message">
+                <h1>Welcome, {{ user.first_name }} {{ user.last_name }}&#10024;</h1>
+                <p>Join your quiz from here.</p>
+            </div>
+
+            <br><br><br>
+
+            <div class="cta-buttons">
+                <button onclick="joinQuiz()">Join a Quiz</button>
+            </div>
+
+            <br><br><br>
+
+            <div class="welcome-message">
+                 <h1>Quizzes attended by You</h1>
             </div>
             <div class="quiz-history">
                 <table class="user-results" align="center">
@@ -79,7 +132,7 @@
                 </table>
             </div>
         </section>
-    </div>
+    </div> {% endcomment %}
 
     <!-- =========== Scripts =========  -->
     <script src="{% static 'JavaScript/dashboard.js' %}"></script>

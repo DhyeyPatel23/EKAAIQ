@@ -31,6 +31,8 @@ static_storage = FileSystemStorage(location=settings.BASE_DIR / 'static/question
 
 class Quiz(models.Model):
     title = models.CharField(max_length=255)
+    start_time = models.DateTimeField(blank=True, null=True) 
+    end_time = models.DateTimeField(blank=True, null=True) 
     pdf = models.FileField(upload_to='pdfs/', null=True, blank=True)
     code = models.IntegerField(unique=True, editable=False, null=True, blank=True)
     host = models.ForeignKey(User, on_delete=models.CASCADE)

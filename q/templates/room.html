@@ -156,7 +156,8 @@
             <label for="room_code">Room Code:</label>
             <input type="text" id="room_code" name="room_code" required>
             {% if error %}
-                <div class="error">{{ error }}</div>
+                <div align="center" class="error" style="font-size: 1.5em;">{{ error }}</div>
+                <br>
             {% endif %}
             <input type="submit" value="Join Room" class="submit-btn" />
         </form>

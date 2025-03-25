@@ -236,6 +236,9 @@ body {
   color: var(--white);
   margin-left: 20px;
 }
+.top-navigation .nav-links a img {
+  border-radius: 50%;
+}
 
 .top-navigation .nav-links a .icon {
   margin-right: 5px;

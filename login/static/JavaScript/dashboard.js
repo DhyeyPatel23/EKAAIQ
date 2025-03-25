@@ -43,7 +43,7 @@ function pdfQuiz() {
 function aiQuiz() {
     // Redirect to the create quiz page
     // alert('Redirecting to Create Quiz Page');
-    window.location.href = "/a/ai_select";
+    window.location.href = "/a/upload_text";
 }
 
 function joinQuiz() {

@@ -152,6 +152,19 @@
                 <option value="False" {% if not quiz.is_active %}selected{% endif %}>No</option>
             </select>
             <br><br>
+            
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" name="start_time" id="start_time" value="{{ quiz.start_time|date:'Y-m-d\TH:i' }}" >
+            <!-- <button type="button" onclick="document.getElementById('start_time').value=''">Remove</button> -->
+            <a onclick="document.getElementById('start_time').value=''" style="color: red;">Remove</a>
+            <br><br>
+
+            <!-- End Time Setting -->
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" name="end_time" id="end_time" value="{{ quiz.end_time|date:'Y-m-d\TH:i' }}" >
+            <!-- <button type="button" onclick="document.getElementById('end_time').value=''">Remove</button> -->
+            <a onclick="document.getElementById('end_time').value=''" style="color: red;">Remove</a>
+            <br><br>
     
             <button type="submit">Update Quiz Settings</button>
         </form>

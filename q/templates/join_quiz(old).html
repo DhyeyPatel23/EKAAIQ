@@ -151,22 +151,22 @@
                     <div class="options-container">
                         <div class="radio-group">
                             <input type="radio" id="q{{ question.id }}_1" name="answers_{{ question.id }}" value="option1" required>
-                            <label for="q{{ question.id }}_1">{{ question.option1 }}</label>
+                            <label for="q{{ question.id }}_1">A.{{ question.option1 }}</label>
                         </div>
                         <div class="radio-group">
                             <input type="radio" id="q{{ question.id }}_2" name="answers_{{ question.id }}" value="option2" required>
-                            <label for="q{{ question.id }}_2">{{ question.option2 }}</label>
+                            <label for="q{{ question.id }}_2">B.{{ question.option2 }}</label>
                         </div>
                         {% if question.option3 %}
                         <div class="radio-group">
                             <input type="radio" id="q{{ question.id }}_3" name="answers_{{ question.id }}" value="option3" required>
-                            <label for="q{{ question.id }}_3">{{ question.option3 }}</label>
+                            <label for="q{{ question.id }}_3">C.{{ question.option3 }}</label>
                         </div>
                         {% endif %}
                         {% if question.option4 %}
                         <div class="radio-group">
                             <input type="radio" id="q{{ question.id }}_4" name="answers_{{ question.id }}" value="option4" required>
-                            <label for="q{{ question.id }}_4">{{ question.option4 }}</label>
+                            <label for="q{{ question.id }}_4">D.{{ question.option4 }}</label>
                         </div>
                         {% endif %}
                     </div>

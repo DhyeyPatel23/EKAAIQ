@@ -13,6 +13,9 @@ import os
 import PyPDF2
 import ollama
 import json
+from django.utils import timezone
+from datetime import datetime
+from .utils import check_quiz_status
 from .ai import get_generated_quiz , generate_question
 from django.views.decorators.http import require_http_methods
 from django.db.models import Avg, F, Sum  # Add this import at the top of the file
@@ -187,6 +190,8 @@ def generate_mcqs_with_ollama(text):
 def upload_pdf(request):
     if request.method == 'POST':
         title = request.POST.get('title', 'Untitled Quiz')
+        start_time_str = request.POST.get('start_time' , None)
+        end_time_str = request.POST.get('end_time', None)
         show_results_to_student = request.POST.get('show_results_to_student') == 'on'
         duration = int(request.POST.get('duration', 2))  # Ensure it's an integer
         count = int(request.POST.get('count'))  # Ensure it's an integer
@@ -208,6 +213,8 @@ def upload_pdf(request):
             # Store questions in session before finalizing the quiz
             request.session['quiz_data'] = {
                 'title': title,
+                'start_time': start_time_str,
+                'end_time': end_time_str,
                 'show_results_to_student': show_results_to_student,
                 'duration': duration,
                 'is_active': is_active,
@@ -253,11 +260,21 @@ def finalize_quiz(request):
 
     if not quiz_data:
         return redirect('upload_pdf')
+    
+    try:
+        start = timezone.make_aware(datetime.strptime(quiz_data['start_time'], "%Y-%m-%dT%H:%M"), timezone.get_current_timezone())
+        end = timezone.make_aware(datetime.strptime(quiz_data['end_time'], "%Y-%m-%dT%H:%M"), timezone.get_current_timezone())
+
+    except ValueError:
+        start = None
+        end = None
 
     # Create the Quiz
     quiz = Quiz.objects.create(
         title=quiz_data['title'],
         host=request.user,
+        start_time=start,
+        end_time=end,
         show_results_to_student=quiz_data['show_results_to_student'],
         duration=quiz_data['duration'],
         is_active=quiz_data['is_active']
@@ -599,6 +616,51 @@ def view_quiz_results(request, quiz_id):
 
 
 
+# @login_required
+# def join_room(request):
+#     if not request.user.is_student:
+#         return HttpResponseForbidden("You are not allowed to access this page.")
+#     if request.method == 'POST':
+#         room_code = request.POST.get('room_code')
+#         if room_code:
+#             # Validate that the room code contains only digits
+#             if not re.match(r'^\d+$', room_code):
+#                 return render(request, 'room.html', {'error': 'Invalid room code. Only numbers are allowed.'})
+
+#             # Check if the room code exists in the Quiz model
+#             try:
+#                 quiz = Quiz.objects.get(code=room_code)
+
+#                 # Check if the quiz is active
+#                 if not quiz.is_active:
+#                     return render(request, 'room.html', {'error': 'Room is not active.'})
+
+#                 # Generate a 6-digit OTP
+#                 otp = random.randint(100000, 999999)
+
+#                 # Save the OTP and room code in the session for later verification
+#                 request.session['otp'] = otp
+#                 request.session['room_code'] = room_code
+
+#                 # Send OTP via email
+#                 user_email = request.user.email
+#                 send_mail(
+#                     'Your OTP for Quiz Room',
+#                     f'Your OTP is {otp}. Please use this to join the quiz.',
+#                     settings.DEFAULT_FROM_EMAIL,
+#                     [user_email],
+#                     fail_silently=False,
+#                 )
+
+#                 # Redirect to OTP verification page
+#                 return redirect('verify_otp_room')
+
+#             except Quiz.DoesNotExist:
+#                 # If the room code does not exist, show an error
+#                 return render(request, 'room.html', {'error': 'Room not found.'})
+
+#     return render(request, 'room.html')
+
 @login_required
 def join_room(request):
     if not request.user.is_student:
@@ -613,10 +675,25 @@ def join_room(request):
             # Check if the room code exists in the Quiz model
             try:
                 quiz = Quiz.objects.get(code=room_code)
+                quiz_status = check_quiz_status(quiz.start_time, quiz.end_time)
+
+                # print("start time : " , quiz.start_time)
+
+                local_time = timezone.localtime(quiz.start_time)
+
+                # print("start time : " , local_time)
+
+                time_12hr = local_time.strftime("%I:%M %p")
 
                 # Check if the quiz is active
                 if not quiz.is_active:
-                    return render(request, 'room.html', {'error': 'Room is not active.'})
+                    return render(request, 'room.html', {'error': 'Room is not currently active.'})
+
+                if quiz_status == "upcoming":
+                    return render(request, 'room.html', {'error': f'Room will start at {time_12hr} .'})
+                elif quiz_status == "expired":
+                    return render(request, 'room.html', {'error': 'Room is already expired.'})
+
 
                 # Generate a 6-digit OTP
                 otp = random.randint(100000, 999999)
@@ -643,8 +720,6 @@ def join_room(request):
                 return render(request, 'room.html', {'error': 'Room not found.'})
 
     return render(request, 'room.html')
-
-
 
 
 @login_required
@@ -902,6 +977,8 @@ def update_quiz_settings(request, quiz_id):
         duration = request.POST.get('duration')
         show_results = request.POST.get('show_results_to_student') == 'True'
         is_active = request.POST.get('is_active') == 'True'
+        start = request.POST.get('start_time', "").strip()
+        end = request.POST.get('end_time' , "").strip()
 
         # Print the data to check if it's being received
         print(f"Received Duration: {duration}")
@@ -912,6 +989,17 @@ def update_quiz_settings(request, quiz_id):
         quiz.duration = duration
         quiz.show_results_to_student = show_results
         quiz.is_active = is_active
+
+        if start :
+            quiz.start_time = start
+        else : 
+            quiz.start_time = None
+
+        if end :
+            quiz.end_time = end
+        else : 
+            quiz.end_time = None
+
 
         # Print the current quiz object before saving
         print(f"Quiz before save: {quiz}")

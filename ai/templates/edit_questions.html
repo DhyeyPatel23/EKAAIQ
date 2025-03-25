@@ -301,7 +301,7 @@
 <body>
     <div class="container">
         <h1>AI Generated Quiz</h1>
-        <form method="post" action="{% url 'edit_questions' %}">
+        <form method="post" action="{% url 'edit_questions_text' %}">
             {% csrf_token %}
             <!-- <div class="quiz-title">
                 <label for="quizTitle">Quiz Title:</label>
@@ -345,12 +345,22 @@
                     <br>
                     Correct Answer :
                     <br>
-                    <select name="correct_options">
+                    <!-- <select name="correct_options">
                         <option value="{{ question.correct_answer }}">{{ question.correct_answer }}</option>
-                        <!-- <option value="{{ question.options.1 }}">Option B</option>
-                        <option value="{{ question.options.2 }}">Option C</option>
-                        <option value="{{ question.options.3 }}">Option D</option> -->
+                    </select> -->
+                    <!-- <option value="{{ question.options.1 }}">Option B</option>
+                    <option value="{{ question.options.2 }}">Option C</option>
+                    <option value="{{ question.options.3 }}">Option D</option>  -->
+
+                    <select name="correct_options">
+                        <!-- <option value="" disabled selected>Select Correct Option</option> -->
+                        <option value="option1" {% if question.correct_answer == "option1" %}selected{% endif %}>option1</option>
+                        <option value="option2" {% if question.correct_answer == "option2" %}selected{% endif %}>option2</option>
+                        <option value="option3" {% if question.correct_answer == "option3" %}selected{% endif %}>option3</option>
+                        <option value="option4" {% if question.correct_answer == "option4" %}selected{% endif %}>option4</option>
                     </select>
+                    
+
                     <br>
 
                     <button type="button" class="delete-question">Delete Question</button>
@@ -363,7 +373,7 @@
         </form>
     </div>
 
-    <script src="{% static 'js/pdf-edit.js' %}"></script>
+    <script src="{% static 'js/text-edit.js' %}"></script>
 </body>
 
 </html>

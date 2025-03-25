@@ -3,154 +3,138 @@ from .models import *
 from .utils import *
 import random
 from django.http import HttpResponseBadRequest, JsonResponse
+from .ai import *
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from django.views.decorators.http import require_http_methods
+from django.utils import timezone
 
-def quiz_view(request):
-    if 'quiz_questions' in request.session:
-        quiz_questions = request.session['quiz_questions']
-    else:
-        level = request.session.get('level')
-        subject = request.session.get('subject')
-        num_questions = request.session.get('num_questions')
 
-        if subject == "python":
-            if level == "beginner":
-                all_questions = python_easy()
-            elif level == "intermediate":
-                all_questions = python_inter()
-            elif level == "advance":
-                all_questions = python_adv()
-        elif subject == "java":
-            if level == "beginner":
-                all_questions = java_easy()
-            elif level == "intermediate":
-                all_questions = java_inter()
-            elif level == "advance":
-                all_questions = java_adv()
-        elif subject == "c":
-            if level == "beginner":
-                all_questions = c_easy()
-            elif level == "intermediate":
-                all_questions = c_inter()
-            elif level == "advance":
-                all_questions = c_adv()
-
-        request.session['all_questions'] = all_questions
-        quiz_questions = random.sample(all_questions, num_questions)
-        request.session['quiz_questions'] = quiz_questions
-
-    context = {
-        'questions': quiz_questions
-    }
-    return render(request, 'ai-show.html', context)
-
-def ai_select(request):
-    if 'quiz_questions' in request.session:
-        del request.session['quiz_questions']
-
+@login_required
+def upload_text(request):
     if request.method == 'POST':
-        subject = request.POST.get('subject')
-        request.session['subject'] = str(subject)
-        level = request.POST.get('level')
-        request.session['level'] = str(level)
-        num_questions = request.POST.get('num')
-        if num_questions:
-            try:
-                num_questions = int(num_questions)
-                request.session['num_questions'] = num_questions
-                return redirect('ai_quiz')
-            except ValueError:
-                return HttpResponseBadRequest("Invalid number of questions")
-        else:
-            return HttpResponseBadRequest("Number of questions not provided")
-
-    return render(request, 'ai-generated.html')
-
-def ai_create_quiz(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
+        title = request.POST.get('title', 'Untitled Quiz')
+        start_time_str = request.POST.get('start_time' , None)
+        end_time_str = request.POST.get('end_time', None)
         show_results_to_student = request.POST.get('show_results_to_student') == 'on'
-        duration = request.POST.get('duration')
+        duration = int(request.POST.get('duration', 2))  # Ensure it's an integer
+        count = int(request.POST.get('count'))  # Ensure it's an integer
+        request.session['offset'] = count
+        prompt = request.POST.get('prompt')
         is_active = request.POST.get('is_active') == 'on'
-        
-        questions = request.POST.getlist('questions')
-        options = request.POST.getlist('options')
-        correct_options = request.POST.getlist('correct_options')
-        image_loc = request.POST.getlist('img')
+  
+        request.session['ai_text'] = prompt
+        ai_mcqs = get_generated_quiz(prompt , count)
 
-        filtered_questions = []
-        filtered_options = []
-        filtered_correct_options = []
-        filtered_image_loc = []
+        # Store questions in session before finalizing the quiz
+        request.session['quiz_data'] = {
+            'title': title,
+            'start_time': start_time_str,
+            'end_time': end_time_str,
+            'show_results_to_student': show_results_to_student,
+            'duration': duration,
+            'is_active': is_active,
+            'questions': ai_mcqs,
+        }
+
+        return redirect('edit_questions_text')  # Redirect to the question edit page
+
+    return render(request, "upload_ai.html")
+
+@login_required
+def edit_questions_text(request):
+    quiz_data = request.session.get('quiz_data', {})
+
+    if not quiz_data:
+        print("No quiz data found")
+        return redirect('upload_text')  # Redirect if no quiz data found
+
+    if request.method == 'POST':
+        # Retrieve edited questions from the form
+        updated_questions = []
+        questions = request.POST.getlist('questions')
+        options_list = request.POST.getlist('options')
+        correct_answers = request.POST.getlist('correct_options')
 
         for i in range(len(questions)):
-            if questions[i].strip():
-                filtered_questions.append(questions[i])
-                filtered_correct_options.append(correct_options[i])
-                filtered_options.extend(options[i * 4:(i + 1) * 4])
-                if image_loc:
-                    filtered_image_loc.append(image_loc[i] if i < len(image_loc) else None)
+            updated_questions.append({
+                "question": questions[i],
+                "options": options_list[i * 4: (i + 1) * 4],  # Slice options into groups of 4
+                "correct_answer": correct_answers[i]
+            })
 
-        num_questions = len(filtered_questions)
-        expected_options_length = num_questions * 4
+        # Update session with modified questions
+        quiz_data['questions'] = updated_questions
+        request.session['quiz_data'] = quiz_data
 
-        if len(filtered_options) != expected_options_length:
-            return HttpResponseBadRequest("Mismatch in the number of options after filtering.")
+        return redirect('finalize_quiz_text')  # Redirect to finalize and save in DB
 
-        if len(filtered_correct_options) != num_questions:
-            return HttpResponseBadRequest("Mismatch in the number of correct options after filtering.")
+    return render(request, "edit_questions.html", {"questions": quiz_data.get('questions', [])})
 
-        if len(filtered_image_loc) != num_questions:
-            return HttpResponseBadRequest("Mismatch in the number of images after filtering.")
+@login_required
+def finalize_quiz_text(request):
+    quiz_data = request.session.get('quiz_data', {})
 
-        quiz = Quiz.objects.create(
-            title=title, 
-            host=request.user,
-            show_results_to_student=show_results_to_student,
-            duration=duration,
-            is_active=is_active
+    if not quiz_data:
+        return redirect('upload_text')
+    
+
+    try:
+        start = timezone.make_aware(datetime.strptime(quiz_data['start_time'], "%Y-%m-%dT%H:%M"), timezone.get_current_timezone())
+        end = timezone.make_aware(datetime.strptime(quiz_data['end_time'], "%Y-%m-%dT%H:%M"), timezone.get_current_timezone())
+
+    except ValueError:
+        start = None
+        end = None
+    
+    # Create the Quiz
+    quiz = Quiz.objects.create(
+        title=quiz_data['title'],
+        host=request.user,
+        start_time=start,
+        end_time=end,
+        show_results_to_student=quiz_data['show_results_to_student'],
+        duration=quiz_data['duration'],
+        is_active=quiz_data['is_active']
+    )
+
+    # Save Questions
+    for mcq in quiz_data['questions']:
+        Question.objects.create(
+            quiz=quiz,
+            question_text=mcq["question"],
+            question_type='MCQ',
+            option1=mcq["options"][0],
+            option2=mcq["options"][1],
+            option3=mcq["options"][2],
+            option4=mcq["options"][3],
+            correct_option=mcq["correct_answer"],
+            points=1
         )
 
-        for i in range(num_questions):
-            Question.objects.create(
-                quiz=quiz,
-                question_text=filtered_questions[i],
-                option1=filtered_options[i * 4],
-                option2=filtered_options[i * 4 + 1],
-                option3=filtered_options[i * 4 + 2],
-                option4=filtered_options[i * 4 + 3],
-                correct_option=filtered_correct_options[i],
-                image_loc=filtered_image_loc[i] if filtered_image_loc else None
-            )
+    # Clear session data
+    del request.session['quiz_data']
 
-        return redirect('quiz_detail', quiz_id=quiz.id)
+    return redirect('quiz_detail', quiz_id=quiz.id)  # Redirect to quiz details page
 
-    return HttpResponseBadRequest("Invalid request method.")
+@require_http_methods(["POST"])
+def generate_ai_questions_text(request):
+    try:
+        text = request.session.get('ai_text', '')
+        count = 1
+        offset = int(request.session.get('offset'))
+        print("offset :" , offset)
+        questions = generate_question(text=text, offset=offset ,  count=count)
+        request.session['offset'] = offset + 1
 
-def quiz_add(request):
-    if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        level = request.session.get('level')
-        subject = request.session.get('subject')
-        num_questions = 1 
+        print("Questions:", questions)
+        return JsonResponse({
+            'success': True,
+            'questions': questions
+        })
 
-        all_questions = request.session.get('all_questions')
-
-        add_questions = random.sample(all_questions, num_questions)
-        request.session['add_questions'] = add_questions
-
-        data = {
-            'questions': add_questions
-        }
-        return JsonResponse(data)
-
-    return HttpResponseBadRequest('Invalid request')
-
-def remove_quiz_question(request):
-    if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        question_text = request.POST.get('question')
-        quiz_questions = request.session.get('quiz_questions', [])
-        
-        updated_questions = [q for q in quiz_questions if q['question'] != question_text]
-        request.session['quiz_questions'] = updated_questions
-        
-        return JsonResponse({'status': 'success'})
-    return HttpResponseBadRequest('Invalid request')
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=500)
