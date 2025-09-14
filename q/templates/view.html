@@ -192,10 +192,15 @@
 
         <!-- Export Options -->
         <section class="export-options">
+            <a href="{% url 'export_quiz_results_csv' quiz.id %}" class="export-btn" target="_blank">Export to CSV</a>
+            <a href="{% url 'export_quiz_results_pdf' quiz.id %}" class="export-btn" target="_blank">Export to PDF</a>
+            <button onclick="home()">Home</button>
+        </section>
+        <!-- <section class="export-options">
             <button onclick="exportToCSV()">Export to CSV</button>
             <button onclick="exportToPDF()">Export to PDF</button>
             <button onclick="home()">Home</button>
-        </section>
+        </section> -->
     </div>
 
     <script type="text/javascript">

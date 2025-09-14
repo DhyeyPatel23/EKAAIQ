@@ -20,6 +20,77 @@ from .ai import get_generated_quiz , generate_question
 from django.views.decorators.http import require_http_methods
 from django.db.models import Avg, F, Sum  # Add this import at the top of the file
 
+def export_quiz_results_csv(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    results = quiz.results.select_related('user').all()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="quiz_{quiz_id}_results.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Student Name', 'Scored', 'Correct Attempts', 'Submitted At'])
+    total_questions = quiz.questions.count()
+    for result in results:
+        correct_attempts = StudentAnswer.objects.filter(
+            quiz_result=result,
+            user_answer=F('correct_answer')
+        ).count()
+        writer.writerow([
+            result.user.first_name,
+            result.score,
+            f"{correct_attempts} / {total_questions}",
+            result.submitted_at.strftime('%Y-%m-%d %H:%M')
+        ])
+    return response
+
+def export_quiz_results_pdf(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    results = quiz.results.select_related('user').all()
+    total_questions = quiz.questions.count()
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=letter)
+    width, height = letter
+    y = height - 40
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(40, y, f"Quiz Title: {quiz.title}")
+    y -= 25
+    p.setFont("Helvetica", 12)
+    p.drawString(40, y, f"Date: {quiz.created_at}")
+    y -= 20
+    p.drawString(40, y, f"Room Code: {quiz.code}")
+    y -= 20
+    p.drawString(40, y, f"Total Questions: {total_questions}")
+    y -= 30
+    p.setFont("Helvetica-Bold", 12)
+    p.drawString(40, y, "Student Name")
+    p.drawString(180, y, "Scored")
+    p.drawString(260, y, "Correct Attempts")
+    p.drawString(400, y, "Submitted At")
+    y -= 18
+    p.setFont("Helvetica", 11)
+    for result in results:
+        if y < 60:
+            p.showPage()
+            y = height - 40
+        correct_attempts = StudentAnswer.objects.filter(
+            quiz_result=result,
+            user_answer=F('correct_answer')
+        ).count()
+        p.drawString(40, y, str(result.user.first_name))
+        p.drawString(180, y, str(result.score))
+        p.drawString(260, y, f"{correct_attempts} / {total_questions}")
+        p.drawString(400, y, result.submitted_at.strftime('%Y-%m-%d %H:%M'))
+        y -= 16
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    response = HttpResponse(buffer, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="quiz_{quiz_id}_results.pdf"'
+    return response
+
+
+
+
+
+
 # def extract_text_from_pdf(pdf_path):
 #     """Extract text from a PDF file"""
 #     document = fitz.open(pdf_path)

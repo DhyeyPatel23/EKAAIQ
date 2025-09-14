@@ -26,4 +26,8 @@ urlpatterns = [
     path('edit_questions/', views.edit_questions, name='edit_questions'),  # Edit AI-generated questions
     path('finalize_quiz/', views.finalize_quiz, name='finalize_quiz'), 
     path('generate_ai_questions/', views.generate_ai_questions, name='generate_ai_questions'),
+
+
+    path('export/quiz/<int:quiz_id>/csv/', export_quiz_results_csv, name='export_quiz_results_csv'),
+    path('export/quiz/<int:quiz_id>/pdf/', export_quiz_results_pdf, name='export_quiz_results_pdf'),
 ] 
