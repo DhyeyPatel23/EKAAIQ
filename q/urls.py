@@ -28,6 +28,6 @@ urlpatterns = [
     path('generate_ai_questions/', views.generate_ai_questions, name='generate_ai_questions'),
 
 
-    path('export/quiz/<int:quiz_id>/csv/', export_quiz_results_csv, name='export_quiz_results_csv'),
-    path('export/quiz/<int:quiz_id>/pdf/', export_quiz_results_pdf, name='export_quiz_results_pdf'),
+    path('export/quiz/<int:quiz_id>/csv/', views.export_quiz_results_csv, name='export_quiz_results_csv'),
+    path('export/quiz/<int:quiz_id>/pdf/', views.export_quiz_results_pdf, name='export_quiz_results_pdf'),
 ] 
