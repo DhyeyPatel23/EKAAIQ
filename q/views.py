@@ -9,6 +9,8 @@ from django.conf import settings
 from django.shortcuts import render
 import re
 import os
+from io import BytesIO
+
 # import fitz  # PyMuPDF
 import PyPDF2
 import ollama
