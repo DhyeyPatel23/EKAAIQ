@@ -10,6 +10,7 @@ from django.shortcuts import render
 import re
 import os
 from io import BytesIO
+from reportlab.pdfgen import canvas
 
 # import fitz  # PyMuPDF
 import PyPDF2
