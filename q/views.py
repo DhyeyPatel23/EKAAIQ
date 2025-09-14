@@ -12,6 +12,7 @@ import os
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from django.http import HttpResponse
 
 # import fitz  # PyMuPDF
 import PyPDF2
